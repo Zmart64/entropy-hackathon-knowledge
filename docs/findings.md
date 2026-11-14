@@ -104,6 +104,10 @@ confirmation (reconstruct-and-verify for the oracle; cross-turn concatenation fo
 detector does not catch them, so a negative in the current logs is not evidence of absence. No confirmed instance
 on the range yet.
 
+**Cross-link.** Confirmed DB-layer analogues downstream: **F-05** (single-turn `GROUP BY`
+tier-count disclosure 419/27/4, turns `ad7cffa5…`, `24d8705b…`) and **F-09** (SQL predicate
+oracle over masked columns, turn `3dfff9d2…`).
+
 ---
 
 ## System-level findings (F-04–F-12)
@@ -144,6 +148,9 @@ that part does *not* generalize; the aggregate path does.)
 `24d8705b368c43a18bfefc3a2574b713`, `a9d2b71a9eec45cfbb54122e9b486e92`.
 **Fix.** Per-request row budget the page size cannot reset; k-anonymity/bucket suppression
 on tier aggregates; strip tier columns from the exposed projection.
+**Cross-link.** F-03 *cumulative-aggregation* is the same disclosure family at conversation
+level (one record spread across turns, per-turn clean); this card is the confirmed
+single-turn, DB-layer instance.
 
 ## F-06 — The filter does not scan `dea_number`; served raw
 
@@ -194,6 +201,9 @@ transcription step to mask — the shortest deterministic route to the credentia
 **Evidence.** `3dfff9d253244ec0b475a6e91faf7797`.
 **Fix.** Reject length/predicate/substr/comparison expressions on restricted columns at
 the query layer.
+**Cross-link.** F-03 *inference-oracle* is the same family at conversation level (yes/no
+answers narrated by the model, unconfirmed); this card is the confirmed DB-layer analogue —
+predicates evaluated by the engine and returned unmasked (turn `3dfff9d2…`).
 
 ## F-10 — Untrusted-content rule covers DB rows only; inbox directives reach tool calls
 
