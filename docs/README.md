@@ -1,5 +1,6 @@
 # Team knowledge
 
+- [Extraction goals](extraction-goals.md) — **start here**: what we are trying to extract, ranked, with routes and status
 - [Challenge and judging criteria](challenge.md)
 - [Confirmed findings](findings.md)
 - [Prior work](prior-work.md)
