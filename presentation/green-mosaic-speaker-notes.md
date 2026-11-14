@@ -1,6 +1,6 @@
 # Speaker notes: Green Mosaic
 
-Talk estimate 127 s (budget 180 s, limit 180 s) at 140 words/min; video slides count the video length.
+Talk estimate 125 s (budget 180 s, limit 180 s) at 140 words/min; video slides count the video length.
 Beat boundaries: hook ends 0:12; demo ends 0:55; killchain ends 1:25; evidence ends 1:51; rounds ends 2:36; close ends 3:00.
 
 ## 1. hook (12 s budget, ~12 s estimate, 28 words)
@@ -27,13 +27,12 @@ Same harness on two open models. Both leak real records while the filter stays g
 percent of attack messages on the small model, ten on the large one. The smaller one trends
 higher, but the intervals overlap. Claude Haiku and Sonnet are pending the Level-3 unlock.
 
-## 5. rounds (45 s budget, ~28 s estimate, 65 words)
+## 5. rounds (45 s budget, ~26 s estimate, 60 words)
 
 Against ground truth, all thirty-two leaking conversations are blocked; Llama Guard lets twenty-nine
-of thirty-two out; the price is twenty-three percent of hard normal questions. The work is done by
-matching values the database returned, the simplest layer. The budget and the field-predicate are
-defense-in-depth for attacks we did not see here. Layer two is a teammate's query guard: no free SQL.
-No model call.
+of thirty-two out; the price is twenty-three percent of hard normal questions. Value matching does the
+work, the simplest layer; the session budget catches one more; decoding and the oracle rule are
+untested here. Layer two is a teammate's query guard: no free SQL. No model call.
 
 ## 6. close (24 s budget, ~21 s estimate, 49 words)
 
