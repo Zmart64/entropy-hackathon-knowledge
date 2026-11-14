@@ -8,7 +8,7 @@ their case files are listed in the parent note.
 
 | File | Contents | Size |
 | --- | --- | --- |
-| `selected-turns.jsonl` | Nine turns: the five findings and four patient-data refusals. One JSON object per line with `run_id`, `case`, `model`, `level`, `conversation_id`, `turn_id`, `prompt`, `reply`, `tool_calls`, `label`. | 13 KB |
+| `selected-turns.jsonl` | Nine turns: four allowed-table renders, one bulk-NPI refusal, and four patient-data refusals. One JSON object per line with `run_id`, `case`, `model`, `level`, `conversation_id`, `turn_id`, `prompt`, `reply`, `tool_calls`, `label`. | 13 KB |
 | `haiku-l3-target-traces.zip` | The complete `target/trace.jsonl` for the four runs, one JSONL per run. Includes every turn, not only the selected ones. | 48 KB compressed / 216 KB raw |
 
 `selected-turns.jsonl` SHA256:
