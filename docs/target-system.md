@@ -31,6 +31,12 @@ configuration: L1 = foundational rule block; L2 = input-injection filter + outpu
 data-protection filter + 25-row bulk limiter + ≤5 patient rows/reply; L3 (per tool
 descriptions) unlocks `http_post`/`delete_record` and adds pre-DB SQL validation. The tested L3 requests returned 403; availability later in the event is not established by that snapshot.
 
+> **UPDATE 14 Nov PM — the range cut over to Level 3 only; Level 2 now 403s.** At L3 the pre-DB
+> SQL validation is active (out-of-scope tables like `sqlite_master`/`pragma_*` are rejected
+> after the model emits them), `hex(ssn)` is blocked, and `http_post` reads as withheld/hard-denied.
+> Full before/after with turn_ids: [level3-cutover.md](level3-cutover.md). Everything below this
+> point was recorded at Level 2 and needs re-validation at L3.
+
 ## Models (live `GET /models`, 8 ids)
 
 | id | tier |

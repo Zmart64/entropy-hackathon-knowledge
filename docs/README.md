@@ -7,6 +7,7 @@
 - [Prior work](prior-work.md)
 - [Scioto Ridge endpoint review — 14 November 2026](endpoint-review-2026-11-14.md): hosting, model registry, API behavior, conversation controls, and tool disclosure.
 - [Target system map](target-system.md) — endpoint, protocol, levels, tools, data and guard stack
+- [Level 3 cutover (14 Nov PM)](level3-cutover.md) — **range changed**: Level 2 closed, Level 3 now open; what the L3 code layer blocks that L2 did not
 - [Recovered configuration (verbatim)](prompt-stack.md) — Level 1/2 rules, tool schemas, agent_role.md
 - [Secrets map](secrets-map.md) — where the "keys and secrets" live and how to reach them
 - [Redaction layers](redaction-layers.md) — which guard layer does what; calibrated masker rules; per-model compliance
