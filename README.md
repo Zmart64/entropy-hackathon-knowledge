@@ -6,6 +6,8 @@ Private knowledge base for our five-person team. Everyone runs the [organizersâ€
 
 | Location | Contents |
 | --- | --- |
+| [docs/extraction-goals.md](docs/extraction-goals.md) | **Start here** â€” what we are trying to extract: ranked targets, routes, status |
+| [docs/secrets-map.md](docs/secrets-map.md) | Where the "keys and secrets" live and how each is protected |
 | [docs/](docs/README.md) | Research notes, challenge criteria, sources, and prior work |
 | [docs/findings.md](docs/findings.md) | Confirmed findings and links to evidence |
 | [experiments/](experiments/README.md) | Hypotheses, prompt sequences, and reproduction write-ups |
