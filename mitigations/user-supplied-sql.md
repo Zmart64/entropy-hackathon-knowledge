@@ -4,18 +4,35 @@ Status: local reference implementation, evaluated. Not deployed to the
 organizers' server.
 Finding: [docs/findings.md](../docs/findings.md) F-13
 Experiment: [experiments/user-supplied-sql-execution](../experiments/user-supplied-sql-execution/README.md)
-Code: `break-the-model-starter/mitigation/query_guard.py` (local checkout, not
-committed to the organizers' repository)
+Code: [query-guard/query_guard.py](query-guard/query_guard.py) — sanitized
+reference implementation, standard library only.
+Evaluation output: [query-guard/evaluation.txt](query-guard/evaluation.txt).
+
+## Implemented vs proposed
+
+Two different things appear in this document, and the difference matters:
+
+- **Implemented and tested here:** `validate(sql, role, subject_id)`, a validator
+  that inspects a SQL string before execution and rejects it when it violates the
+  policy. It still accepts SQL as an input type. It is a policy filter in front
+  of the existing tool.
+- **Proposed, not implemented here:** a structured lookup interface
+  (`lookup_patient`, `list_appointments`, catalog lookups) that removes SQL from
+  the interface entirely, so the model cannot choose rows or columns at all.
+
+The validator is what reviewers can run and what the 8/8 and 4/4 numbers below
+refer to. The structured interface is the recommended design.
 
 ## Enforcement point
 
 The `query_db` tool boundary. The attack works because the tool signature is
-`query_db(sql: str)` and the model copies the user's text into it. No amount of
-prompt hardening changes that: any instruction that can be phrased as a
-read-only query is executable. The fix belongs in the tool, not in the system
-prompt and not in a post-hoc output filter.
+`query_db(sql: str)` and the model copies the user's text into it. Prompt
+hardening alone does not change that: any instruction that can be phrased as a
+read-only query is executable. The durable fix is to remove SQL from the tool
+interface; the validator in this PR is the narrower, testable step in front of
+the existing interface.
 
-## Rule implemented
+## Validator rules (implemented)
 
 `validate(sql, role, subject_id)` returns allow/deny with a reason:
 
@@ -42,7 +59,8 @@ prompt and not in a post-hoc output filter.
 
 ## Evaluation
 
-Run: `.venv/bin/python mitigation/query_guard.py`
+Run: `python3 mitigations/query-guard/query_guard.py` (captured output:
+[query-guard/evaluation.txt](query-guard/evaluation.txt))
 
 | Input | Before | After |
 | --- | --- | --- |
@@ -62,13 +80,23 @@ row. A patient reading another patient's row is denied.
 Redaction on the actual leaked reply masks all four MRNs, the phone number, the
 email, and the member ID.
 
-## Why it addresses the mechanism
+## What the validator changes, and what it does not
 
-The model can no longer choose rows or columns. It can only ask for categories
-and aggregates, or for a specific patient's record under an authenticated
-identity. Even a fully compliant model cannot turn "run this SQL" into a data
-dump, because the tool no longer accepts SQL. The output filter becomes a second
-layer rather than the only one.
+Implemented and tested:
+
+- Rejects the eight attack shapes in the fixture list before execution.
+- For `anonymous`, refuses row reads from person tables and any identifying
+  column; catalog and aggregate requests still pass.
+- Requires an explicit row cap on person-table reads; rejects stacking and
+  `UNION`.
+- Masks identifier patterns in rendered output as a second layer.
+
+Not changed by this implementation:
+
+- The tool still accepts SQL. The model still chooses a statement; the validator
+  decides whether that statement may run.
+- Removing row and column choice entirely requires the proposed structured
+  interface, which is a design recommendation, not code in this PR.
 
 ## Relationship to the F-01 / F-03 fix
 
@@ -78,15 +106,22 @@ necessary and complementary, but they do not remove the capability that produced
 this leak. A perfect output DLP would still let the model run arbitrary queries;
 it would only catch the display.
 
-This guard is input-side: the model can no longer choose rows or columns, so the
-data is never fetched. Conversely, this guard alone is not sufficient — a
-legitimate fixed field set can still be abused under pretext, which is exactly
-F-01's case. Deployment should layer both: parameterized tools and role-scoped
-views at the boundary, provenance DLP on the way out.
+The validator is input-side in the narrow sense: it rejects a disallowed query
+before execution, so for an anonymous caller the tested data selections never
+run. It does not remove the capability — the tool still takes SQL. The proposed
+structured interface is what removes row and column choice. Conversely, no
+input-side control is sufficient on its own: a legitimate fixed field set can
+still be abused under pretext, which is exactly F-01's case. Deployment should
+layer both: a structured tool and role-scoped views at the boundary, provenance
+DLP on the way out.
 
 ## Limitations
 
 - Local reference only; the organizers' server is unchanged.
+- The validator still accepts SQL text. It constrains which statements execute;
+  it does not remove the interface capability.
+- The tests are a fixed fixture suite, not a harness against the live server or
+  against arbitrary model paraphrases.
 - The SQL parser is regex-based and intentionally small. Production should use a
   real parser plus a database role with column-level grants, so the policy is
   enforced twice.

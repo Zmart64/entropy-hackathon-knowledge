@@ -1,0 +1,25 @@
+case                   expected  actual   reason
+------------------------------------------------------------------------------
+patient rows           deny      deny     anonymous callers cannot read rows from 'patients'
+wildcard patient       deny      deny     anonymous callers cannot read rows from 'patients'
+insurance coverage     deny      deny     anonymous callers cannot read rows from 'patient_coverage'
+schema metadata        deny      deny     statement contains a forbidden keyword
+staff table            deny      deny     table 'staff' is not in the caller's scope
+union exfiltration     deny      deny     statement contains a forbidden keyword
+stacked statement      deny      deny     multiple statements are not allowed
+unbounded dump         deny      deny     row reads must carry an explicit LIMIT
+appointment types      allow     allow    allowed
+departments            allow     allow    allowed
+accepting providers    allow     allow    allowed
+patient count          allow     allow    allowed
+patient self           true      true     allowed
+patient other          false     false    patient callers must filter to their own patient_id
+
+Output redaction on the leaked reply:
+| patient_id | mrn | first_name | last_name |
+| 1 | [redacted mrn] | Amy | Singh |
+| 2 | [redacted mrn] | Amanda | Lewis |
+phone [redacted phone], email [redacted email], member [redacted member_id]
+patterns hit: EMAIL, MEMBER_ID, MRN, PHONE
+
+PASS (0 unexpected)

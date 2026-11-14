@@ -9,4 +9,4 @@ Label local demonstrations clearly. A local wrapper or simulated backend is not 
 ## Proposals
 
 - [Chat endpoint hardening](chat-endpoint-hardening.md): response filtering, identity, tool permissions, validation, secrets, budgets, and regression criteria. Not deployed or evaluated after a patch.
-- [User-supplied SQL](user-supplied-sql.md): structured query interface plus per-role row/column policy; local guard blocks 8/8 attack queries, allows 4/4 legitimate ones. Not deployed.
+- [User-supplied SQL](user-supplied-sql.md): SQL validator (in-repo, runnable) plus the proposed structured-query interface; blocks 8/8 attack queries, allows 4/4 legitimate ones. Not deployed.
