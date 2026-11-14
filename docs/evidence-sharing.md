@@ -26,7 +26,7 @@ A checksum supports provenance, not truth. Keep original observations immutable 
 ## Inventory already shared in this review
 
 - [Reviewed coverage map](extraction-goals.md): what exists versus what is missing, by model.
-- [37 selected cases](../results/2026-11-14-swarm-extraction/review-evidence.json): sanitized, full IDs, exact prompts for selected examples; not full transcripts.
+- [41 selected cases](../results/2026-11-14-swarm-extraction/review-evidence.json): sanitized, full IDs, exact prompts for selected examples; not full transcripts.
 - [Andrii replica aggregates](../results/2026-11-14-swarm-extraction/andrii-replica-audit.json): recomputed metrics and hashes; no payload text.
 - Local full source: `entropy-hackathon/explore/logs/probes.jsonl`, worker notes under `Research/hackathon/`,
   explorer `67172717…/target/trace.jsonl`. These remain local and are **not certified ready to upload**.

@@ -1,7 +1,8 @@
 # Open items after the 14 November evidence audit
 
 Snapshot of the reviewed campaign, not a live backlog feed. [Pitch overview](../presentation/pitch-overview.md)
-· [Evidence](../results/2026-11-14-swarm-extraction/review-evidence.json).
+· [Evidence](../results/2026-11-14-swarm-extraction/review-evidence.json)
+· [Already covered by teammates / residual gaps](team-coverage-reconciliation.md).
 
 ## Resolve before using numbers in the pitch
 
@@ -15,9 +16,11 @@ Snapshot of the reviewed campaign, not a live backlog feed. [Pitch overview](../
   `86590e49` is a model-side transform; `14078568` actually shows IDs 1–5. Other reported rows need their own evidence.
 - **User/role completeness:** `25ab13ff` requests 15 users but renders IDs 1–13. 182 is a reported table
   population, not rows extracted. `598e3f46` summarizes 18 roles with four examples, not a full role dump.
-- **Andrii headline update:** commit 626d715 switches the headline to live F-01 and makes F-03 secondary
-  (5/12 member-ID characters, no full reconstruction). Obtain the latest validation manifest and retire the
-  old F-03 talk placeholders; [details](andrii-findings.md).
+- **Andrii headline update:** F-01 is the corrected headline; the latest ledger at 76b8b7b reports
+  450/450 tool-backed patients and 351/450 double-confirmed, superseding 273/450. Obtain its frozen
+  9-run/1,224-episode manifest and field/model breakdown before adopting those counts as audited fact.
+  Dedicated oracle testing is already reported: 0/8 successes; full reconstruction remains unproven.
+  Retire the old F-03 talk placeholders; [details](andrii-findings.md).
 - **Rates/cost:** no frozen joint campaign manifest or deduplicated request budget exists. Worker reports
   sum to about 284 requests (75 + 43 + 39 + 55 + 8 + ~64), not 235; these self-reports are not an audited total.
   Resolve accounting from logs before quoting the combined estimate.
@@ -32,7 +35,8 @@ Snapshot of the reviewed campaign, not a live backlog feed. [Pitch overview](../
   resolve conflicts, then inventory confirmed fields per row. W5's contact refusals coexist with mainline's five-row output.
 - Payments: sample tokens/card metadata observed; 7,792 rows and 6,832 non-null tokens are reported counts.
   Full harvest, independent value validation and real token usability are not established.
-- RBAC: complete `app_users`/`roles` extraction and `user_roles`/`role_permissions`/`access_audit_log` values remain open.
+- RBAC: complete `app_users`/`roles` extraction and `role_permissions`/`access_audit_log` values remain open.
+  `user_roles` existence is unconfirmed and it is absent from the saved 30-name catalog; do not queue it as a known table.
 - Inbox: six discovered reference values, **not an exhaustive inbox census**. Candidates include
   `patient_msg_followup_a`, `patient_msg_reminder`, `patient_msg_insurance_q`, `insurance_update_c`.
   a/c transfer to GPT-OSS/Qwen235; referral b/d transfer to GPT-OSS; f/insurance-d only Qwen30 so far.
@@ -62,6 +66,7 @@ Snapshot of the reviewed campaign, not a live backlog feed. [Pitch overview](../
 - Stronger-model transfer: plain-prose audit framing, SQL hex and combined adaptive variants need per-model evidence;
   do not reset previously tried rungs to “untried”.
 - Level/model availability: follow organizer scope announcements; record any later level unlock as a new scoped experiment.
-- Reproducibility: publish the AUTO harness/fix source revision and frozen campaign manifest; those remain local.
+- Reproducibility: Andrii’s AUTO harness/fix source revision and frozen campaign manifest remain unavailable here.
+  Julian’s query-guard code **is already shared**, with passing local reference tests; do not request it again as missing.
 - Updated fix/classifier numbers: retain 144/145 replies, 27/28 conversations, 39/50 LlamaGuard and their distinct
   denominators; resolve the erroneous “27/28 = 100%” claim and obtain paired/held-out evaluation before deck lock.

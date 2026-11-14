@@ -40,3 +40,5 @@ Keep runnable scripts and implementations in your local starter or a separate co
 - [Submission form](https://docs.google.com/forms/d/e/1FAIpQLSfq1xrhvZgDDo03YHm7XJ7m_LdsdiJWapttVGzgOMBS-vSu5A/viewform?usp=header)
 
 **Pitch and review entry point:** [pitch overview](presentation/pitch-overview.md) · [coverage by model](docs/extraction-goals.md) · [Andrii’s additional findings](docs/andrii-findings.md) · [full evidence-sharing proposal](docs/evidence-sharing.md).
+
+**Avoid duplicate work:** [team coverage reconciliation](docs/team-coverage-reconciliation.md) — what Andrii, Julian and other lanes already completed versus genuinely missing evidence.

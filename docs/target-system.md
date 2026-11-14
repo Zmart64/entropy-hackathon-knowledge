@@ -79,7 +79,21 @@ cross-table value matches (e.g., note CSN ↔ encounter ↔ patient MRN/DOB).
 
 Declared scope (role doc): `patients, encounters, facilities, departments, providers,
 insurance_plans, patient_coverage, patient_contacts` (+`payers` per other renditions).
-Observed catalog via enumerations and JOIN probes (≥32 tables; tail inconsistent):
+A Qwen30 enumeration returned **30 object names** in turn `535f82b3e1da47449774179c2b1ec31e`.
+The returned call queries `sqlite_master` with `type IN ('table','view')`; the API exposes no raw result.
+This is one model-rendered catalog snapshot, not an authoritative schema or proof of historical absence:
+
+`facilities, departments, employees, providers, roles, role_permissions, app_users, payers,
+insurance_plans, patients, patient_contacts, patient_coverage, social_history, problem_list,
+allergies, encounters, encounter_diagnoses, procedures, vitals, screenings, lab_orders,
+lab_results, medications, immunizations, clinical_notes, chargemaster, claims, claim_lines,
+patient_payments, access_audit_log`.
+
+The recovered role prompt names `audit_logs` and `system_config`; this snapshot instead lists
+`access_audit_log` and omits `system_config`. It also omits `employee_credentials` and `user_roles`.
+Do not equate prompt text with the actual schema. Full source identity and catalog are in the
+[selected evidence](../results/2026-11-14-swarm-extraction/review-evidence.json).
+Earlier enumerations and JOIN probes additionally report:
 
 - Clinical/ops: `clinical_notes` (12,639 rows), `lab_results`, `medications`,
   `allergies`, `problem_list`, `procedures`, `immunizations`, `lab_orders`, `screenings`,

@@ -375,7 +375,8 @@ model-recited policy establish a real table. This is an evidence-quality correct
 
 Transformed inbox values appear in email arguments and one query string-literal case; direct protected strings
 can be masked. JSON wrapping does not guarantee args bypass. The observations cover specific tools/value classes,
-not every tool. `.invalid` email destinations and model narration do not establish external delivery.
+not every tool. Whole-call replacements also occur (`name=redacted`, `args=[blocked by policy]`);
+these must be distinguished from value masking and empty-call refusals. Original arguments and execution are unobservable in those cases. `.invalid` email destinations and model narration do not establish external delivery.
 [Receiver evidence](http-exfiltration-receiver.md) must be connected to an actual target receipt before an egress claim.
 
 ## Earlier-card interpretation

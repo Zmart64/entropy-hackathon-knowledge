@@ -19,6 +19,7 @@ prove every unknown value is correct. No explicit filter-green telemetry appears
 | Input flagging | Recovered configuration describes flags that allow messages onward | Configuration is model-recited; implementation/order unverified |
 | Model policy | Refusals, generated SQL, omitted fields and transcription errors vary by model/frame | A refusal on one prompt is not impossibility |
 | Returned reply | Typed replacements and unmasked representations observed | Could include model-authored redactions; no raw intermediate state |
+| Whole returned call | `{"name":"redacted","args":"[blocked by policy]"}` observed on Qwen30 (`57c7f9a0`, `0ec4529d`, `e5e6e928`) | Response suppression; neither proof of successful execution nor proof of where the suppression occurred |
 | Returned tool args | Sensitive strings can appear here even when reply narrates refusal; typed replacements also occur | This visible channel must be evaluated separately from reply and actual execution |
 | Tool authorization | Level-2 requests and gated HTTP/delete behavior recorded | Tool-call entry does not establish successful action; 25-row windows and five-patient reply guidance are distinct controls |
 

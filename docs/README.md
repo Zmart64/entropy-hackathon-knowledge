@@ -19,3 +19,5 @@ Add focused notes here as needed. Include the author, date, and source links. Di
 - [Andrii’s live and replica findings](andrii-findings.md)
 - [Evidence-sharing proposal](evidence-sharing.md)
 - [Pitch overview](../presentation/pitch-overview.md)
+
+- [Team coverage reconciliation](team-coverage-reconciliation.md): completed teammate work, latest pushes, remaining evidence gaps.

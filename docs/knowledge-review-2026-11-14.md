@@ -33,7 +33,7 @@ is retained through the existing merged KB pages and linked from the pitch overv
 
 1. **Counts exceeded evidence.** 182 users were called a dump despite a sampled reply. Direct inspection now
    finds only IDs 1–13 in the cited LIMIT-15 response. Repository results guidance requires explicit observed counts.
-2. **Local-only evidence was not a usable team handoff.** Added 37 sanitized case entries with full identifiers,
+2. **Local-only evidence was not a usable team handoff.** Added 41 sanitized case entries with full identifiers,
    selected exact prompts, source hashes and reset/context metadata. Cases with omitted prompts are clearly partial.
 3. **Exploratory observations weakened the evidence gate.** Removed n≥2/n≥3 substitutes and universal server-property
    claims; quantitative/generalization claims still need the team's gate and campaign-specific denominators.
@@ -87,3 +87,47 @@ status. Main through `8e9b08f` adds Justus’s two-sink HTTP negative result and
 Andrii’s independent-label fix/PromptGuard2/LlamaGuard reports. The incoming 27/28 “100%” arithmetic is corrected
 and the unshared manifests remain an explicit limitation. Main's F-14 is reserved for HTTP; the PR's six cards
 are now F-15–F-20, with cross-references updated. Original PR review findings refer to its earlier numbering.
+
+## Follow-up coordination with the independent review thread
+
+Edgar requested coordination with `07bbcdf2-9be6-4373-90f0-4edc78cb5aa7`. Its earlier review independently
+flagged credential provenance, sample-versus-population counts, and argument-versus-delivery distinctions.
+Its report predated the push; b1fb20a is already published. No mitigation implementation work is requested.
+
+[Zmart’s review of 59ec43e](https://github.com/Zmart64/entropy-hackathon-knowledge/pull/6#issuecomment-6877848045)
+was read directly. Mapping to the published correction:
+
+| Review point | Current resolution | Remaining limit |
+| --- | --- | --- |
+| Extracted versus total rows | Cited users reply has 13 rows; population 182 kept separate | Full table not extracted |
+| F-03 contradictory status | Andrii’s 626d715 correction makes it secondary; no complete reconstruction claimed | Underlying scored live manifest not supplied |
+| Args/anchor/egress evidence | Calls show exposed args; anchors check fidelity; delivery not established | Recovered email description records intent, never sends; no receipt proof |
+| Credential transience | Morning actual calls inspected and empty; flicker claim withdrawn | Existence/historical changes unresolved |
+
+Additional contribution: whole-call suppression was confirmed in the saved top-level `tool_calls` field; three
+selected suppression cases added, plus the catalog below, bringing the sanitized selection to 41. No claim of a changing filter or unseen execution.
+The other thread’s suggested Unicode/field-registry mitigation gaps are not code-verified and are not represented
+as working bypasses. General model transfer and a connection to LlamaGuard’s unblocked cohort are also unproven.
+No GitHub review reply was posted by this coordination.
+
+
+The requested read-only delta review completed (pinned run `e7dfa76b-fd57-4945-9f47-cd53dfb5556b`).
+Its initial catalog-gap claim was withdrawn after comparison with existing teammate work: the useful change
+is more precise provenance/counting, not a new finding. We verified turn `535f82b3e1da47449774179c2b1ec31e`
+against source line 650: a returned table-or-view query and 30 model-rendered names. The map now records it
+without calling it authoritative raw DB ground truth; unconfirmed `user_roles` is separate from listed RBAC objects.
+
+The latest user request additionally reconciled Andrii and **judodoju / Julian Dobler** (not Justus).
+Main advanced to b0075ba with the hub board/ledger and was merged. New source-reported 450/450 patient coverage,
+351/450 corroboration, dedicated oracle 0/8 and F-01-only fix 27/27 are recorded with missing-manifest limits.
+Julian’s existing V4-Pro 30/30 trial, NPI sample and shared local query guard are marked already completed within
+scope. The guard’s existing self-test was rerun offline: PASS (0 unexpected). No mitigation was implemented.
+See [team reconciliation](team-coverage-reconciliation.md) for the completed-versus-remaining map.
+
+The reviewer’s subsequent teammate cross-check completed and withdrew both proposed gaps as already covered
+by prior work. No new open finding survived that review. The catalog refinement and RBAC consistency edit
+remain useful documentation improvements, not newly discovered target behavior.
+
+Follow-up verification: 41 unique case IDs resolve in saved logs; JSON parses; 114 relative links in changed
+Markdown resolve; F-01–F-20 remain unique; whitespace/conflict-marker/common-authentication-pattern checks pass.
+The imported hub source is preserved with explicit snapshot warnings; its frozen manifests remain unavailable.

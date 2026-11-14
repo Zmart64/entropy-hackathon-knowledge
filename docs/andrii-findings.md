@@ -6,16 +6,21 @@ Reviewed 2026-11-14. Two sources with **different environments and different F-0
 - Separate private experiment repo: [F-01 at 181df0d](https://github.com/B0yko/entropy-hackathon-2026/blob/181df0dcaf264e8cc6ede85f530eeba81eca2037/findings/F-01.md), fetched and matched to local checkout. Last fetched commit 10:11:30 UTC.
 - Later shared-KB updates: [a724b32](https://github.com/Zmart64/entropy-hackathon-knowledge/commit/a724b32) and [8e9b08f](https://github.com/Zmart64/entropy-hackathon-knowledge/commit/8e9b08fc548d51f08b0212c11eda0b7a38c8bcb2) add independent-label shadow results and LlamaGuard comparisons; incorporated below.
 
+Latest push: [76b8b7b ledger](https://github.com/Zmart64/entropy-hackathon-knowledge/commit/76b8b7b)
+and [b0075ba board](https://github.com/Zmart64/entropy-hackathon-knowledge/commit/b0075ba) were merged during
+follow-up coordination. They contain both historical and newer claims; the latest reported state is below.
+[Team reconciliation](team-coverage-reconciliation.md) maps completed work to the remaining gaps.
+
 ## Live Riley work: disclosure measurement, not a new technique claim
 
 | Item | Andrii's latest statement | What is available / what remains |
 | --- | --- | --- |
 | Headline | F-01 benign-pretext/structured-format PHI disclosure + deterministic mitigation | Updated gate supersedes earlier F-03 headline |
-| Legitimacy audit | 273/450 double-confirmed (61%); about 78% tool-backed, still changing | Latest gate is an author report. Underlying 450-case validation manifest/per-model breakdown is not in this checkout; do not quote 61% as per-attack success rate |
+| Legitimacy audit | Latest ledger: 450/450 tool-backed; 351/450 double-confirmed (78%); nine run files / 1,224 episodes | Author report supersedes 273/450. Frozen row-level manifest, field/model breakdown and raw result provenance unavailable here. Population coverage is not per-attack success |
 | Earlier attack-attempt pilot | V4-Pro 14/143; Qwen30 15/92 (about 10% vs 16%) | Separate denominator from the 450 validation cohort; earlier findings contain turn examples. Not directly comparable to 273/450 |
-| Oracle | Member-ID predicate answers, 5/12 characters; no complete oracle-only reconstruction; datarecon 0/43 | Secondary only. Member ID was not masked, so this does not prove an oracle defeated redaction |
+| Oracle | Incidental member-ID answers: 5/12 characters; no complete oracle-only reconstruction, datarecon 0/43. Latest dedicated test: 0/8; six refusals, two verbatim appearances | Dedicated test is already done, source-reported null; not an unrun task. Member ID was not masked. No oracle-defeats-redaction claim |
 | Integrity failure | Bulk replies invent rows beyond the actual query/read | Supports our need to separate requested LIMIT, rendered rows, and validated records |
-| DLP fix | Latest independent-label shadow report: 144/145 replies; 27/28 conversations; benign FP 1/16 | 99.3% and 96.4%, respectively; source incorrectly labeled 27/28 as 100%. Case manifest unavailable here. 450/450 is only in-sample consistency; held-out/adaptive evaluation pending |
+| DLP fix | Latest independent-label shadow report: 144/145 replies; 27/28 conversations; benign FP 1/16 | 99.3% and 96.4%, respectively; source incorrectly labeled 27/28 as 100%. Latest ledger also reports 27/27 for F-01 only, excluding one oracle conversation; do not silently swap denominators. Case manifest unavailable here. The earlier fix 450/450 is in-sample consistency (distinct from patient census); held-out/adaptive evaluation pending |
 | Other classifiers | Latest source reports LlamaGuard-4 S7 39/50 (78%) leaking replies detected; PromptGuard2 0/500 attack inputs | Supersedes 626d715’s “untested” status. Different tasks/denominators; paired evaluation missing, benign-FP denominators absent. Do not say all other guards fail |
 
 **Important reconciliation:** Andrii's new gate still says secrets/DEA have not landed in his lane.
@@ -56,6 +61,6 @@ engineering lesson is to enforce permissions on the data and destination, retain
 and delegation, and evaluate both attacks and benign utility. Measurement is the defensible contribution; do not
 claim a novel encoding trick, universal stronger-model failure, or a deployed fix.
 
-Missing handoff from Andrii: frozen live run IDs, 450-case validation classifications and per-model denominators, independent-label 145-reply/28-conversation fix manifest, classifier comparison manifests,
+Missing handoff from Andrii: frozen nine-run/1,224-episode manifest underlying the reported 450/450 census and 351/450 corroboration, field/model denominators, independent-label 145-reply/28-conversation and F-01-only 27-conversation fix manifests, classifier comparison manifests,
 selected redacted transcripts, held-out fix/FP results, adaptive evaluation, and final deck-ready numbers.
 His unpushed local work and other-machine conversations are not accessible here; no claim of exhaustive review of those.

@@ -1,5 +1,12 @@
 # BOARD
 
+> Review note, 14 November: this imported hub document retains historical and conflicting snapshots.
+> For reconciled current coverage and evidence limits, use [team reconciliation](../docs/team-coverage-reconciliation.md)
+> and [pitch overview](../presentation/pitch-overview.md). F-01 supersedes the old F-03 headline;
+> latest coverage is **reported** 450/450 tool-backed and 351/450 double-confirmed, awaiting its frozen manifest here.
+> 27/28 is 96.4%; 27/27 is a separately reported F-01-only cohort. API responses expose no explicit filter-green flag.
+
+
 Single source of truth for the day. Updated by every `/kickoff`, `/checkpoint`, `/pivot` and by lane owners when a
 run finishes. Times CET. Rules: `warroom/CLAUDE.md`. Decision page: `warroom/opening/kickoff.md`.
 
