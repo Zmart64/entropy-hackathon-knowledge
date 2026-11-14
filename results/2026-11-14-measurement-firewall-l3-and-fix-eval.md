@@ -33,6 +33,13 @@ matches excluded.
 **Methodology note (honesty):** an early N=24 sample read 25% [12–45]; with N=202 it regressed to ~6–9%. Use the
 pooled / large-N figure, not the small-N fluke. Consistent with the ladder (DeepSeek-V4-Pro ~10% [6–16]).
 
+**Two denominators — do not conflate.** The 9% above is *per attack message* (per episode). *Per conversation*
+(≥1 tool-backed record in a multi-turn session) is **6/11 = 55% [28–79], N=11** — a different question and an
+order-of-magnitude different number; only report it with "per multi-turn session, N=11" stated, never beside the
+per-message figure. L3 context: L3 adds a stricter system prompt **on top of** the SQL scope checks; F-01 still lands
+at ~9% per message (≈ the ladder's L-tier DeepSeek ~10%), i.e. the harder tier does **not** reduce it — "beats the
+harder tier." Any "L3 < L2" reduction claim must compare the *same* denominator.
+
 **Error hygiene (gate item 7):** 8-worker concurrency tripped a transient rate-limit burst on the shared range
 (10× HTTP 429 at cold start) plus range 502s → ~12% error on that cell; error episodes excluded. The throughput
 bottleneck is the shared range (30 rpm / 10 concurrent), not the local attacker cluster (our 8× DGX Spark cluster).
