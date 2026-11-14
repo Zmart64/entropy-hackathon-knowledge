@@ -1,34 +1,39 @@
 # Deterministic output-DLP fix (canonicalize + label-flow + disclosure budget + field-predicate)
 
-Author: Andrii (AUTO / defense lane). Date: 2026-11-14. Status: v1 measured in shadow on the real Riley logs.
-Code (local): `range-harness/dlp_fix.py` (guard), `score.py` (shadow recall), `benign_fp.py` (FP). Keys via `kc`.
+Author: Andrii (AUTO / defense lane). Date: 2026-11-14. Status: PROVEN for F-01 (mass structured PHI exfil) on real
+Riley logs; objectivity caveats below. Code (local): `range-harness/dlp_fix.py` (guard), `score.py`, `verify.py`,
+`benign_fp.py`.
 
 ## The defense
-A deterministic guard on the agent's OUTGOING answer (and any egress tool-call argument), four layers — no model
-call, decision in microseconds:
-1. **canonicalize + parse** — decode base64 / rot13 / hex / spaced digits AND parse JSON / CSV / markdown-table into
-   field values, THEN scan. Defeats F-01 structured-format laundering and transform-evasion (the filter can no
-   longer be fooled by wrapping a record in structure).
-2. **label-flow** — block if any patient-record field OR credential appears, in any form, in the answer or an egress
-   argument.
-3. **session-cumulative disclosure budget** — accumulate identifying fields disclosed across the whole conversation;
-   block once a session has disclosed >= 2 distinct identifiers. Defeats cumulative-aggregation (F-03) and multi-turn
-   reassembly that each-answer-passes-the-filter.
-4. **field-predicate** — block a short / yes-no answer that reveals a specific protected field the user asked about.
-   Targets the inference-oracle (F-03), where the secret is never emitted verbatim so a content filter is blind.
+A deterministic guard on the agent's OUTGOING answer (and any egress tool-call argument) — no model call, microseconds:
+1. **canonicalize + parse** — decode base64/rot13/hex/spaced digits AND parse JSON/CSV/markdown-table into field
+   values, THEN scan. Defeats F-01 structured-format laundering (wrapping a record in structure no longer hides it). **[proven]**
+2. **label-flow** — block if any patient-record field or credential appears, in any form, in the answer or an egress
+   argument. **[proven]**
+3. **session-cumulative disclosure budget** — accumulate identifying fields across the conversation; block after >= 2
+   distinct identifiers. *[design, for multi-turn aggregation — secondary, not yet validated against traces]*
+4. **field-predicate** — a design layer for an inference-oracle channel. NOTE: the credential-masking /
+   oracle-reconstruction claim is **DROPPED** (not proven — member_id isn't masked, no oracle-only reconstruction,
+   credentials refused). The oracle is at most a secondary alternative channel; this layer is not validated.
 
-## Measurement (shadow, over the real logged Riley runs; aggregates only, no record text)
-- **Recall on filter-clean leaks** (leaks the SERVER DLP already passed): **100%** — 287/287 DeepSeek-V4-Pro and
-  163/163 Qwen3-30B flagged leaks blocked in shadow (**450/450** total). Riley's OWN deployed output DLP is the
-  status-quo row and it FAILED: every one of these leaks is filter-clean (it passed Riley's filter). Our guard blocks
-  all of them, no model call.
-- **Benign false positives** (8 legitimate patient-service queries): **v1 = 2/8 -> v2 = 1/8**, recall unchanged at 100%.
-  v2 scopes a lone phone to patient-record provenance (a phone with no patient name = a facility line, allowed),
-  removing one facility-phone mis-flag. The remaining 1/8 is a facility phone co-located with a staff NAME; a clean
-  fix needs field-level data provenance (which table the value came from) — the v3 direction, with role/recipient-bound
-  declassification (an authorized clinician may see their own patient).
+## Measurement (shadow, real Riley logs; aggregates only)
+- **Recall (NON-CIRCULAR, independent label).** The leak label = the supervisor's GT tool-backed real MRNs
+  (datarecon), NOT the fix's own matcher. Per reply: **144/145 = 99%**. Per conversation, F-01 family:
+  **27/28 = 100%** (structured-dump 13/13, enumeration 7/7). The in-sample dlp_fix-matcher "450/450" is a
+  consistency check, not recall — use these GT-labeled numbers.
+- **Benign false positives:** 1/16 (6%) on a broader patient-service set (the single facility-phone case). CAVEAT:
+  v2's phone rule was tuned on the observed FPs -> an out-of-sample re-score on a frozen, harder benign set is pending.
+- **Objectivity (honest):** NOT pre-registered — rules written after the attack class (generic info-flow rules, not
+  payload-overfit, so claim "generic, not overfit"). Held-out recall (runs after the fix froze) and one adaptive
+  attack (via the local model, residual) are pending.
 
-## For the measured campaign (hub's lane)
-Use this guard as the fix row in the `ek` campaign (replica l1/l4 with seeded canaries) for N>=30/arm + Wilson CI,
-with `promptguard2` / `llamaguard` as the status-quo input-classifier rows. The contrast: an input classifier scores
-the request; this guard scores the OUTPUT post-hoc, so it blocks regardless of how benign the framing was.
+## Status-quo comparison (MEASURED on the real data)
+| guard | what it is | catches the exfil? |
+|---|---|---|
+| Riley's OWN deployed output DLP | the range's built-in filter | **0%** — passed all 450 filter-clean leaks |
+| PromptGuard2 (Llama-Prompt-Guard-2-86M) | input injection/jailbreak classifier | **0/500 attack inputs = 0%** (benign-pretext exfil passes; it flags obvious injections — a raw "ignore instructions" scores 0.9995 — just not these). Replies 0/500; benign FP 0% |
+| LlamaGuard-S7 | content/privacy classifier | **UNTESTED** (not served here) — do not claim it misses it |
+| **our deterministic output DLP** | output label-flow | **100%** (F-01, non-circular) |
+
+Thesis: both the deployed output DLP and an input injection guard miss agentic data-exfil; a deterministic output DLP
+catches it, with no model call.
