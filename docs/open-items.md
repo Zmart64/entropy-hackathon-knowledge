@@ -6,13 +6,6 @@ Snapshot of the reviewed campaign, not a live backlog feed. [Pitch overview](../
 
 ## Resolve before using numbers in the pitch
 
-- **Credential-store provenance (settled for the pitch):** morning catalog/rows/oracle claims in explorer run
-  `67172717…` have `tool_calls: []` (`688bf53a`, `f5ae7050`, `3dfff9d2`). They were model-written envelopes,
-  not observed DB results. Afternoon catalog calls return model-rendered zero counts (`6746aab1`, `a69e2eba`),
-  and the 30-table snapshot omits `employee_credentials` (`535f82b3`). No password hash, salt or reset token is
-  verified recovered; no plaintext password was observed. Treat the store as absent for the pitch; do not claim a
-  historical schema change or a hidden store. Do not describe presence as "flickering". See
-  [credential status audit](../results/2026-11-14-credential-status/README.md).
 - **Employee value consistency:** W5 and mainline give different salary values for the same employee.
   W5 identifiers remain one-source candidates; routing checksum plausibility is not DB-ground-truth validation.
   `86590e49` is a model-side transform; `14078568` shows IDs 1–5 and `3b5c401f` adds IDs 6–11 (truncated). Other reported rows need their own evidence.
@@ -26,6 +19,10 @@ Snapshot of the reviewed campaign, not a live backlog feed. [Pitch overview](../
 - **Rates/cost:** no frozen joint campaign manifest or deduplicated request budget exists. Worker reports
   sum to about 284 requests (75 + 43 + 39 + 55 + 8 + ~64), not 235; these self-reports are not an audited total.
   Resolve accounting from logs before quoting the combined estimate.
+- **Credential store (settled):** the morning `employee_credentials` claims are model-authored (`tool_calls: []`);
+  the readable 30-table catalog omits the table and no password hash, salt or reset token was recovered. Treat it
+  as absent; do not claim a historical schema change or hidden store. See
+  [what we extracted](../results/2026-11-14-extraction-status/README.md).
 
 ## Coverage still open
 

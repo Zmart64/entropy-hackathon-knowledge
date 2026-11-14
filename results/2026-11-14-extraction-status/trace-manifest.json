@@ -1,7 +1,7 @@
 {
  "schema_version": 1,
  "generated_at": "2026-11-14T17:35:00+01:00",
- "selection": "First record matching each turn_id prefix; one case per claim. No record is included twice.",
+ "selection": "One record per claim, first match by turn_id prefix; 13 L2 extraction + 10 L2 checks + 3 morning explorer + 6 L3.",
  "raw_values": "Not included in this bundle. Raw request/response logs remain local at the source paths.",
  "sources": [
   {
@@ -85,5 +85,11 @@
   "688bf53a3dc042cb80c6fe64b7b85347",
   "f5ae7050dc074f98961af936b7c091e6",
   "3dfff9d253244ec0b475a6e91faf7797"
- ]
+ ],
+ "run_blocks": {
+  "l2_extraction": 13,
+  "l2_checks": 10,
+  "morning_explorer": 3,
+  "l3_data_plane": 6
+ }
 }
