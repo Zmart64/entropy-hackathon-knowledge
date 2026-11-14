@@ -36,3 +36,4 @@ Do not treat errors or timeouts as successful attacks. Report them separately. C
 
 - [Conversation isolation and response exposure](chat-isolation-and-response-exposure/README.md)
 - [Tool interface disclosure](tool-interface-disclosure/README.md)
+- [User-supplied SQL execution](user-supplied-sql-execution/README.md)

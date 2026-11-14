@@ -15,6 +15,12 @@ Manipulate Riley through messages to disclose private data from the fictional ho
 
 The organizers allow prompt attacks against the challenge only. Do not attack the server, WiFi, model weights, or unrelated systems. Use fictional challenge data only; the starter prohibits attempts to obtain harmful content. Messages are logged and used for research.
 
+## Model targets
+
+The organizer slides list Gemma 3 27B and Deepseek V4 Pro as available now, and Claude Haiku 5.5 / Sonnet 5.5 later through Entropy's org ID.
+
+On 2026-11-14 the live `/models` response exposed `deepseek-ai/DeepSeek-V4-Pro-0813`, plus Qwen and GPT-OSS ids. Gemma and Claude were both absent. The absence is enforced, not incidental: the range keeps a model-registry whitelist and rejects `google/gemma-3-27b-it` with HTTP 400 `unknown_model` even when the supplied Nebius key is valid (see `experiments/filter-clean-measurement`). A personal key does not widen the attack surface to Nebius's catalog. Qwen and GPT-OSS are in the registry but are not named as targets on the slides; recheck live availability and organizer announcements before each run.
+
 ## Judging
 
 | Criterion | Weight | Evidence |
