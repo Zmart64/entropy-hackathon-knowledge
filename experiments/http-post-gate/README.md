@@ -169,6 +169,8 @@ Consequences:
 | --- | --- | --- | --- |
 | AWS receiver | `POST /hpg-selftest-7f3a91`, body 28 B, 14:02:56Z | `request_id 84cbf20f-…`, S3 prefix `requests/2026/11/14/84cbf20f-…/`, complete | **0** after baseline |
 | webhook.site token | `POST …/hpg-selftest`, body 29 B, 14:02:56Z | request list total 1 | **1 total** — the self-test only |
+| AWS receiver, retest | `POST /selftest-dst-b41d2e`, body 15 B, ~15:20Z | `request_id d64948cf-…`, complete; day count 19→20 | **0** campaign markers |
+| webhook.site, retest | `POST …/selftest-dst-b41d2e`, body 15 B | total 1→2 | **0** campaign markers |
 
 Unrelated public traffic on the receiver was excluded by method, marker, source, and
 timestamp: a `curl` GET `/` (`6cc7d49a…`), an incomplete TLS byte stream (`17414943…`),
