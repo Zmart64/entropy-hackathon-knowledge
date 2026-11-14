@@ -1,0 +1,59 @@
+Selected Nmap output, 14 November 2026 (Europe/Berlin).
+Historical operator-review evidence; not permission to repeat infrastructure scans under challenge rules.
+Invocation commands and workstation paths omitted. Full-range scans were interrupted; only the common-port scan completed.
+
+Completed 1,000 common TCP port scan
+
+Nmap scan report for 2.31.186.181
+Host is up, received user-set (0.041s latency).
+Not shown: 997 filtered tcp ports (no-response)
+PORT    STATE SERVICE REASON
+22/tcp  open  ssh     syn-ack
+80/tcp  open  http    syn-ack
+443/tcp open  https   syn-ack
+
+# Nmap done at Sat Nov 14 11:32:31 2026 -- 1 IP address (1 host up) scanned in 54.10 seconds
+
+Service identification on ports 22, 80, and 443
+
+Nmap scan report for 2-31-186-181.sslip.io (2.31.186.181)
+Host is up (0.025s latency).
+
+PORT    STATE SERVICE  VERSION
+22/tcp  open  ssh      OpenSSH 10.2p1 Ubuntu 2ubuntu3.8 (Ubuntu Linux; protocol 2.0)
+|_banner: SSH-2.0-OpenSSH_10.2p1 Ubuntu-2ubuntu3.8
+80/tcp  open  http     Caddy httpd
+|_http-title: Site doesn't have a title.
+| http-headers:
+|   Connection: close
+|   Location: https://2-31-186-181.sslip.io/
+|   Server: Caddy
+|   Date: Sat, 14 Nov 2026 10:22:26 GMT
+|   Content-Length: 0
+|
+|_  (Request type: GET)
+443/tcp open  ssl/http Caddy httpd
+|_http-title: Site doesn't have a title (application/json).
+| http-headers:
+|   Alt-Svc: h3=":443"; ma=2592000
+|   Content-Length: 51
+|   Content-Type: application/json
+|   Date: Sat, 14 Nov 2026 10:22:26 GMT
+|   Via: 1.0 Caddy
+|   Connection: close
+|
+|_  (Request type: GET)
+| ssl-cert: Subject: commonName=2-31-186-181.sslip.io
+| Subject Alternative Name: DNS:2-31-186-181.sslip.io
+| Issuer: commonName=YE2/organizationName=Let's Encrypt/countryName=US
+| Public Key type: ec
+| Public Key bits: 256
+| Signature Algorithm: ecdsa-with-SHA384
+| Not valid before: 2026-11-14T07:21:44
+| Not valid after:  2027-02-12T07:21:43
+| MD5:     53ff 3f15 dc5c b8fb ab8e 6d60 eea6 a4e6
+| SHA-1:   df8d 8699 79e0 2d2b 06cc 3b91 3a87 00ac 1e25 08f4
+|_SHA-256: 3190 971d d89f 70f7 7a3d 4d59 12ed e29d e0ae 9c2b 9f61 f9b1 d0d4 8c8d 6a38 9a33
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+# Nmap done at Sat Nov 14 11:22:46 2026 -- 1 IP address (1 host up) scanned in 33.04 seconds
