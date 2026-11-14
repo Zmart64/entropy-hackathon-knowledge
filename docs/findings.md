@@ -335,4 +335,4 @@ bypasses; the structured design makes them unrepresentable. Not deployed.
 **Limitations / open.** Deepseek V4 Pro only; single fixed prompt measured, not a phrasing
 sweep. `secrets`/`staff` were not reached through `query_db` in our runs; F-04's JOIN path
 suggests table scope is a model-layer obstacle, not a tool guarantee. No bulk extraction
-beyond `COUNT(*)` and three-row samples. Guard is regex-based and local.
+beyond `COUNT(*)` and three-row samples. Guard is a local fixed-menu reference implementation, not deployed.
