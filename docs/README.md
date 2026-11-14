@@ -9,5 +9,8 @@
 - [Target system map](target-system.md) — endpoint, protocol, levels, tools, data and guard stack
 - [Recovered configuration (verbatim)](prompt-stack.md) — Level 1/2 rules, tool schemas, agent_role.md
 - [Secrets map](secrets-map.md) — where the "keys and secrets" live and how to reach them
+- [Redaction layers](redaction-layers.md) — which guard layer does what; calibrated masker rules; per-model compliance
+- [Extraction playbook](extraction-playbook.md) — routes/primitives that worked (14 Nov PM), with evidence discipline
+- [Open items](open-items.md) — what is NOT extracted yet and each next attempt; update when an item moves
 
 Add focused notes here as needed. Include the author, date, and source links. Distinguish observations from hypotheses, and link to experiment evidence where available.
