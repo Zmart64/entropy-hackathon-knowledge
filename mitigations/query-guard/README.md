@@ -7,10 +7,13 @@ library only; no network, credentials, or challenge data.
 python3 mitigations/query-guard/query_guard.py
 ```
 
-Expected result: eight attack queries denied, four legitimate catalog/aggregate
-requests allowed, patient-self allowed / patient-other denied, identifier
-redaction demo, and a final `PASS (0 unexpected)`. Captured output:
-[evaluation.txt](evaluation.txt).
+Expected result: nineteen attack queries denied, seven legitimate requests
+allowed, patient-other denied, identifier redaction demo, and a final
+`PASS (0 unexpected)`. Captured output: [evaluation.txt](evaluation.txt).
+
+The suite includes the six bypasses found in review (qualified wildcard,
+function-wrapped column, cross-join, `OR` predicate, patient wildcard, unknown
+role) plus comma-join and `JOIN`-subquery regressions.
 
 Scope: this is a **validator for SQL strings**, not a replacement tool interface.
 It shows the policy that could be enforced in front of `query_db`; it does not

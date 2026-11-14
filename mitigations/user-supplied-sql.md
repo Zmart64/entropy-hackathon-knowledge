@@ -36,26 +36,32 @@ the existing interface.
 
 `validate(sql, role, subject_id)` returns allow/deny with a reason:
 
-1. Exactly one statement; `SELECT` only. Semicolon stacking and `UNION`/
-   `INTERSECT`/`EXCEPT` are rejected.
-2. Table must be in the caller's scope (the policy we propose:
-   `departments`, `encounters`,
-   `facilities`, `insurance_plans`, `patient_contacts`, `patient_coverage`,
-   `payers`, `patients`, `providers`).
-3. Role policy:
-   - `anonymous` — no row reads from person tables (`patients`,
-     `patient_contacts`, `patient_coverage`, `encounters`) and no identifying
-     columns; aggregates and catalog lookups only.
-   - `patient` — rows only where `patient_id` equals the authenticated subject;
-     SSN never exposed.
-   - `staff` — demographics allowed, SSN and `SELECT *` dumps refused.
-4. Row reads from person tables require `LIMIT <= 20`; catalog tables are
+1. Exactly one statement; `SELECT` only. Comments, semicolon stacking and
+   `UNION`/`INTERSECT`/`EXCEPT` are rejected.
+2. Every table reference is checked, not only the first: `FROM` and each `JOIN`.
+   Comma joins and subqueries in `FROM`/`JOIN` are rejected.
+3. Selected expressions are tokenized, so `lower(first_name)` and qualified
+   wildcards (`p.*`, `x.*`) cannot hide an identifying column or a whole row.
+4. Unknown roles are denied; there is no default-allow path.
+5. Table must be in the policy scope (`departments`, `encounters`, `facilities`,
+   `insurance_plans`, `patient_contacts`, `patient_coverage`, `payers`,
+   `patients`, `providers`).
+6. Role policy:
+   - `anonymous` — no row reads from person tables, no identifying columns, and
+     no filters on identifying columns (blocks count/range oracles over SSN,
+     DOB, MRN); aggregates and catalog lookups only.
+   - `patient` — one person table, rows only under an exact
+     `patient_id = <subject>` equality (no `OR`, no tautology); SSN never
+     exposed; wildcard refused.
+   - `staff` — demographics allowed, SSN and wildcard dumps refused.
+7. Row reads from person tables require `LIMIT <= 20`; catalog tables are
    bounded server-side.
-5. `redact()` masks email, phone, 8-digit MRN, and member-ID patterns in
+8. `redact()` masks email, phone, 8-digit MRN, and member-ID patterns in
    rendered output as defense in depth.
 
-`DISTINCT` over non-identifying columns counts as a category lookup, so
-"appointment types" still works without a `LIMIT`.
+`DISTINCT` counts as a category lookup only when every referenced column is
+non-identifying, so "appointment types" still works while
+`DISTINCT lower(first_name)` does not.
 
 ## Evaluation
 
@@ -74,8 +80,27 @@ Run: `python3 mitigations/query-guard/query_guard.py` (captured output:
 | `SELECT first_name FROM patients;` | untested | denied (no LIMIT) |
 
 Legitimate requests still allowed: appointment types, department directory,
-providers accepting new patients, patient count, and a patient reading their own
-row. A patient reading another patient's row is denied.
+providers accepting new patients, patient count, a patient reading their own row,
+staff demographics, and aliased catalog columns. A patient reading another
+patient's row is denied.
+
+### Review regressions
+
+The first version checked only pieces of the request. These cases bypassed it;
+all are now fixtures in the suite and denied:
+
+| Caller | Query | Prior bypass |
+| --- | --- | --- |
+| `anonymous` | `SELECT x.* FROM departments CROSS JOIN private_records x;` | only the first table was checked |
+| `anonymous` | `SELECT DISTINCT lower(first_name) FROM patients;` | function hid the column; no row cap |
+| `patient`, id 1 | `... WHERE patient_id = 1 OR 1=1 LIMIT 20;` | `OR` defeated the ownership check |
+| `patient`, id 1 | `SELECT * FROM patients WHERE patient_id = 1 LIMIT 1;` | wildcard included SSN |
+| `staff` | `SELECT p.* FROM patients p LIMIT 1;` | qualified wildcard included SSN |
+| `unknown` | `SELECT ssn FROM patients LIMIT 1;` | unknown role fell through to allow |
+
+Two additional holes in the same class — comma joins and subqueries in
+`FROM`/`JOIN` — are also denied and covered by fixtures, as are aggregate
+oracles over identifying columns (`COUNT(*) ... WHERE ssn IS NOT NULL`).
 
 Redaction on the actual leaked reply masks all four MRNs, the phone number, the
 email, and the member ID.
@@ -84,12 +109,17 @@ email, and the member ID.
 
 Implemented and tested:
 
-- Rejects the eight attack shapes in the fixture list before execution.
+- Rejects all nineteen attack fixtures (eight original probes, six review
+  bypasses, five same-class regressions) before execution.
 - For `anonymous`, refuses row reads from person tables and any identifying
   column; catalog and aggregate requests still pass.
 - Requires an explicit row cap on person-table reads; rejects stacking and
   `UNION`.
 - Masks identifier patterns in rendered output as a second layer.
+
+Passing this fixture suite supports the claim "blocks these queries". It does
+not establish general access-control correctness; the parser is a reference, not
+a proof.
 
 Not changed by this implementation:
 

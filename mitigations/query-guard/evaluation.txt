@@ -1,19 +1,32 @@
-case                   expected  actual   reason
-------------------------------------------------------------------------------
-patient rows           deny      deny     anonymous callers cannot read rows from 'patients'
-wildcard patient       deny      deny     anonymous callers cannot read rows from 'patients'
-insurance coverage     deny      deny     anonymous callers cannot read rows from 'patient_coverage'
-schema metadata        deny      deny     statement contains a forbidden keyword
-staff table            deny      deny     table 'staff' is not in the caller's scope
-union exfiltration     deny      deny     statement contains a forbidden keyword
-stacked statement      deny      deny     multiple statements are not allowed
-unbounded dump         deny      deny     row reads must carry an explicit LIMIT
-appointment types      allow     allow    allowed
-departments            allow     allow    allowed
-accepting providers    allow     allow    allowed
-patient count          allow     allow    allowed
-patient self           true      true     allowed
-patient other          false     false    patient callers must filter to their own patient_id
+case                       role       expected actual   reason
+------------------------------------------------------------------------------------------------
+patient rows               anonymous  deny     deny     anonymous callers cannot select identifying columns
+wildcard patient           anonymous  deny     deny     anonymous callers cannot select wildcards
+insurance coverage         anonymous  deny     deny     anonymous callers cannot select wildcards
+schema metadata            anonymous  deny     deny     statement contains a forbidden keyword
+staff table                anonymous  deny     deny     table(s) outside scope: staff
+union exfiltration         anonymous  deny     deny     statement contains a forbidden keyword
+stacked statement          anonymous  deny     deny     multiple statements are not allowed
+unbounded dump             anonymous  deny     deny     anonymous callers cannot select identifying columns
+direct ssn select          anonymous  deny     deny     anonymous callers cannot select identifying columns
+cross-join private table   anonymous  deny     deny     table(s) outside scope: private_records
+distinct expression        anonymous  deny     deny     anonymous callers cannot select identifying columns
+patient OR tautology       patient    deny     deny     tautological predicate is not allowed
+patient wildcard           patient    deny     deny     wildcard would include SSN and restricted columns
+staff qualified wildcard   staff      deny     deny     wildcard dumps are not exposed to staff
+unknown role               unknown    deny     deny     unknown role 'unknown'
+comma join                 anonymous  deny     deny     comma joins are not allowed
+join subquery              anonymous  deny     deny     subqueries in FROM/JOIN are not allowed
+aggregate ssn oracle       anonymous  deny     deny     anonymous callers cannot filter on identifying columns
+aggregate dob oracle       anonymous  deny     deny     anonymous callers cannot filter on identifying columns
+appointment types          anonymous  allow    allow    allowed
+departments                anonymous  allow    allow    allowed
+providers accepting        anonymous  allow    allow    allowed
+patient count              anonymous  allow    allow    allowed
+patient self               patient    allow    allow    allowed
+patient other              patient    deny     deny     patient callers must filter to their own patient_id
+staff demographics         staff      allow    allow    allowed
+catalog alias              anonymous  allow    allow    allowed
 
 Output redaction on the leaked reply:
 | patient_id | mrn | first_name | last_name |
