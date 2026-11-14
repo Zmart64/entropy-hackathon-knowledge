@@ -1,0 +1,352 @@
+[
+{
+"provider_id": 1,
+"npi": "1039849058",
+"credential": "DO",
+"specialty": "Family Medicine"
+},
+{
+"provider_id": 2,
+"npi": "2598844530",
+"credential": "DO",
+"specialty": "Family Medicine"
+},
+{
+"provider_id": 3,
+"npi": "2326051309",
+"credential": "MD",
+"specialty": "Family Medicine"
+},
+{
+"provider_id": 4,
+"npi": "2527900957",
+"credential": "MD",
+"specialty": "Family Medicine"
+},
+{
+"provider_id": 5,
+"npi": "1644878013",
+"credential": "DO",
+"specialty": "Family Medicine"
+},
+{
+"provider_id": 6,
+"npi": "2963165651",
+"credential": "DO",
+"specialty": "Internal Medicine"
+},
+{
+"provider_id": 7,
+"npi": "2892419591",
+"credential": "DO",
+"specialty": "Internal Medicine"
+},
+{
+"provider_id": 8,
+"npi": "1075066401",
+"credential": "DO",
+"specialty": "Internal Medicine"
+},
+{
+"provider_id": 9,
+"npi": "2777514409",
+"credential": "DO",
+"specialty": "Internal Medicine"
+},
+{
+"provider_id": 10,
+"npi": "2643594072",
+"credential": "DO",
+"specialty": "Pediatrics"
+},
+{
+"provider_id": 11,
+"npi": "1907965374",
+"credential": "DO",
+"specialty": "Pediatrics"
+},
+{
+"provider_id": 12,
+"npi": "2678566300",
+"credential": "DO",
+"specialty": "Pediatrics"
+},
+{
+"provider_id": 13,
+"npi": "1836555312",
+"credential": "DO",
+"specialty": "Emergency Medicine"
+},
+{
+"provider_id": 14,
+"npi": "1382173247",
+"credential": "DO",
+"specialty": "Emergency Medicine"
+},
+{
+"provider_id": 15,
+"npi": "2577487608",
+"credential": "DO",
+"specialty": "Emergency Medicine"
+},
+{
+"provider_id": 16,
+"npi": "2668629084",
+"credential": "MD",
+"specialty": "Emergency Medicine"
+},
+{
+"provider_id": 17,
+"npi": "1744337175",
+"credential": "MD",
+"specialty": "Emergency Medicine"
+},
+{
+"provider_id": 18,
+"npi": "2790431698",
+"credential": "DO",
+"specialty": "Hospitalist"
+},
+{
+"provider_id": 19,
+"npi": "1458579954",
+"credential": "MD",
+"specialty": "Hospitalist"
+},
+{
+"provider_id": 20,
+"npi": "2311460077",
+"credential": "MD",
+"specialty": "Hospitalist"
+},
+{
+"provider_id": 21,
+"npi": "1008923702",
+"credential": "MD",
+"specialty": "Hospitalist"
+},
+{
+"provider_id": 22,
+"npi": "1131432449",
+"credential": "MD",
+"specialty": "Cardiovascular Disease"
+},
+{
+"provider_id": 23,
+"npi": "2722076330",
+"credential": "MD",
+"specialty": "Cardiovascular Disease"
+},
+{
+"provider_id": 24,
+"npi": "2129509677",
+"credential": "MD",
+"specialty": "Pulmonary Disease"
+},
+{
+"provider_id": 25,
+"npi": "2054094034",
+"credential": "MD",
+"specialty": "Nephrology"
+},
+{
+"provider_id": 26,
+"npi": "2497937906",
+"credential": "MD",
+"specialty": "Endocrinology, Diabetes & Metabolism"
+},
+{
+"provider_id": 27,
+"npi": "2970232031",
+"credential": "MD",
+"specialty": "Gastroenterology"
+},
+{
+"provider_id": 28,
+"npi": "2498190026",
+"credential": "MD",
+"specialty": "Rheumatology"
+},
+{
+"provider_id": 29,
+"npi": "2292439363",
+"credential": "MD",
+"specialty": "Hematology & Oncology"
+},
+{
+"provider_id": 30,
+"npi": "2416485763",
+"credential": "MD",
+"specialty": "Hematology & Oncology"
+},
+{
+"provider_id": 31,
+"npi": "2197607718",
+"credential": "MD",
+"specialty": "Infectious Disease"
+},
+{
+"provider_id": 32,
+"npi": "1096363514",
+"credential": "MD",
+"specialty": "Neurology"
+},
+{
+"provider_id": 33,
+"npi": "2620838476",
+"credential": "MD",
+"specialty": "Psychiatry"
+},
+{
+"provider_id": 34,
+"npi": "2191094681",
+"credential": "DO",
+"specialty": "Psychiatry"
+},
+{
+"provider_id": 35,
+"npi": "2720474875",
+"credential": "MD",
+"specialty": "Addiction Medicine"
+},
+{
+"provider_id": 36,
+"npi": "1374732323",
+"credential": "DO",
+"specialty": "Obstetrics & Gynecology"
+},
+{
+"provider_id": 37,
+"npi": "1140733019",
+"credential": "MD",
+"specialty": "Obstetrics & Gynecology"
+},
+{
+"provider_id": 38,
+"npi": "1352195717",
+"credential": "MD",
+"specialty": "Surgery"
+},
+{
+"provider_id": 39,
+"npi": "1390202236",
+"credential": "MD",
+"specialty": "Orthopaedic Surgery"
+},
+{
+"provider_id": 40,
+"npi": "1678398383",
+"credential": "MD",
+"specialty": "Diagnostic Radiology"
+},
+{
+"provider_id": 41,
+"npi": "2350621944",
+"credential": "DO",
+"specialty": "Family Medicine"
+},
+{
+"provider_id": 42,
+"npi": "1715795518",
+"credential": "APRN-CNP",
+"specialty": "Nurse Practitioner, Family"
+},
+{
+"provider_id": 43,
+"npi": "1315567572",
+"credential": "APRN-CNP",
+"specialty": "Nurse Practitioner, Family"
+},
+{
+"provider_id": 44,
+"npi": "2289054050",
+"credential": "APRN-CNP",
+"specialty": "Nurse Practitioner, Family"
+},
+{
+"provider_id": 45,
+"npi": "2701877864",
+"credential": "APRN-CNP",
+"specialty": "Nurse Practitioner, Family"
+},
+{
+"provider_id": 46,
+"npi": "2305028591",
+"credential": "APRN-CNP",
+"specialty": "Nurse Practitioner, Psych/Mental Health"
+},
+{
+"provider_id": 47,
+"npi": "1925154654",
+"credential": "PA-C",
+"specialty": "Physician Assistant"
+},
+{
+"provider_id": 48,
+"npi": "1679981294",
+"credential": "PA-C",
+"specialty": "Physician Assistant"
+},
+{
+"provider_id": 49,
+"npi": "2575269024",
+"credential": "PA-C",
+"specialty": "Physician Assistant"
+},
+{
+"provider_id": 50,
+"npi": "2425318377",
+"credential": "PA-C",
+"specialty": "Physician Assistant"
+},
+{
+"provider_id": 51,
+"npi": "1435231547",
+"credential": "PA-C",
+"specialty": "Physician Assistant",
+"taxonomy_code": "363A00000X",
+"board_certified": 1,
+"accepting_new_patients": 1,
+"primary_department_id": 13
+},
+{
+"provider_id": 52,
+"npi": "2388516520",
+"credential": "PsyD",
+"specialty": "Clinical Psychologist",
+"taxonomy_code": "103TC0700X",
+"board_certified": 1,
+"accepting_new_patients": 0,
+"primary_department_id": 22
+},
+{
+"provider_id": 53,
+"npi": "1174164883",
+"credential": "LISW-S",
+"specialty": "Clinical Social Worker",
+"taxonomy_code": "1041C0700X",
+"board_certified": 1,
+"accepting_new_patients": 1,
+"primary_department_id": 22
+},
+{
+"provider_id": 54,
+"npi": "2525869188",
+"credential": "LISW-S",
+"specialty": "Clinical Social Worker",
+"taxonomy_code": "1041C0700X",
+"board_certified": 1,
+"accepting_new_patients": 1,
+"primary_department_id": 22
+},
+{
+"provider_id": 55,
+"npi": "2152391175",
+"credential": "LICDC-CS",
+"specialty": "Addiction Counselor",
+"taxonomy_code": "101YA0400X",
+"board_certified": 1,
+"accepting_new_patients": 1,
+"primary_department_id": 23
+}
+]

@@ -1,0 +1,236 @@
+{
+  "source_repository": "https://github.com/B0yko/green-mosaic",
+  "source_commit": "5cc9dd241e4242a758fb43c35efb12f4d7f305f7",
+  "imported_on": "2026-11-14",
+  "scope": "Provider exports and Nina/Remy evidence; all 15 Python harness scripts with alias/column reports and recorded outputs. No live requests executed.",
+  "files": [
+    {
+      "path": "source/README.md",
+      "source_path": "evidence/haiku-deepseek-harness/README.md",
+      "sha256": "a92c83c551610596996cf9a83476272790d893547b79d24c80a943eec298707f",
+      "bytes": 1774
+    },
+    {
+      "path": "source/REPORT.md",
+      "source_path": "evidence/haiku-deepseek-harness/REPORT.md",
+      "sha256": "28332a4e3e48acdc848403add9f6f5cd559f451c3359e5930379c90de993f749",
+      "bytes": 10216
+    },
+    {
+      "path": "source/RESULT.md",
+      "source_path": "evidence/haiku-deepseek-harness/RESULT.md",
+      "sha256": "d8978de935feda409a4fad90f211656927d69060c238d3a969222c74708f070d",
+      "bytes": 2957
+    },
+    {
+      "path": "source/atk.py",
+      "source_path": "evidence/haiku-deepseek-harness/atk.py",
+      "sha256": "630f686f5bdce84475fc4bcf42013c810d81c909848e40788ad68706e80cde48",
+      "bytes": 2403
+    },
+    {
+      "path": "source/btm.py",
+      "source_path": "evidence/haiku-deepseek-harness/btm.py",
+      "sha256": "e34fa72d52c0f004028e31e9513d233ae8c90e2dc6ae76dde5f0c7d798357d58",
+      "bytes": 2115
+    },
+    {
+      "path": "source/chat.py",
+      "source_path": "evidence/haiku-deepseek-harness/chat.py",
+      "sha256": "c060ab14e5ca276222d38ceeceb0f092cb4d317adb8bdceb102195740cf05f89",
+      "bytes": 1860
+    },
+    {
+      "path": "source/example_attack.py",
+      "source_path": "evidence/haiku-deepseek-harness/example_attack.py",
+      "sha256": "b5285b0ea7785f7a9a0baa389ff4ab9c988fc02e4a8512381d42f8702345e913",
+      "bytes": 424
+    },
+    {
+      "path": "source/logs/agents/alias/RESULT.md",
+      "source_path": "evidence/haiku-deepseek-harness/logs/agents/alias/RESULT.md",
+      "sha256": "2d56fa7265ca2c02712782cca516c6a8b988ba26790657254b18209e4ee5d452",
+      "bytes": 5847
+    },
+    {
+      "path": "source/logs/agents/alias/attempts.jsonl",
+      "source_path": "evidence/haiku-deepseek-harness/logs/agents/alias/attempts.jsonl",
+      "sha256": "f531c786359646732acaa658693cc0ce4b3e6254620031c1234fcb5cf9225c6a",
+      "bytes": 31917
+    },
+    {
+      "path": "source/logs/agents/alias/drive.py",
+      "source_path": "evidence/haiku-deepseek-harness/logs/agents/alias/drive.py",
+      "sha256": "9d71fcb31556c85607e5e06e8e209564a78f7b220c0b137a40548e84493bbfd1",
+      "bytes": 4367
+    },
+    {
+      "path": "source/logs/agents/alias/drive2.py",
+      "source_path": "evidence/haiku-deepseek-harness/logs/agents/alias/drive2.py",
+      "sha256": "33923d90a4aba361e65d3ba17cb95ad241095282d65282337d6e9a54bb9237d3",
+      "bytes": 2439
+    },
+    {
+      "path": "source/logs/agents/alias/drive3.py",
+      "source_path": "evidence/haiku-deepseek-harness/logs/agents/alias/drive3.py",
+      "sha256": "d35cedaaf3ab8687eefb43e81fea76e49f7eb13cdb36056e5679bfe2a05fab5f",
+      "bytes": 2037
+    },
+    {
+      "path": "source/logs/agents/alias/runs.json",
+      "source_path": "evidence/haiku-deepseek-harness/logs/agents/alias/runs.json",
+      "sha256": "f6bd3464baae22332dc97b610998fab1b852b460c84c8818c7867e00d3035830",
+      "bytes": 16258
+    },
+    {
+      "path": "source/logs/agents/alias/runs2.json",
+      "source_path": "evidence/haiku-deepseek-harness/logs/agents/alias/runs2.json",
+      "sha256": "75f78d40c284cb06d0e218bf50df2e0994193205e85e408edabccd1f9cf8a1ca",
+      "bytes": 6109
+    },
+    {
+      "path": "source/logs/agents/alias/runs3.json",
+      "source_path": "evidence/haiku-deepseek-harness/logs/agents/alias/runs3.json",
+      "sha256": "adc137ab6a4aebe5d66e579775afaa38c25de3c5523b77b0f38548341acecb2e",
+      "bytes": 1810
+    },
+    {
+      "path": "source/logs/agents/column/RESULT.md",
+      "source_path": "evidence/haiku-deepseek-harness/logs/agents/column/RESULT.md",
+      "sha256": "be53e20b0b4fa2747bd0e14067463f9c61330db1b420976f515b9a03d053dc85",
+      "bytes": 5017
+    },
+    {
+      "path": "source/logs/agents/column/attempts.jsonl",
+      "source_path": "evidence/haiku-deepseek-harness/logs/agents/column/attempts.jsonl",
+      "sha256": "7e9297bf7806632c617709f0daed31f110bdad9f0c0faecef635620708d4280d",
+      "bytes": 51636
+    },
+    {
+      "path": "source/logs/agents/column/loop.py",
+      "source_path": "evidence/haiku-deepseek-harness/logs/agents/column/loop.py",
+      "sha256": "95c5832f612c684985f5bfdc2cd906975adfb19410fdc6dab50ca3acde93988f",
+      "bytes": 1073
+    },
+    {
+      "path": "source/logs/agents/column/loop2.py",
+      "source_path": "evidence/haiku-deepseek-harness/logs/agents/column/loop2.py",
+      "sha256": "226f457c430aa2771ed03b2f4fcc678ec1a8723c71719c9a02ea9978bcc386dc",
+      "bytes": 1917
+    },
+    {
+      "path": "source/logs/agents/column/loop3.py",
+      "source_path": "evidence/haiku-deepseek-harness/logs/agents/column/loop3.py",
+      "sha256": "d53428a06096df46b01f916a46049b7e95306c2358b0caab742d708e4f7ec23d",
+      "bytes": 845
+    },
+    {
+      "path": "source/logs/agents/column/loop4.py",
+      "source_path": "evidence/haiku-deepseek-harness/logs/agents/column/loop4.py",
+      "sha256": "a9790bc48221600ba7b4aa6301b653b6a551f43e3fb2b6ac3e2bf575261256b5",
+      "bytes": 1226
+    },
+    {
+      "path": "source/logs/agents/column/loop5.py",
+      "source_path": "evidence/haiku-deepseek-harness/logs/agents/column/loop5.py",
+      "sha256": "220cc5cb41083ab54e38bf4372d597580f5e07329e42e2fdd81bc0d6db90c3d2",
+      "bytes": 1019
+    },
+    {
+      "path": "source/logs/agents/column/probe.jsonl",
+      "source_path": "evidence/haiku-deepseek-harness/logs/agents/column/probe.jsonl",
+      "sha256": "b6724c5926ca4655c1c6d31c3cd8beb3d73adbfc699e5d18e86efed10af718d2",
+      "bytes": 47073
+    },
+    {
+      "path": "source/logs/agents/column/probe.py",
+      "source_path": "evidence/haiku-deepseek-harness/logs/agents/column/probe.py",
+      "sha256": "70b1d718f2e0b2a6ca38c142f4e32ff3e7aa6d0f55de882480ee4658fd0ac755",
+      "bytes": 2222
+    },
+    {
+      "path": "source/logs/agents/nina/RESULT.md",
+      "source_path": "evidence/haiku-deepseek-harness/logs/agents/nina/RESULT.md",
+      "sha256": "f360753ee85acb2eeaae465cd74ee76f0f9d7ae4c0fe6c74cc016fd57b40f92a",
+      "bytes": 4281
+    },
+    {
+      "path": "source/logs/agents/nina/attempts.jsonl",
+      "source_path": "evidence/haiku-deepseek-harness/logs/agents/nina/attempts.jsonl",
+      "sha256": "808a5b4d14bc84ae4e8e07fd620c316c9959421097d0c1e308097cb3cc4d1773",
+      "bytes": 26999
+    },
+    {
+      "path": "source/logs/agents/nina/pages.md",
+      "source_path": "evidence/haiku-deepseek-harness/logs/agents/nina/pages.md",
+      "sha256": "ba08c27e2a5b5ec5b5a9029ff36af246aa27dc63c62f771e8b15a2b84ad3640a",
+      "bytes": 8789
+    },
+    {
+      "path": "source/logs/agents/nina/providers.csv",
+      "source_path": "evidence/haiku-deepseek-harness/logs/agents/nina/providers.csv",
+      "sha256": "219436ed0ab02f1062554fce95ffefe9c4d677e2b5f63e006996d94e6273754b",
+      "bytes": 2417
+    },
+    {
+      "path": "source/logs/agents/nina/providers_dump.json",
+      "source_path": "evidence/haiku-deepseek-harness/logs/agents/nina/providers_dump.json",
+      "sha256": "119160a8e7c6f48ff5b465312304519c67809d08f4f64f80d97b48dd1678f630",
+      "bytes": 6037
+    },
+    {
+      "path": "source/logs/agents/nina/providers_full.json",
+      "source_path": "evidence/haiku-deepseek-harness/logs/agents/nina/providers_full.json",
+      "sha256": "ce6cabdb22de2b4fc936bb925a07e1ec673b94de79275fecbd369425dc7ff264",
+      "bytes": 5925
+    },
+    {
+      "path": "source/logs/agents/nina/verbatim_lines.txt",
+      "source_path": "evidence/haiku-deepseek-harness/logs/agents/nina/verbatim_lines.txt",
+      "sha256": "6009519e30311807886c5c6d02dcf40ca1b7f594eaa081c608c16e0d7a943cb2",
+      "bytes": 5869
+    },
+    {
+      "path": "source/logs/agents/remy/attempts.jsonl",
+      "source_path": "evidence/haiku-deepseek-harness/logs/agents/remy/attempts.jsonl",
+      "sha256": "023895839ee46c1ab26b04e92907389a812d69108039133238e42b541b293eac",
+      "bytes": 16149
+    },
+    {
+      "path": "source/logs/agents/remy/pages.md",
+      "source_path": "evidence/haiku-deepseek-harness/logs/agents/remy/pages.md",
+      "sha256": "34b71933faa7d657d8e5b0e2f2074c2059f76861869afd87f11ab0be65f93cc7",
+      "bytes": 11674
+    },
+    {
+      "path": "source/logs/agents/remy/providers_widened.csv",
+      "source_path": "evidence/haiku-deepseek-harness/logs/agents/remy/providers_widened.csv",
+      "sha256": "81f52ebcf3bfcb7cd7945b8a6b53732351b41a4e560ed45241b3530a6b1c17fa",
+      "bytes": 3172
+    },
+    {
+      "path": "source/probe.py",
+      "source_path": "evidence/haiku-deepseek-harness/probe.py",
+      "sha256": "4287e21ea4dcff17fb71238d2fb8faab99a209718a77073b0e2e8d1cb5578a9c",
+      "bytes": 3523
+    },
+    {
+      "path": "source/providers_leaked.csv",
+      "source_path": "evidence/haiku-deepseek-harness/providers_leaked.csv",
+      "sha256": "fa5f0a16cb3f28830bf691a8b7270b965adf6cbcb9b913888c8e46bbd0737109",
+      "bytes": 2485
+    },
+    {
+      "path": "source/providers_leaked_full.csv",
+      "source_path": "evidence/haiku-deepseek-harness/providers_leaked_full.csv",
+      "sha256": "81f52ebcf3bfcb7cd7945b8a6b53732351b41a4e560ed45241b3530a6b1c17fa",
+      "bytes": 3172
+    },
+    {
+      "path": "source/setup.py",
+      "source_path": "evidence/haiku-deepseek-harness/setup.py",
+      "sha256": "9a49f75fe348749cef0fc5e84fa377ce812c280005add8433ba9c0678ed4d9d6",
+      "bytes": 3025
+    }
+  ]
+}
