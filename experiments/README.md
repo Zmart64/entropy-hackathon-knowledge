@@ -1,6 +1,6 @@
-# Experiments
+# Experiment write-ups
 
-Create a folder per experiment, for example `experiments/short-descriptive-name/`. Keep its script and notes together. The starter's `example_attack.py` shows the client API.
+Create a folder per experiment, for example `experiments/short-descriptive-name/`. Share the hypothesis, exact prompt sequence, method, and outcomes here. Run scripts in your separate local starter checkout; link to a shared code revision if one is available.
 
 Use this outline in each experiment's README:
 
@@ -15,8 +15,9 @@ Status: hypothesis / tested / reproduced / unsuccessful
 What behavior are we testing, and why might it occur?
 
 ## Reproduction
-Model, exact prompts in order, conversation reset behavior, command,
-and number of independent trials. Never include API keys.
+Model, exact prompts in order, conversation reset behavior, and number
+of independent trials. Include any code reference and commands to run
+in a separate starter checkout. Never include API keys.
 
 ## Results
 Verified successes / total attempts, validation method, turn IDs,

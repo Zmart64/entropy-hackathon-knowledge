@@ -29,7 +29,9 @@ The organizers allow prompt attacks against the challenge only. Do not attack th
 
 The slides request a deterministic patch for a successful attack. Distinguish a locally evaluated mitigation from a change deployed on the organizers' server.
 
-## Client behavior
+## Starter client behavior (separate repository)
+
+These notes describe the [organizers' starter](https://github.com/natalienma/break-the-model-starter), which each teammate runs in a separate local checkout.
 
 - Configuration lives in each teammate's local `.env`.
 - `btm.py` uses the configured challenge server's `/models` and `/chat` endpoints.
