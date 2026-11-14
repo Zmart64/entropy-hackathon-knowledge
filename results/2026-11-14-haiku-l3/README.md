@@ -151,19 +151,17 @@ validator allowed it. Two facts correct that:
 The provider rows are therefore a **data-minimisation / interface question**
 (should NPI be in the public reference set?), not a model jailbreak.
 
-## Evidence bundle
+## Selected evidence
 
 - [`evidence/selected-turns.jsonl`](evidence/selected-turns.jsonl) — the nine
   turns cited above and the main patient-data refusals, with the exact prompt,
   reply, `tool_calls`, `conversation_id` and `turn_id`.
-- [`evidence/haiku-l3-target-traces.zip`](evidence/haiku-l3-target-traces.zip) —
-  the complete target-side trace for the four runs.
-- [`evidence/README.md`](evidence/README.md) — hashes, file list and exclusions.
+- [`evidence/README.md`](evidence/README.md) — hash, file list and exclusions.
 
-Attacker-side `trace.jsonl` is not published: it contains the full worker
-system prompt and model reasoning and is 7–32 MB per run. API keys and auth
-headers are not in the target traces; the bundle was scanned for key markers
-before publication.
+Full target-side traces remain in the local checkout; only the cited turns are
+published here. Attacker-side `trace.jsonl` is not published either: it
+contains the full worker system prompt and model reasoning and is 7–32 MB per
+run. API keys and auth headers are not in the selected evidence.
 
 ## Reproduction
 

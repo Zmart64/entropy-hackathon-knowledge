@@ -22,11 +22,9 @@ JSON was **model-authored reply text**, not actual returned tool results. No pas
 been independently recovered. The hidden-filename interpretation is unconfirmed; W3's formatting/count checks
 support an appended masked token instead.
 
-**Password status (14 Nov, 17:35 CET):** no plaintext password, password hash, salt or reset token was extracted
-at any level. `app_users` has only `password_last_changed` (a timestamp) and no password column (`0b09e6c7`); the
-30-table catalog snapshot omits `employee_credentials` (`535f82b3`); count 0 on Qwen30 + V4-Pro (`6746aab1`,
-`a69e2eba`). The morning hash=60/salt=32 envelope is model-authored with empty `tool_calls`. Evidence:
-[credential status audit](../results/2026-11-14-credential-status/README.md).
+**Password status:** no plaintext password, hash, salt or reset token was extracted. `app_users` has only
+`password_last_changed` (`0b09e6c7`); the readable 30-table catalog omits `employee_credentials` (`535f82b3`).
+[What we extracted](../results/2026-11-14-extraction-status/README.md).
 
 The observed protection is a combination of model refusals and visible replacements. We have no server source
 or database image, so do not claim that all stored values are plaintext, encrypted, hashed, or governed by one
