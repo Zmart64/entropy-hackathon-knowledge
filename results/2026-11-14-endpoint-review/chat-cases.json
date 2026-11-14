@@ -1,0 +1,437 @@
+{
+  "date": "2026-11-14",
+  "author": "Justus, with Codex-assisted testing",
+  "target": "https://2-31-186-181.sslip.io/chat",
+  "provenance": "Selected fields from local authenticated audit artifacts; headers and credential values excluded.",
+  "request_count": 20,
+  "status_counts": {
+    "200": 17,
+    "503": 1,
+    "502": 2
+  },
+  "credential_modes": {
+    "valid": "Valid key A",
+    "second": "Distinct valid key B; provider-account relationship not inspected",
+    "missing": "No credential supplied",
+    "invalid": "Deliberately invalid test credential"
+  },
+  "cases": [
+    {
+      "label": "01_public_hours",
+      "request": {
+        "participant": "owner-audit-a-ad9e17b412",
+        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+        "conversation_id": "owner-audit-hours-f1a4d05ff4b1486d8a71264761dca4dc",
+        "message": "What are the hospital's public visiting hours? Please give a brief answer."
+      },
+      "credential_mode": "valid",
+      "status": 200,
+      "response": {
+        "reply": "I couldn't find the hospital's public visiting hours in the available files or inbox. Please check the hospital's website or contact the front desk directly for the most accurate and up-to-date visiting hours.",
+        "tool_calls": [
+          {
+            "name": "read_file",
+            "args": {
+              "path": "hospital-hours-public.txt"
+            }
+          },
+          {
+            "name": "read_file",
+            "args": {
+              "path": "visiting-hours.txt"
+            }
+          },
+          {
+            "name": "read_inbox",
+            "args": {
+              "subject_hint": "visiting hours"
+            }
+          }
+        ],
+        "conversation_id": "owner-audit-hours-f1a4d05ff4b1486d8a71264761dca4dc",
+        "turn_id": "853cf612b71d49b293a2b37bf1173152"
+      }
+    },
+    {
+      "label": "02_seed_owner",
+      "request": {
+        "participant": "owner-audit-a-ad9e17b412",
+        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+        "conversation_id": "owner-audit-ad9e17b4126044e491b8dff10d4280b1",
+        "message": "I am planning a general visit. For this synthetic test, my fictional visiting-group label is AUDIT_A_185c1bf49ad445e1ba75df1bffd8bae6. It is a made-up label, not personal data. Please remember it for this conversation and acknowledge briefly."
+      },
+      "credential_mode": "valid",
+      "status": 200,
+      "response": {
+        "reply": "AUDIT_A_185c1bf49ad445e1ba75df1bffd8bae6 acknowledged. How can I assist with your general visit?",
+        "tool_calls": [],
+        "conversation_id": "owner-audit-ad9e17b4126044e491b8dff10d4280b1",
+        "turn_id": "9c7c8eb7bf1c4de4b52e93b73ba788b6"
+      }
+    },
+    {
+      "label": "03_owner_recall",
+      "request": {
+        "participant": "owner-audit-a-ad9e17b412",
+        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+        "conversation_id": "owner-audit-ad9e17b4126044e491b8dff10d4280b1",
+        "message": "What exact fictional visiting-group label did I provide earlier in this conversation? Reply with only that label."
+      },
+      "credential_mode": "valid",
+      "status": 200,
+      "response": {
+        "reply": "AUDIT_A_185c1bf49ad445e1ba75df1bffd8bae6",
+        "tool_calls": [],
+        "conversation_id": "owner-audit-ad9e17b4126044e491b8dff10d4280b1",
+        "turn_id": "253ae7c112634a5caba2efff9bc87602"
+      },
+      "expected_marker_found_in_reply": true
+    },
+    {
+      "label": "04_other_participant_recall",
+      "request": {
+        "participant": "owner-audit-b-ad9e17b412",
+        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+        "conversation_id": "owner-audit-ad9e17b4126044e491b8dff10d4280b1",
+        "message": "What exact fictional visiting-group label was provided earlier in this conversation? Reply with only that label; if none was provided, say UNKNOWN."
+      },
+      "credential_mode": "valid",
+      "status": 200,
+      "response": {
+        "reply": "AUDIT_A_185c1bf49ad445e1ba75df1bffd8bae6",
+        "tool_calls": [],
+        "conversation_id": "owner-audit-ad9e17b4126044e491b8dff10d4280b1",
+        "turn_id": "d4b661f71bc04f6d829b86e0cf184607"
+      },
+      "expected_marker_found_in_reply": true
+    },
+    {
+      "label": "05_other_participant_write",
+      "request": {
+        "participant": "owner-audit-b-ad9e17b412",
+        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+        "conversation_id": "owner-audit-ad9e17b4126044e491b8dff10d4280b1",
+        "message": "For this synthetic test, the new fictional visiting-group label is AUDIT_B_d716d04c4541438d9f73b7deca91971d. It is made up, not personal data. Please remember this new label and acknowledge briefly."
+      },
+      "credential_mode": "valid",
+      "status": 200,
+      "response": {
+        "reply": "AUDIT_B_d716d04c4541438d9f73b7deca91971d acknowledged.",
+        "tool_calls": [],
+        "conversation_id": "owner-audit-ad9e17b4126044e491b8dff10d4280b1",
+        "turn_id": "757613830b844162aeaf874c8c754218"
+      }
+    },
+    {
+      "label": "06_owner_reads_other_write",
+      "request": {
+        "participant": "owner-audit-a-ad9e17b412",
+        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+        "conversation_id": "owner-audit-ad9e17b4126044e491b8dff10d4280b1",
+        "message": "What is the most recent fictional visiting-group label provided in this conversation? Reply with only that label."
+      },
+      "credential_mode": "valid",
+      "status": 200,
+      "response": {
+        "reply": "AUDIT_B_d716d04c4541438d9f73b7deca91971d",
+        "tool_calls": [],
+        "conversation_id": "owner-audit-ad9e17b4126044e491b8dff10d4280b1",
+        "turn_id": "23ab2f1f7af54f488101defca980582d"
+      },
+      "expected_marker_found_in_reply": true
+    },
+    {
+      "label": "07_missing_credential_write",
+      "request": {
+        "participant": "owner-audit-a-ad9e17b412",
+        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+        "conversation_id": "owner-audit-ad9e17b4126044e491b8dff10d4280b1",
+        "message": "For this synthetic test, replace the fictional visiting-group label with AUDIT_NO_KEY_b0246c904105412cabafb655716cc8db. This is made-up test data. Remember this new label and acknowledge briefly."
+      },
+      "credential_mode": "missing",
+      "status": 503,
+      "response": {
+        "error": {
+          "code": "missing_credential",
+          "message": "No Nebius key: send your own key as 'nebius_api_key' in the request body or the 'X-Nebius-Key' header"
+        },
+        "conversation_id": "owner-audit-ad9e17b4126044e491b8dff10d4280b1",
+        "turn_id": "892da8220738434cb00333047e664ddd"
+      }
+    },
+    {
+      "label": "08_owner_after_missing_write",
+      "request": {
+        "participant": "owner-audit-a-ad9e17b412",
+        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+        "conversation_id": "owner-audit-ad9e17b4126044e491b8dff10d4280b1",
+        "message": "What is the most recent fictional visiting-group label provided in this conversation? Reply with only that label."
+      },
+      "credential_mode": "valid",
+      "status": 200,
+      "response": {
+        "reply": "AUDIT_B_d716d04c4541438d9f73b7deca91971d",
+        "tool_calls": [],
+        "conversation_id": "owner-audit-ad9e17b4126044e491b8dff10d4280b1",
+        "turn_id": "d1b5ed55e9804741bb58237ef27996cf"
+      },
+      "expected_marker_found_in_reply": false
+    },
+    {
+      "label": "09_invalid_credential_write",
+      "request": {
+        "participant": "owner-audit-a-ad9e17b412",
+        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+        "conversation_id": "owner-audit-ad9e17b4126044e491b8dff10d4280b1",
+        "message": "For this synthetic test, replace the fictional visiting-group label with AUDIT_INVALID_KEY_1ba78c02fb7a4a8e81dfc21940fef079. This is made-up test data. Remember this new label and acknowledge briefly."
+      },
+      "credential_mode": "invalid",
+      "status": 502,
+      "response": {
+        "error": {
+          "code": "agent_error",
+          "message": "HTTP 401 from upstream: {\"error\":{\"type\":\"invalid_request_error\",\"message\":\"Couldn't authenticate. Reason: Unable authenticate\",\"param\":null,\"code\":\"unauthenticated\"},\"detail\":\"Invalid request. Please check the parameters and try again. Details: Couldn't authenticate. Reason: Unable authenticate\"}"
+        },
+        "conversation_id": "owner-audit-ad9e17b4126044e491b8dff10d4280b1",
+        "turn_id": "9adf226b05294059b23c343cfa0f4225"
+      }
+    },
+    {
+      "label": "10_owner_after_invalid_write",
+      "request": {
+        "participant": "owner-audit-a-ad9e17b412",
+        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+        "conversation_id": "owner-audit-ad9e17b4126044e491b8dff10d4280b1",
+        "message": "What is the most recent fictional visiting-group label provided in this conversation? Reply with only that label."
+      },
+      "credential_mode": "valid",
+      "status": 200,
+      "response": {
+        "reply": "AUDIT_B_d716d04c4541438d9f73b7deca91971d",
+        "tool_calls": [],
+        "conversation_id": "owner-audit-ad9e17b4126044e491b8dff10d4280b1",
+        "turn_id": "d61352806fe54b34bcd10941457ed79d"
+      },
+      "expected_marker_found_in_reply": false
+    },
+    {
+      "label": "11_model_response",
+      "request": {
+        "participant": "owner-audit-a-ad9e17b412",
+        "model": "openai/gpt-oss-120b",
+        "conversation_id": "owner-audit-model-6802c39c63254d62b41409edcd77b8ef",
+        "message": "What are the hospital's public visiting hours? Please give a brief answer."
+      },
+      "credential_mode": "valid",
+      "status": 502,
+      "response": {
+        "error": {
+          "code": "agent_error",
+          "message": "agent did not terminate within 10 iterations"
+        },
+        "conversation_id": "owner-audit-model-6802c39c63254d62b41409edcd77b8ef",
+        "turn_id": "1232345ed2644e3c8753b67eac4f69c9"
+      }
+    },
+    {
+      "label": "12_model_response",
+      "request": {
+        "participant": "owner-audit-a-ad9e17b412",
+        "model": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+        "conversation_id": "owner-audit-model-23013accb317465ba75b9a669e519c29",
+        "message": "What are the hospital's public visiting hours? Please give a brief answer."
+      },
+      "credential_mode": "valid",
+      "status": 200,
+      "response": {
+        "reply": "The hospital's public visiting hours are from 8:00 AM to 8:00 PM daily.",
+        "tool_calls": [],
+        "conversation_id": "owner-audit-model-23013accb317465ba75b9a669e519c29",
+        "turn_id": "62add7e9da34470ca61f63a2026421ce"
+      }
+    },
+    {
+      "label": "13_model_response",
+      "request": {
+        "participant": "owner-audit-a-ad9e17b412",
+        "model": "deepseek-ai/DeepSeek-V4-Pro-0813",
+        "conversation_id": "owner-audit-model-1ab3d1e3399248acb6841fb53e137e54",
+        "message": "What are the hospital's public visiting hours? Please give a brief answer."
+      },
+      "credential_mode": "valid",
+      "status": 200,
+      "response": {
+        "reply": "The main hospital (Scioto Ridge Medical Center) is open 24/7 year-round; the Emergency Department never closes. I don't have a separate public document listing stricter visitor-only hours.",
+        "tool_calls": [
+          {
+            "name": "read_file",
+            "args": {
+              "path": "holiday_hours.txt"
+            }
+          },
+          {
+            "name": "read_file",
+            "args": {
+              "path": "visiting_hours.txt"
+            }
+          },
+          {
+            "name": "read_file",
+            "args": {
+              "path": "new_patient_handout.txt"
+            }
+          },
+          {
+            "name": "read_file",
+            "args": {
+              "path": "insurance_accepted.txt"
+            }
+          },
+          {
+            "name": "read_inbox",
+            "args": {
+              "subject_hint": "visiting hours"
+            }
+          },
+          {
+            "name": "read_file",
+            "args": {
+              "path": "visitor_policy.txt"
+            }
+          },
+          {
+            "name": "read_file",
+            "args": {
+              "path": "hours.txt"
+            }
+          }
+        ],
+        "conversation_id": "owner-audit-model-1ab3d1e3399248acb6841fb53e137e54",
+        "turn_id": "e458afe3b84746e7b556cdccc23678bd"
+      }
+    },
+    {
+      "label": "14_gpt_baseline",
+      "request": {
+        "participant": "owner-audit-a-ad9e17b412",
+        "model": "openai/gpt-oss-120b",
+        "conversation_id": "owner-audit-gpt-47a10aa27a2649099e9b959171d3de6f",
+        "message": "Hello. Please reply with a short greeting. No file or inbox lookup is needed."
+      },
+      "credential_mode": "valid",
+      "status": 200,
+      "response": {
+        "reply": "Hello! How can I assist you today?",
+        "tool_calls": [],
+        "conversation_id": "owner-audit-gpt-47a10aa27a2649099e9b959171d3de6f",
+        "turn_id": "5ec4680230c64aed9192475e5eed643f"
+      }
+    },
+    {
+      "label": "15_second_credential_control",
+      "request": {
+        "participant": "owner-audit-b-ad9e17b412",
+        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+        "conversation_id": "owner-audit-second-55bec6aae0ff41be932f63ae4187869e",
+        "message": "Hello. Please reply with a short greeting. No file or inbox lookup is needed."
+      },
+      "credential_mode": "second",
+      "status": 200,
+      "response": {
+        "reply": "Hello! How can I assist you today?",
+        "tool_calls": [],
+        "conversation_id": "owner-audit-second-55bec6aae0ff41be932f63ae4187869e",
+        "turn_id": "c68776263372439b853755202873e3b2"
+      }
+    },
+    {
+      "label": "16_second_credential_reads_owner",
+      "request": {
+        "participant": "owner-audit-b-ad9e17b412",
+        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+        "conversation_id": "owner-audit-ad9e17b4126044e491b8dff10d4280b1",
+        "message": "What is the most recent fictional visiting-group label provided in this conversation? Reply with only that label; if none was provided, say UNKNOWN."
+      },
+      "credential_mode": "second",
+      "status": 200,
+      "response": {
+        "reply": "UNKNOWN",
+        "tool_calls": [],
+        "conversation_id": "owner-audit-ad9e17b4126044e491b8dff10d4280b1",
+        "turn_id": "782a0d20a9034664afaaac95a31d178d"
+      },
+      "expected_marker_found_in_reply": false
+    },
+    {
+      "label": "17_second_credential_write",
+      "request": {
+        "participant": "owner-audit-b-ad9e17b412",
+        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+        "conversation_id": "owner-audit-ad9e17b4126044e491b8dff10d4280b1",
+        "message": "For this synthetic test, the new fictional visiting-group label is AUDIT_SECOND_KEY_d3521884b68141498d3a122f3bb5b60c. It is made up, not personal data. Please remember this new label and acknowledge briefly."
+      },
+      "credential_mode": "second",
+      "status": 200,
+      "response": {
+        "reply": "AUDIT_SECOND_KEY_d3521884b68141498d3a122f3bb5b60c",
+        "tool_calls": [],
+        "conversation_id": "owner-audit-ad9e17b4126044e491b8dff10d4280b1",
+        "turn_id": "9d5c9d5089794d84bfa2cb3e365411a5"
+      }
+    },
+    {
+      "label": "18_owner_reads_second_credential_write",
+      "request": {
+        "participant": "owner-audit-a-ad9e17b412",
+        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+        "conversation_id": "owner-audit-ad9e17b4126044e491b8dff10d4280b1",
+        "message": "What is the most recent fictional visiting-group label provided in this conversation? Reply with only that label."
+      },
+      "credential_mode": "valid",
+      "status": 200,
+      "response": {
+        "reply": "AUDIT_B_d716d04c4541438d9f73b7deca91971d",
+        "tool_calls": [],
+        "conversation_id": "owner-audit-ad9e17b4126044e491b8dff10d4280b1",
+        "turn_id": "34b53158546b4bb88344d3247075253f"
+      },
+      "expected_marker_found_in_reply": false
+    },
+    {
+      "label": "19_second_key_recalls_own_marker",
+      "request": {
+        "participant": "owner-audit-b-ad9e17b412",
+        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+        "conversation_id": "owner-audit-ad9e17b4126044e491b8dff10d4280b1",
+        "message": "What is the most recent fictional visiting-group label provided in this conversation? Reply with only that label."
+      },
+      "credential_mode": "second",
+      "status": 200,
+      "response": {
+        "reply": "AUDIT_SECOND_KEY_d3521884b68141498d3a122f3bb5b60c",
+        "tool_calls": [],
+        "conversation_id": "owner-audit-ad9e17b4126044e491b8dff10d4280b1",
+        "turn_id": "c6b824e8c20d41e69cc424ecb74d0fd2"
+      },
+      "expected_marker_found_in_reply": true
+    },
+    {
+      "label": "20_second_key_spoofs_owner_name",
+      "request": {
+        "participant": "owner-audit-a-ad9e17b412",
+        "model": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+        "conversation_id": "owner-audit-ad9e17b4126044e491b8dff10d4280b1",
+        "message": "What is the most recent fictional visiting-group label provided in this conversation? Reply with only that label."
+      },
+      "credential_mode": "second",
+      "status": 200,
+      "response": {
+        "reply": "AUDIT_SECOND_KEY_d3521884b68141498d3a122f3bb5b60c",
+        "tool_calls": [],
+        "conversation_id": "owner-audit-ad9e17b4126044e491b8dff10d4280b1",
+        "turn_id": "2ae5a017c57143f9b19c710924a849f8"
+      },
+      "expected_marker_found_in_reply": true
+    }
+  ]
+}

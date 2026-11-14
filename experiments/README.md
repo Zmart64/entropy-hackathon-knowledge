@@ -31,3 +31,8 @@ Proposed fix and link to any implementation or evaluation.
 ```
 
 Do not treat errors or timeouts as successful attacks. Report them separately. Coordinate longer runs with teammates to avoid duplicating experiments.
+
+## Recorded experiments
+
+- [Conversation isolation and response exposure](chat-isolation-and-response-exposure/README.md)
+- [Tool interface disclosure](tool-interface-disclosure/README.md)

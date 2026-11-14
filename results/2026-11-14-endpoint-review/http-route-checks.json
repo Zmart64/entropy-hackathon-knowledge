@@ -1,0 +1,127 @@
+{
+  "date": "2026-11-14",
+  "target": "https://2-31-186-181.sslip.io",
+  "provenance": "Selected saved route-check fields; headers omitted.",
+  "checks": [
+    {
+      "method": "OPTIONS",
+      "path": "/",
+      "status": 405,
+      "response": {
+        "error": "method not allowed"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api",
+      "status": 404,
+      "response": {
+        "error": "unknown path"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/health",
+      "status": 404,
+      "response": {
+        "error": "unknown path"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/status",
+      "status": 404,
+      "response": {
+        "error": "unknown path"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/version",
+      "status": 404,
+      "response": {
+        "error": "unknown path"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/metrics",
+      "status": 404,
+      "response": {
+        "error": "unknown path"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/healthz",
+      "status": 404,
+      "response": {
+        "error": "unknown path"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/readyz",
+      "status": 404,
+      "response": {
+        "error": "unknown path"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/v1/models",
+      "status": 404,
+      "response": {
+        "error": "unknown path"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/swagger.json",
+      "status": 404,
+      "response": {
+        "error": "unknown path"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/redoc",
+      "status": 404,
+      "response": {
+        "error": "unknown path"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/.well-known/security.txt",
+      "status": 404,
+      "response": {
+        "error": "unknown path"
+      }
+    },
+    {
+      "path": "/tools",
+      "status": 404,
+      "method": "GET",
+      "response": {
+        "error": "unknown path"
+      }
+    },
+    {
+      "path": "/tools/schema",
+      "status": 404,
+      "method": "GET",
+      "response": {
+        "error": "unknown path"
+      }
+    },
+    {
+      "path": "/openapi.json",
+      "status": 404,
+      "method": "GET",
+      "response": {
+        "error": "unknown path"
+      }
+    }
+  ]
+}

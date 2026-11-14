@@ -1,0 +1,76 @@
+{
+  "date": "2026-11-14",
+  "endpoint": "https://2-31-186-181.sslip.io/models",
+  "snapshots": [
+    {
+      "label": "initial",
+      "provenance": "Extracted from saved unauthenticated /models response",
+      "models": [
+        {
+          "id": "deepseek-ai/DeepSeek-V4-Pro-0813",
+          "provider": "nebius",
+          "tier": "very large"
+        },
+        {
+          "id": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+          "provider": "nebius",
+          "tier": "large"
+        },
+        {
+          "id": "openai/gpt-oss-120b",
+          "provider": "nebius",
+          "tier": "medium"
+        },
+        {
+          "id": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+          "provider": "nebius",
+          "tier": "small"
+        }
+      ]
+    },
+    {
+      "label": "later",
+      "provenance": "Transcribed from later live /models tool output in the chat; not a newly fetched response",
+      "models": [
+        {
+          "id": "deepseek-ai/DeepSeek-V4-Pro-0813",
+          "provider": "nebius",
+          "tier": "very large"
+        },
+        {
+          "id": "Qwen/Qwen3-235B-A22B-Instruct-2507",
+          "provider": "nebius",
+          "tier": "large"
+        },
+        {
+          "id": "openai/gpt-oss-120b",
+          "provider": "nebius",
+          "tier": "medium"
+        },
+        {
+          "id": "Qwen/Qwen3-30B-A3B-Instruct-2507",
+          "provider": "nebius",
+          "tier": "small"
+        },
+        {
+          "id": "groq/openai/gpt-oss-120b",
+          "provider": "groq",
+          "tier": "large",
+          "upstream": "openai/gpt-oss-120b"
+        },
+        {
+          "id": "groq/qwen/qwen3.8-27b",
+          "provider": "groq",
+          "tier": "medium",
+          "upstream": "qwen/qwen3.8-27b"
+        },
+        {
+          "id": "groq/openai/gpt-oss-20b",
+          "provider": "groq",
+          "tier": "small",
+          "upstream": "openai/gpt-oss-20b"
+        }
+      ]
+    }
+  ]
+}
