@@ -1,12 +1,12 @@
 # Speaker notes: Green Mosaic
 
-Talk estimate 150 s (budget 180 s, limit 180 s) at 140 words/min; video slides count the video length.
+Talk estimate 160 s (budget 180 s, limit 180 s) at 140 words/min; video slides count the video length.
 Beat boundaries: hook ends 0:12; demo ends 0:55; killchain ends 1:25; evidence ends 1:51; rounds ends 2:36; close ends 3:00.
 
-## 1. hook (12 s budget, ~12 s estimate, 28 words)
+## 1. hook (12 s budget, ~14 s estimate, 33 words)
 
-Every answer passed the hospital's data filter. Every patient's record still left, read from the
-database, returned as tables. The filter checks answers; the breach is the conversation.
+Every answer passed the hospital's data filter. One structured answer carries a whole table of
+records past a filter that checks one answer at a time. Hundreds of patients, read from the database.
 
 ## 2. demo (43 s budget, ~43 s estimate, 41 words)
 
@@ -34,12 +34,12 @@ of thirty-two out; the price is twenty-three percent of hard normal questions. V
 work, the simplest layer; the session budget catches one more; decoding and the oracle rule are
 untested here. Layer two is a teammate's query guard: no free SQL. No model call.
 
-## 6. close (24 s budget, ~21 s estimate, 49 words)
+## 6. close (24 s budget, ~28 s estimate, 66 words)
 
-Green Mosaic. Every tile is green; the picture is the breach. The product is an output DLP with
-memory, a gateway in front of any assistant, policy from the data classification you already
-keep. One harness, one ledger, every finding re-verified. Check the conversation, not the answer.
-Thank you.
+Green Mosaic: every answer is a green tile, and one tile can carry a whole table. One control
+closes it: no free SQL, and an output check that matches the records the agent read. The product
+is an output DLP with memory, a gateway in front of any assistant. One harness, one ledger, every
+finding re-verified. Check the answer against what the agent read. Thank you.
 
 ## 7. A1 (appendix, ~0 s estimate, 0 words)
 
