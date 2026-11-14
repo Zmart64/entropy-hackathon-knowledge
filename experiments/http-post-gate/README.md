@@ -131,7 +131,8 @@ DeepSeek states it directly: “I don’t have a tool like `http_post` available
 shapes batch, before the watcher’s final sample at 14:14Z; `gate_log`’s last writes
 (14:17Z) were already model refusals. The first definitive post-change turn is 15:00:37Z.
 The removal window is therefore 14:14Z–15:00Z, and it was not caused by any request
-parameter.
+parameter. A watcher (`tool_watch.jsonl`, local) re-probed every ~3 min and saw 8/8
+refusals through 15:33Z, so the removal persisted for at least the rest of the retest.
 
 Consequences:
 
