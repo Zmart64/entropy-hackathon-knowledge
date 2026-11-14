@@ -8,6 +8,7 @@ Review files before sharing: exclude API keys, authentication headers, and unrel
 
 ## Evidence collections
 
+- [14 November 2026 Level 3 scope bypass and category assessment](2026-11-14-l3-scope-bypass/README.md): imported report of MRN/surname recovery through a count oracle; all seven screenshot categories assessed, with missing-evidence and citation limits. Author-reported, pending evidence review.
 - [Green Mosaic results snapshot](green-mosaic/README.md): 37 source measurements and a 56-entry findings catalog, pinned to the source revision with duplicate-run mapping and later-correction notes.
 - [Green Mosaic provider results and scripts](green-mosaic/providers/README.md): 55 provider records across eight fields, source reports and selected turn logs, and all 15 harness scripts from revision `5cc9dd2`.
 - [14 November 2026 endpoint review](2026-11-14-endpoint-review/README.md): curated API cases, model snapshots, tool schemas, and historical service-scan excerpts.
