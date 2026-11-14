@@ -49,6 +49,10 @@ Snapshot of the reviewed campaign, not a live backlog feed. [Pitch overview](../
 - Preserve per-model refusal outcomes. V4-Pro has earlier positive F-01/F-13 evidence and today's negative
   sensitive-frame samples. An adaptive combined campaign is unmeasured; several individual rungs were already tried.
 - Resolve base64/case/homoglyph outcomes with controls; do not label uncertain model refusals as server masking.
+  **Partially resolved 17:5x** — on `claude-haiku-5-5` every encoding/framing family (base64, zalgo,
+  full-force Unicode, l33t/PLINY, Chinese, dataset-meta) is a *model-side refusal* (0/96 emissions, all five
+  families in [haiku lane](../results/2026-11-14-haiku-l3-and-tail-relay/README.md)); Haiku recites the exact
+  per-table allow-list and pre-filters, so it cannot be used to measure guard column coverage of unknown columns.
 - Add remaining sanitized transcripts and exact reproduction dependencies; selected JSON is not a full campaign archive.
 - Retain known-literal calibration separately from unknown-secret extraction and actual external delivery.
 - Validate any deterministic fix against these new cases, legitimate tasks and an adaptive attempt.
