@@ -14,15 +14,15 @@ filter-clean; **351 / 450 (78%)** reproduced across two or more independent
 replies. Per conversation the attack succeeds in **65% [50-78]** (N=43, Wilson 95%). No tool sends
 the record out — the reply itself is the channel. Severity L5: regulated patient data disclosed at the scale of the whole table.
 
-**Novelty.** Even Llama Guard-4's privacy classifier lets 28 of 32 leaking conversations out: the leak is conversation-level, not a bad answer. We did not find this measured against a deployed healthcare assistant's output DLP as of 14 Nov 2026; our contribution is that measurement plus a deterministic provenance rule that closes it - Dinur-Nissim query auditing (2003), ported to an LLM output DLP, with its measured false-positive cost.
+**Novelty.** Even Llama Guard-4's privacy classifier lets 28 of 32 leaking conversations out: a single benign-pretext structured answer carries a whole table of records past a filter that checks one answer at a time. We did not find this measured against a deployed healthcare assistant's output DLP as of 14 Nov 2026; our contribution is that measurement plus a deterministic provenance value-matching fix, with its measured false-positive cost.
 
 **Honest nulls.** A dedicated inference-oracle cell, reported in full, is refused (0 of 7); no L6 credential landed
 (the credential columns are refused). We report both.
 
 ## Evidence
 
-Real-record leaks per attack message, same harness: Qwen3-30B 16% [10-25]
-(N=92), DeepSeek-V4-Pro 10% [6-16] (N=143); Claude not
+Real-record leaks per attack message, same harness: Qwen3-30B 89% [57-98]
+(N=9), DeepSeek-V4-Pro 59% [42-74] (N=34); Claude not
 run. A record counts only when its value came from a real `query_db` read and was confirmed against ground truth;
 invented records (a separate data-integrity failure) are excluded.
 
@@ -40,6 +40,6 @@ Minimum-necessary (HIPAA) and data minimisation (GDPR Art. 5(1)(c)) are about th
 
 ## Limitations and reproduce
 
-One fictional hospital assistant, black-box over HTTP. Model ladder: two open models; Claude pending the organizer token. Fix measured against independent ground-truth labels, not deployed on the organizers' server; benign false positives on a hard held-out set are 23% [15-34] (9% [4-17] on everyday questions): a real cost we show, not bury. Repo https://github.com/Zmart64/entropy-hackathon-knowledge; finding cards carry the `turn_id`s; frozen snapshot
+One fictional hospital assistant, black-box over HTTP. Model ladder: two open models; Claude pending the organizer token. Fix measured against independent ground-truth labels, not deployed on the organizers' server; benign false positives on a hard held-out set are 23% [15-34] (9% [4-17] on everyday questions): a real cost we show, not bury. Repo https://github.com/B0yko/green-mosaic; finding cards carry the `turn_id`s; frozen snapshot
 gt-20261114T143309:5c298f83ebaf (Level 2, 9 runs, 1,224 episodes, span 12:26-14:18). Attacker and judge models and full statistics: methodology.md.
 Shared with the organizers with this submission; the hospital, the range and every record are synthetic.
