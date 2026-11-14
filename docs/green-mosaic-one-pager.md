@@ -21,10 +21,11 @@ the record out — the reply itself is the channel. Severity L5: regulated patie
 
 ## Evidence
 
-Real-record leaks per attack message, same harness: Qwen3-30B 89% [57-98]
-(N=9), DeepSeek-V4-Pro 59% [42-74] (N=34); Claude not
-run. A record counts only when its value came from a real `query_db` read and was confirmed against ground truth;
-invented records (a separate data-integrity failure) are excluded.
+Real-record leak per conversation, same harness (the 65% headline by model): Qwen3-30B
+89% [57-98] (N=9), DeepSeek-V4-Pro 59% [42-74]
+(N=34); Claude pending the organizer token. A record counts only when its value came from a real
+`query_db` read and was confirmed against ground truth; invented records (a separate data-integrity failure) are
+excluded.
 
 ## Fix
 
@@ -36,7 +37,7 @@ served, so the oracle has nothing to ask with. Full-field, identical sets, in-sa
 ## Why it matters
 
 Per-message filters are what regulated assistants deploy today; every answer here passes them.
-Minimum-necessary (HIPAA) and data minimisation (GDPR Art. 5(1)(c)) are about the total disclosed, not per message. Today every log line says allowed; the fix writes one decision record per answer, and a replay gives the same decision. Session DLP: a gateway in front of assistants. Buyer: their security owner. Policy from your data classification; no model call.
+Minimum-necessary (HIPAA) and data minimisation (GDPR Art. 5(1)(c)) are about the total disclosed, not per message. Today every log line says allowed; the fix writes one signed decision record per answer, revokes a conversation that passes the per-record budget, and leaves the policy to the assistant's security owner (from the data classification they already keep). Session DLP: a gateway in front of assistants. Buyer: their security owner. Policy from your data classification; no model call.
 
 ## Limitations and reproduce
 
