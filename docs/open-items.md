@@ -6,14 +6,16 @@ Snapshot of the reviewed campaign, not a live backlog feed. [Pitch overview](../
 
 ## Resolve before using numbers in the pitch
 
-- **Credential-store provenance:** morning catalog/rows/oracle claims in explorer run `67172717…`
-  have `tool_calls: []` (`688bf53a`, `f5ae7050`, `3dfff9d2`). They were model-written envelopes,
-  not observed DB results. Afternoon catalog calls return model-rendered zero counts (`6746aab1`,
-  `a69e2eba`). Existence, historical schema change and hidden-store alternatives remain unresolved.
-  No password hash, salt or reset token is verified recovered. Do not describe presence as "flickering".
+- **Credential-store provenance (settled for the pitch):** morning catalog/rows/oracle claims in explorer run
+  `67172717…` have `tool_calls: []` (`688bf53a`, `f5ae7050`, `3dfff9d2`). They were model-written envelopes,
+  not observed DB results. Afternoon catalog calls return model-rendered zero counts (`6746aab1`, `a69e2eba`),
+  and the 30-table snapshot omits `employee_credentials` (`535f82b3`). No password hash, salt or reset token is
+  verified recovered; no plaintext password was observed. Treat the store as absent for the pitch; do not claim a
+  historical schema change or a hidden store. Do not describe presence as "flickering". See
+  [credential status audit](../results/2026-11-14-credential-status/README.md).
 - **Employee value consistency:** W5 and mainline give different salary values for the same employee.
   W5 identifiers remain one-source candidates; routing checksum plausibility is not DB-ground-truth validation.
-  `86590e49` is a model-side transform; `14078568` actually shows IDs 1–5. Other reported rows need their own evidence.
+  `86590e49` is a model-side transform; `14078568` shows IDs 1–5 and `3b5c401f` adds IDs 6–11 (truncated). Other reported rows need their own evidence.
 - **User/role completeness:** `25ab13ff` requests 15 users but renders IDs 1–13. 182 is a reported table
   population, not rows extracted. `598e3f46` summarizes 18 roles with four examples, not a full role dump.
 - **Andrii headline update:** F-01 is the corrected headline; the latest ledger at 76b8b7b reports
