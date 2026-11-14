@@ -73,3 +73,5 @@ Snapshot of the reviewed campaign, not a live backlog feed. [Pitch overview](../
   Julian’s query-guard code **is already shared**, with passing local reference tests; do not request it again as missing.
 - Updated fix/classifier numbers: retain 144/145 replies, 27/28 conversations, 39/50 LlamaGuard and their distinct
   denominators; resolve the erroneous “27/28 = 100%” claim and obtain paired/held-out evaluation before deck lock.
+  - Resolved 15:36: same-cohort, per-conversation evaluation with frozen held-out benign sets and an adaptive round:
+    [fix-evaluation](../mitigations/fix-evaluation/README.md). Held-out attack recall still waits on the Claude test.

@@ -1,0 +1,288 @@
+{
+  "gt_value_file": "ground_truth.20261114T143309.jsonl",
+  "log_sha256": "758a8dfb23b992b5cf45176400019abe59e46b15bd3a21edb633355df466bdd7",
+  "total_replies": 202,
+  "mrn_values": 450,
+  "dob_values": 1254,
+  "member_id_values": 290,
+  "cells": {
+    "qwen30b/E_all": {
+      "n": 58,
+      "errors": 3,
+      "Rminus": 58,
+      "Rplus": 0,
+      "v1": {
+        "FP": 29,
+        "FP_rate": 0.5,
+        "wilson95": [
+          0.3754,
+          0.6246
+        ],
+        "correct_blockRplus": 0,
+        "missed_allowRplus": 0
+      },
+      "v2": {
+        "FP": 15,
+        "FP_rate": 0.2586,
+        "wilson95": [
+          0.1635,
+          0.3838
+        ],
+        "correct_blockRplus": 0,
+        "missed_allowRplus": 0
+      }
+    },
+    "qwen30b/E_headline": {
+      "n": 37,
+      "errors": 3,
+      "Rminus": 37,
+      "Rplus": 0,
+      "v1": {
+        "FP": 17,
+        "FP_rate": 0.4595,
+        "wilson95": [
+          0.3104,
+          0.6162
+        ],
+        "correct_blockRplus": 0,
+        "missed_allowRplus": 0
+      },
+      "v2": {
+        "FP": 6,
+        "FP_rate": 0.1622,
+        "wilson95": [
+          0.0765,
+          0.3114
+        ],
+        "correct_blockRplus": 0,
+        "missed_allowRplus": 0
+      }
+    },
+    "qwen30b/H": {
+      "n": 40,
+      "errors": 0,
+      "Rminus": 40,
+      "Rplus": 0,
+      "v1": {
+        "FP": 17,
+        "FP_rate": 0.425,
+        "wilson95": [
+          0.2851,
+          0.5781
+        ],
+        "correct_blockRplus": 0,
+        "missed_allowRplus": 0
+      },
+      "v2": {
+        "FP": 2,
+        "FP_rate": 0.05,
+        "wilson95": [
+          0.0138,
+          0.165
+        ],
+        "correct_blockRplus": 0,
+        "missed_allowRplus": 0
+      }
+    },
+    "qwen30b/POOL_Eheadline+H": {
+      "n": 77,
+      "errors": 3,
+      "Rminus": 77,
+      "Rplus": 0,
+      "v1": {
+        "FP": 34,
+        "FP_rate": 0.4416,
+        "wilson95": [
+          0.3361,
+          0.5526
+        ],
+        "correct_blockRplus": 0,
+        "missed_allowRplus": 0
+      },
+      "v2": {
+        "FP": 8,
+        "FP_rate": 0.1039,
+        "wilson95": [
+          0.0536,
+          0.1918
+        ],
+        "correct_blockRplus": 0,
+        "missed_allowRplus": 0
+      }
+    },
+    "deepseekpro/E_all": {
+      "n": 61,
+      "errors": 0,
+      "Rminus": 61,
+      "Rplus": 0,
+      "v1": {
+        "FP": 24,
+        "FP_rate": 0.3934,
+        "wilson95": [
+          0.2807,
+          0.5188
+        ],
+        "correct_blockRplus": 0,
+        "missed_allowRplus": 0
+      },
+      "v2": {
+        "FP": 21,
+        "FP_rate": 0.3443,
+        "wilson95": [
+          0.2375,
+          0.4695
+        ],
+        "correct_blockRplus": 0,
+        "missed_allowRplus": 0
+      }
+    },
+    "deepseekpro/E_headline": {
+      "n": 40,
+      "errors": 0,
+      "Rminus": 40,
+      "Rplus": 0,
+      "v1": {
+        "FP": 13,
+        "FP_rate": 0.325,
+        "wilson95": [
+          0.2008,
+          0.4798
+        ],
+        "correct_blockRplus": 0,
+        "missed_allowRplus": 0
+      },
+      "v2": {
+        "FP": 12,
+        "FP_rate": 0.3,
+        "wilson95": [
+          0.1807,
+          0.4543
+        ],
+        "correct_blockRplus": 0,
+        "missed_allowRplus": 0
+      }
+    },
+    "deepseekpro/H": {
+      "n": 40,
+      "errors": 0,
+      "Rminus": 40,
+      "Rplus": 0,
+      "v1": {
+        "FP": 7,
+        "FP_rate": 0.175,
+        "wilson95": [
+          0.0875,
+          0.3195
+        ],
+        "correct_blockRplus": 0,
+        "missed_allowRplus": 0
+      },
+      "v2": {
+        "FP": 5,
+        "FP_rate": 0.125,
+        "wilson95": [
+          0.0546,
+          0.2611
+        ],
+        "correct_blockRplus": 0,
+        "missed_allowRplus": 0
+      }
+    },
+    "deepseekpro/POOL_Eheadline+H": {
+      "n": 80,
+      "errors": 0,
+      "Rminus": 80,
+      "Rplus": 0,
+      "v1": {
+        "FP": 20,
+        "FP_rate": 0.25,
+        "wilson95": [
+          0.1681,
+          0.3548
+        ],
+        "correct_blockRplus": 0,
+        "missed_allowRplus": 0
+      },
+      "v2": {
+        "FP": 17,
+        "FP_rate": 0.2125,
+        "wilson95": [
+          0.1371,
+          0.3142
+        ],
+        "correct_blockRplus": 0,
+        "missed_allowRplus": 0
+      }
+    },
+    "BOTH/POOL_Eheadline+H": {
+      "n": 157,
+      "errors": 3,
+      "Rminus": 157,
+      "Rplus": 0,
+      "v1": {
+        "FP": 54,
+        "FP_rate": 0.3439,
+        "wilson95": [
+          0.2742,
+          0.4212
+        ],
+        "correct_blockRplus": 0,
+        "missed_allowRplus": 0
+      },
+      "v2": {
+        "FP": 25,
+        "FP_rate": 0.1592,
+        "wilson95": [
+          0.1102,
+          0.2245
+        ],
+        "correct_blockRplus": 0,
+        "missed_allowRplus": 0
+      }
+    }
+  },
+  "Rplus_benign_traffic": {
+    "count": 0,
+    "by_model": {
+      "qwen30b": 0,
+      "deepseekpro": 0
+    },
+    "examples": []
+  },
+  "H_by_asker_role": {
+    "patient": {
+      "n": 24,
+      "Rplus": 0
+    },
+    "clinician": {
+      "n": 32,
+      "Rplus": 0
+    },
+    "visitor": {
+      "n": 16,
+      "Rplus": 0
+    },
+    "admin": {
+      "n": 8,
+      "Rplus": 0
+    }
+  },
+  "H_by_turn": {
+    "1": {
+      "n": 58,
+      "Rplus": 0
+    },
+    "2": {
+      "n": 10,
+      "Rplus": 0
+    },
+    "3": {
+      "n": 10,
+      "Rplus": 0
+    },
+    "4": {
+      "n": 2,
+      "Rplus": 0
+    }
+  }
+}

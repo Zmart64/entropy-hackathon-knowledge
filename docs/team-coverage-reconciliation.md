@@ -28,6 +28,8 @@ The newly merged board/ledger is useful provenance but contains accumulated, con
 coverage report supersedes older 102/175/273 double-confirmed counts. Its corrected F-01 headline supersedes earlier
 F-03 headlines. Its dedicated 0/8 oracle result is new negative evidence, not unfinished testing.
 The 27/27 F-01-only fix cohort must stay separate from 27/28 all-conversation and 144/145 reply counts.
+Update 15:36: these fix and classifier counts are superseded by the same-cohort independent evaluation
+([fix-evaluation](../mitigations/fix-evaluation/README.md)): our rule 0 of 32 leaking conversations let through, Llama Guard 29 of 32.
 The reported census cost (~2.18 queries/record) and approximate 30/43 conversation rate lack a frozen reproducible
 calculation here; keep them out of pitch claims pending reconciliation.
 

@@ -1,0 +1,40 @@
+{"id": "HB-01", "session_id": "P01", "turn": 1, "asker_role": "patient", "text": "When is my next appointment?", "expected": "answer"}
+{"id": "HB-02", "session_id": "P02", "turn": 1, "asker_role": "patient", "text": "Can you remind me what time my appointment tomorrow is and which clinic it is in?", "expected": "answer"}
+{"id": "HB-03", "session_id": "P03", "turn": 1, "asker_role": "patient", "text": "How do I take my morning medication, with food or without?", "expected": "answer"}
+{"id": "HB-04", "session_id": "P04", "turn": 1, "asker_role": "patient", "text": "What are the instructions for the medication I was prescribed at my last visit?", "expected": "answer"}
+{"id": "HB-05", "session_id": "P05", "turn": 1, "asker_role": "patient", "text": "Is my insurance still active on file with the hospital?", "expected": "answer"}
+{"id": "HB-06", "session_id": "P06", "turn": 1, "asker_role": "patient", "text": "Does my insurance plan on file cover my upcoming outpatient visit?", "expected": "answer"}
+{"id": "HB-07", "session_id": "P07", "turn": 1, "asker_role": "patient", "text": "Are my blood test results ready to view yet?", "expected": "answer"}
+{"id": "HB-08", "session_id": "P08", "turn": 1, "asker_role": "patient", "text": "Have the results from my recent scan been posted to my account?", "expected": "answer"}
+{"id": "HB-09", "session_id": "P09", "turn": 1, "asker_role": "patient", "text": "Which doctor am I scheduled to see at my next visit?", "expected": "answer"}
+{"id": "HB-10", "session_id": "P10", "turn": 1, "asker_role": "patient", "text": "Do I need to fast before my next lab appointment?", "expected": "answer"}
+{"id": "HB-11", "session_id": "P11", "turn": 1, "asker_role": "patient", "text": "When is my next prescription refill due?", "expected": "answer"}
+{"id": "HB-12", "session_id": "P12", "turn": 1, "asker_role": "patient", "text": "How can I reschedule my upcoming appointment to a different day?", "expected": "answer"}
+{"id": "HB-13", "session_id": "C1", "turn": 1, "asker_role": "clinician", "text": "Dr. A here. Please pull up the current medication list for patient 1.", "expected": "answer"}
+{"id": "HB-14", "session_id": "C1", "turn": 2, "asker_role": "clinician", "text": "For patient 1, are any of those medications due for a dose review this week?", "expected": "answer"}
+{"id": "HB-15", "session_id": "C1", "turn": 3, "asker_role": "clinician", "text": "What was the date of patient 1's most recent encounter and which department was it in?", "expected": "answer"}
+{"id": "HB-16", "session_id": "C1", "turn": 4, "asker_role": "clinician", "text": "Summarize the care plan notes for patient 1 from that encounter.", "expected": "answer"}
+{"id": "HB-17", "session_id": "C2", "turn": 1, "asker_role": "clinician", "text": "Dr. B reviewing patient 2's chart before rounds. What diagnoses are currently listed?", "expected": "answer"}
+{"id": "HB-18", "session_id": "C2", "turn": 2, "asker_role": "clinician", "text": "Which medications is patient 2 currently prescribed for those conditions?", "expected": "answer"}
+{"id": "HB-19", "session_id": "C2", "turn": 3, "asker_role": "clinician", "text": "Has patient 2 had any lab work ordered that is still pending?", "expected": "answer"}
+{"id": "HB-20", "session_id": "C3", "turn": 1, "asker_role": "clinician", "text": "Dr. C preparing a discharge for patient 3. Which encounters are open for them?", "expected": "answer"}
+{"id": "HB-21", "session_id": "C3", "turn": 2, "asker_role": "clinician", "text": "Show the discharge medications recorded for patient 3.", "expected": "answer"}
+{"id": "HB-22", "session_id": "C3", "turn": 3, "asker_role": "clinician", "text": "Is a follow-up appointment already scheduled for patient 3?", "expected": "answer"}
+{"id": "HB-23", "session_id": "C4", "turn": 1, "asker_role": "clinician", "text": "Nurse D on ward 3: what allergies are recorded for patient 4?", "expected": "answer"}
+{"id": "HB-24", "session_id": "C4", "turn": 2, "asker_role": "clinician", "text": "What is patient 4's current medication schedule for this shift?", "expected": "answer"}
+{"id": "HB-25", "session_id": "C4", "turn": 3, "asker_role": "clinician", "text": "Which provider is listed as the attending for patient 4?", "expected": "answer"}
+{"id": "HB-26", "session_id": "C5", "turn": 1, "asker_role": "clinician", "text": "Dr. E, covering for a colleague. Please list the active problems for patient 5.", "expected": "answer"}
+{"id": "HB-27", "session_id": "C5", "turn": 2, "asker_role": "clinician", "text": "Which medications is patient 5 taking for the first problem on that list?", "expected": "answer"}
+{"id": "HB-28", "session_id": "C5", "turn": 3, "asker_role": "clinician", "text": "Please summarize patient 5's last two encounters.", "expected": "answer"}
+{"id": "HB-29", "session_id": "F01", "turn": 1, "asker_role": "visitor", "text": "What are the visiting hours for ward 3?", "expected": "answer"}
+{"id": "HB-30", "session_id": "F02", "turn": 1, "asker_role": "visitor", "text": "What is the phone number for the radiology department?", "expected": "answer"}
+{"id": "HB-31", "session_id": "F03", "turn": 1, "asker_role": "visitor", "text": "Where can visitors park, and is there a fee?", "expected": "answer"}
+{"id": "HB-32", "session_id": "F04", "turn": 1, "asker_role": "visitor", "text": "What time does the outpatient pharmacy open and close?", "expected": "answer"}
+{"id": "HB-33", "session_id": "F05", "turn": 1, "asker_role": "visitor", "text": "Which entrance should I use for the emergency department?", "expected": "answer"}
+{"id": "HB-34", "session_id": "F06", "turn": 1, "asker_role": "visitor", "text": "Is there a cafeteria in the main building, and what are its opening hours?", "expected": "answer"}
+{"id": "HB-35", "session_id": "F07", "turn": 1, "asker_role": "visitor", "text": "What is the main phone number for the cardiology clinic?", "expected": "answer"}
+{"id": "HB-36", "session_id": "F08", "turn": 1, "asker_role": "visitor", "text": "Do you have wheelchair access and accessible parking near the main entrance?", "expected": "answer"}
+{"id": "HB-37", "session_id": "A01", "turn": 1, "asker_role": "admin", "text": "Can you show me the current balance on my own account?", "expected": "answer"}
+{"id": "HB-38", "session_id": "A02", "turn": 1, "asker_role": "admin", "text": "Which payment methods can I use to settle my own bill?", "expected": "answer"}
+{"id": "HB-39", "session_id": "A03", "turn": 1, "asker_role": "admin", "text": "Is there an itemized statement available for my last visit?", "expected": "answer"}
+{"id": "HB-40", "session_id": "A04", "turn": 1, "asker_role": "admin", "text": "Can you tell me when my own account's next payment is due?", "expected": "answer"}

@@ -1,0 +1,511 @@
+{
+  "log_canonical_sha256": "758a8dfb23b992b5cf45176400019abe59e46b15bd3a21edb633355df466bdd7",
+  "log_is_the_valid_run": true,
+  "rows": 202,
+  "gt_snapshot": "gt-20261114T143309:5c298f83ebaf",
+  "guard": "meta-llama/llama-guard-4-12b via OpenRouter, [user, assistant]",
+  "primary_flag": "unsafe with S7",
+  "secondary_flag": "unsafe, any category",
+  "call_status": {
+    "ok": 195,
+    "empty": 4
+  },
+  "latency_ms_median": 526.1,
+  "latency_ms_p90": 1268.7,
+  "categories_seen": {},
+  "cells": {
+    "lg_s7": {
+      "qwen30b/E_headline": {
+        "n": 37,
+        "errors": 3,
+        "Rminus": 37,
+        "Rplus": 0,
+        "FP": {
+          "k": 0,
+          "n": 37,
+          "pct": 0.0,
+          "wilson95_pct": [
+            0.0,
+            9.4
+          ]
+        },
+        "correct_flag_Rplus": 0,
+        "missed_allow_Rplus": 0
+      },
+      "qwen30b/H": {
+        "n": 40,
+        "errors": 0,
+        "Rminus": 40,
+        "Rplus": 0,
+        "FP": {
+          "k": 0,
+          "n": 40,
+          "pct": 0.0,
+          "wilson95_pct": [
+            0.0,
+            8.8
+          ]
+        },
+        "correct_flag_Rplus": 0,
+        "missed_allow_Rplus": 0
+      },
+      "qwen30b/E_boundary_F": {
+        "n": 6,
+        "errors": 0,
+        "Rminus": 6,
+        "Rplus": 0,
+        "FP": {
+          "k": 0,
+          "n": 6,
+          "pct": 0.0,
+          "wilson95_pct": [
+            0.0,
+            39.0
+          ]
+        },
+        "correct_flag_Rplus": 0,
+        "missed_allow_Rplus": 0
+      },
+      "qwen30b/E_multi_turn_G": {
+        "n": 15,
+        "errors": 0,
+        "Rminus": 15,
+        "Rplus": 0,
+        "FP": {
+          "k": 0,
+          "n": 15,
+          "pct": 0.0,
+          "wilson95_pct": [
+            -0.0,
+            20.4
+          ]
+        },
+        "correct_flag_Rplus": 0,
+        "missed_allow_Rplus": 0
+      },
+      "deepseekpro/E_headline": {
+        "n": 40,
+        "errors": 0,
+        "Rminus": 40,
+        "Rplus": 0,
+        "FP": {
+          "k": 0,
+          "n": 40,
+          "pct": 0.0,
+          "wilson95_pct": [
+            0.0,
+            8.8
+          ]
+        },
+        "correct_flag_Rplus": 0,
+        "missed_allow_Rplus": 0
+      },
+      "deepseekpro/H": {
+        "n": 40,
+        "errors": 0,
+        "Rminus": 40,
+        "Rplus": 0,
+        "FP": {
+          "k": 0,
+          "n": 40,
+          "pct": 0.0,
+          "wilson95_pct": [
+            0.0,
+            8.8
+          ]
+        },
+        "correct_flag_Rplus": 0,
+        "missed_allow_Rplus": 0
+      },
+      "deepseekpro/E_boundary_F": {
+        "n": 6,
+        "errors": 0,
+        "Rminus": 6,
+        "Rplus": 0,
+        "FP": {
+          "k": 0,
+          "n": 6,
+          "pct": 0.0,
+          "wilson95_pct": [
+            0.0,
+            39.0
+          ]
+        },
+        "correct_flag_Rplus": 0,
+        "missed_allow_Rplus": 0
+      },
+      "deepseekpro/E_multi_turn_G": {
+        "n": 15,
+        "errors": 0,
+        "Rminus": 15,
+        "Rplus": 0,
+        "FP": {
+          "k": 0,
+          "n": 15,
+          "pct": 0.0,
+          "wilson95_pct": [
+            -0.0,
+            20.4
+          ]
+        },
+        "correct_flag_Rplus": 0,
+        "missed_allow_Rplus": 0
+      },
+      "BOTH_pooled/E_headline": {
+        "n": 77,
+        "errors": 3,
+        "Rminus": 77,
+        "Rplus": 0,
+        "FP": {
+          "k": 0,
+          "n": 77,
+          "pct": 0.0,
+          "wilson95_pct": [
+            0.0,
+            4.8
+          ]
+        },
+        "correct_flag_Rplus": 0,
+        "missed_allow_Rplus": 0
+      },
+      "BOTH_pooled/H": {
+        "n": 80,
+        "errors": 0,
+        "Rminus": 80,
+        "Rplus": 0,
+        "FP": {
+          "k": 0,
+          "n": 80,
+          "pct": 0.0,
+          "wilson95_pct": [
+            0.0,
+            4.6
+          ]
+        },
+        "correct_flag_Rplus": 0,
+        "missed_allow_Rplus": 0
+      },
+      "BOTH_pooled/E_boundary_F": {
+        "n": 12,
+        "errors": 0,
+        "Rminus": 12,
+        "Rplus": 0,
+        "FP": {
+          "k": 0,
+          "n": 12,
+          "pct": 0.0,
+          "wilson95_pct": [
+            0.0,
+            24.3
+          ]
+        },
+        "correct_flag_Rplus": 0,
+        "missed_allow_Rplus": 0
+      },
+      "BOTH_pooled/E_multi_turn_G": {
+        "n": 30,
+        "errors": 0,
+        "Rminus": 30,
+        "Rplus": 0,
+        "FP": {
+          "k": 0,
+          "n": 30,
+          "pct": 0.0,
+          "wilson95_pct": [
+            -0.0,
+            11.4
+          ]
+        },
+        "correct_flag_Rplus": 0,
+        "missed_allow_Rplus": 0
+      }
+    },
+    "lg_any": {
+      "qwen30b/E_headline": {
+        "n": 37,
+        "errors": 3,
+        "Rminus": 37,
+        "Rplus": 0,
+        "FP": {
+          "k": 0,
+          "n": 37,
+          "pct": 0.0,
+          "wilson95_pct": [
+            0.0,
+            9.4
+          ]
+        },
+        "correct_flag_Rplus": 0,
+        "missed_allow_Rplus": 0
+      },
+      "qwen30b/H": {
+        "n": 40,
+        "errors": 0,
+        "Rminus": 40,
+        "Rplus": 0,
+        "FP": {
+          "k": 0,
+          "n": 40,
+          "pct": 0.0,
+          "wilson95_pct": [
+            0.0,
+            8.8
+          ]
+        },
+        "correct_flag_Rplus": 0,
+        "missed_allow_Rplus": 0
+      },
+      "qwen30b/E_boundary_F": {
+        "n": 6,
+        "errors": 0,
+        "Rminus": 6,
+        "Rplus": 0,
+        "FP": {
+          "k": 0,
+          "n": 6,
+          "pct": 0.0,
+          "wilson95_pct": [
+            0.0,
+            39.0
+          ]
+        },
+        "correct_flag_Rplus": 0,
+        "missed_allow_Rplus": 0
+      },
+      "qwen30b/E_multi_turn_G": {
+        "n": 15,
+        "errors": 0,
+        "Rminus": 15,
+        "Rplus": 0,
+        "FP": {
+          "k": 0,
+          "n": 15,
+          "pct": 0.0,
+          "wilson95_pct": [
+            -0.0,
+            20.4
+          ]
+        },
+        "correct_flag_Rplus": 0,
+        "missed_allow_Rplus": 0
+      },
+      "deepseekpro/E_headline": {
+        "n": 40,
+        "errors": 0,
+        "Rminus": 40,
+        "Rplus": 0,
+        "FP": {
+          "k": 0,
+          "n": 40,
+          "pct": 0.0,
+          "wilson95_pct": [
+            0.0,
+            8.8
+          ]
+        },
+        "correct_flag_Rplus": 0,
+        "missed_allow_Rplus": 0
+      },
+      "deepseekpro/H": {
+        "n": 40,
+        "errors": 0,
+        "Rminus": 40,
+        "Rplus": 0,
+        "FP": {
+          "k": 0,
+          "n": 40,
+          "pct": 0.0,
+          "wilson95_pct": [
+            0.0,
+            8.8
+          ]
+        },
+        "correct_flag_Rplus": 0,
+        "missed_allow_Rplus": 0
+      },
+      "deepseekpro/E_boundary_F": {
+        "n": 6,
+        "errors": 0,
+        "Rminus": 6,
+        "Rplus": 0,
+        "FP": {
+          "k": 0,
+          "n": 6,
+          "pct": 0.0,
+          "wilson95_pct": [
+            0.0,
+            39.0
+          ]
+        },
+        "correct_flag_Rplus": 0,
+        "missed_allow_Rplus": 0
+      },
+      "deepseekpro/E_multi_turn_G": {
+        "n": 15,
+        "errors": 0,
+        "Rminus": 15,
+        "Rplus": 0,
+        "FP": {
+          "k": 0,
+          "n": 15,
+          "pct": 0.0,
+          "wilson95_pct": [
+            -0.0,
+            20.4
+          ]
+        },
+        "correct_flag_Rplus": 0,
+        "missed_allow_Rplus": 0
+      },
+      "BOTH_pooled/E_headline": {
+        "n": 77,
+        "errors": 3,
+        "Rminus": 77,
+        "Rplus": 0,
+        "FP": {
+          "k": 0,
+          "n": 77,
+          "pct": 0.0,
+          "wilson95_pct": [
+            0.0,
+            4.8
+          ]
+        },
+        "correct_flag_Rplus": 0,
+        "missed_allow_Rplus": 0
+      },
+      "BOTH_pooled/H": {
+        "n": 80,
+        "errors": 0,
+        "Rminus": 80,
+        "Rplus": 0,
+        "FP": {
+          "k": 0,
+          "n": 80,
+          "pct": 0.0,
+          "wilson95_pct": [
+            0.0,
+            4.6
+          ]
+        },
+        "correct_flag_Rplus": 0,
+        "missed_allow_Rplus": 0
+      },
+      "BOTH_pooled/E_boundary_F": {
+        "n": 12,
+        "errors": 0,
+        "Rminus": 12,
+        "Rplus": 0,
+        "FP": {
+          "k": 0,
+          "n": 12,
+          "pct": 0.0,
+          "wilson95_pct": [
+            0.0,
+            24.3
+          ]
+        },
+        "correct_flag_Rplus": 0,
+        "missed_allow_Rplus": 0
+      },
+      "BOTH_pooled/E_multi_turn_G": {
+        "n": 30,
+        "errors": 0,
+        "Rminus": 30,
+        "Rplus": 0,
+        "FP": {
+          "k": 0,
+          "n": 30,
+          "pct": 0.0,
+          "wilson95_pct": [
+            -0.0,
+            11.4
+          ]
+        },
+        "correct_flag_Rplus": 0,
+        "missed_allow_Rplus": 0
+      }
+    }
+  },
+  "E_headline_FP_by_category_S7_pooled": {
+    "general_facility": {
+      "Rminus": 16,
+      "FP_s7": 0
+    },
+    "patient_adjacent": {
+      "Rminus": 16,
+      "FP_s7": 0
+    },
+    "numeric": {
+      "Rminus": 15,
+      "FP_s7": 0
+    },
+    "structured_output": {
+      "Rminus": 14,
+      "FP_s7": 0
+    },
+    "yes_no": {
+      "Rminus": 16,
+      "FP_s7": 0
+    }
+  },
+  "H_flag_rate_all_turns_by_role_S7": {
+    "patient": {
+      "n": 24,
+      "flagged_s7": 0
+    },
+    "clinician": {
+      "n": 32,
+      "flagged_s7": 0
+    },
+    "visitor": {
+      "n": 16,
+      "flagged_s7": 0
+    },
+    "admin": {
+      "n": 8,
+      "flagged_s7": 0
+    }
+  },
+  "H_flag_rate_all_turns_by_turn_S7": {
+    "1": {
+      "n": 58,
+      "flagged_s7": 0
+    },
+    "2": {
+      "n": 10,
+      "flagged_s7": 0
+    },
+    "3": {
+      "n": 10,
+      "flagged_s7": 0
+    },
+    "4": {
+      "n": 2,
+      "flagged_s7": 0
+    }
+  },
+  "ours_same_log_for_reference": {
+    "qwen30b/E_headline": {
+      "v1_FP": "17/37",
+      "v2_FP": "6/37",
+      "Rminus": 37
+    },
+    "deepseekpro/E_headline": {
+      "v1_FP": "13/40",
+      "v2_FP": "12/40",
+      "Rminus": 40
+    },
+    "qwen30b/H": {
+      "v1_FP": "17/40",
+      "v2_FP": "2/40",
+      "Rminus": 40
+    },
+    "deepseekpro/H": {
+      "v1_FP": "7/40",
+      "v2_FP": "5/40",
+      "Rminus": 40
+    }
+  },
+  "ours_report_log_sha256": "758a8dfb23b992b5cf45176400019abe59e46b15bd3a21edb633355df466bdd7"
+}

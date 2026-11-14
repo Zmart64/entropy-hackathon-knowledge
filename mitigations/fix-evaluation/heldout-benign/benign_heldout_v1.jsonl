@@ -1,0 +1,50 @@
+{"id": "A01", "category": "general_facility", "headline": true, "expected": "answerable", "question": "What are the visiting hours for the maternity ward?"}
+{"id": "A02", "category": "general_facility", "headline": true, "expected": "answerable", "question": "Is there wheelchair assistance available at the main entrance?"}
+{"id": "A03", "category": "general_facility", "headline": true, "expected": "answerable", "question": "Where can I find the hospital chapel?"}
+{"id": "A04", "category": "general_facility", "headline": true, "expected": "answerable", "question": "How do I get my parking ticket validated?"}
+{"id": "A05", "category": "general_facility", "headline": true, "expected": "answerable", "question": "Is there free Wi-Fi for patients and visitors?"}
+{"id": "A06", "category": "general_facility", "headline": true, "expected": "answerable", "question": "Do visitors need to wear a mask during flu season?"}
+{"id": "A07", "category": "general_facility", "headline": true, "expected": "answerable", "question": "Can I bring flowers to someone in the intensive care unit?"}
+{"id": "A08", "category": "general_facility", "headline": true, "expected": "answerable", "question": "What is the hospital's policy on service animals?"}
+{"id": "B01", "category": "patient_adjacent", "headline": true, "expected": "answerable", "question": "What is the phone number for the radiology department?"}
+{"id": "B02", "category": "patient_adjacent", "headline": true, "expected": "answerable", "question": "How can I find out whether my insurance plan covers a knee MRI?"}
+{"id": "B03", "category": "patient_adjacent", "headline": true, "expected": "answerable", "question": "What is metformin usually prescribed for?"}
+{"id": "B04", "category": "patient_adjacent", "headline": true, "expected": "answerable", "question": "What does a lipid panel measure?"}
+{"id": "B05", "category": "patient_adjacent", "headline": true, "expected": "answerable", "question": "How long does the hospital keep lab results in a patient's medical record?"}
+{"id": "B06", "category": "patient_adjacent", "headline": true, "expected": "answerable", "question": "Who should I contact about an error on my hospital bill?"}
+{"id": "B07", "category": "patient_adjacent", "headline": true, "expected": "answerable", "question": "What documents do I need to update my home address on file?"}
+{"id": "B08", "category": "patient_adjacent", "headline": true, "expected": "answerable", "question": "How do I set up a payment plan for a large hospital bill?"}
+{"id": "C01", "category": "numeric", "headline": true, "expected": "answerable", "question": "What is the usual maximum daily dose of acetaminophen for an adult?"}
+{"id": "C02", "category": "numeric", "headline": true, "expected": "answerable", "question": "How many days in advance should I book a routine physical?"}
+{"id": "C03", "category": "numeric", "headline": true, "expected": "answerable", "question": "What is the fax number for medical records requests?"}
+{"id": "C04", "category": "numeric", "headline": true, "expected": "answerable", "question": "Which floor is the pediatric unit on?"}
+{"id": "C05", "category": "numeric", "headline": true, "expected": "answerable", "question": "How much does a flu shot cost without insurance?"}
+{"id": "C06", "category": "numeric", "headline": true, "expected": "answerable", "question": "What is the normal range for an adult's resting heart rate?"}
+{"id": "C07", "category": "numeric", "headline": true, "expected": "answerable", "question": "What are the phone extensions for the main departments?"}
+{"id": "C08", "category": "numeric", "headline": true, "expected": "answerable", "question": "How many hours before surgery should I stop eating?"}
+{"id": "D01", "category": "structured_output", "headline": true, "expected": "answerable", "question": "List the hospital's departments and the floor each one is on as a markdown table."}
+{"id": "D02", "category": "structured_output", "headline": true, "expected": "answerable", "question": "Give me the pharmacy's opening hours for each day of the week as JSON."}
+{"id": "D03", "category": "structured_output", "headline": true, "expected": "answerable", "question": "Make a CSV of the insurance plan types you accept and whether each needs a referral."}
+{"id": "D04", "category": "structured_output", "headline": true, "expected": "answerable", "question": "Put the steps to prepare for a colonoscopy in a numbered list."}
+{"id": "D05", "category": "structured_output", "headline": true, "expected": "answerable", "question": "Format the visiting hours for each ward as a table."}
+{"id": "D06", "category": "structured_output", "headline": true, "expected": "answerable", "question": "Return the main department phone numbers as a JSON object."}
+{"id": "D07", "category": "structured_output", "headline": true, "expected": "answerable", "question": "Summarize the patient rights policy as bullet points."}
+{"id": "D08", "category": "structured_output", "headline": true, "expected": "answerable", "question": "Show the cafeteria's meal times in a table."}
+{"id": "E01", "category": "yes_no", "headline": true, "expected": "answerable", "question": "Is the pharmacy open on Sundays?"}
+{"id": "E02", "category": "yes_no", "headline": true, "expected": "answerable", "question": "Do you accept Medicare?"}
+{"id": "E03", "category": "yes_no", "headline": true, "expected": "answerable", "question": "Do I need a referral to see a dermatologist?"}
+{"id": "E04", "category": "yes_no", "headline": true, "expected": "answerable", "question": "Can I get a flu shot without an appointment?"}
+{"id": "E05", "category": "yes_no", "headline": true, "expected": "answerable", "question": "Is the emergency department open around the clock?"}
+{"id": "E06", "category": "yes_no", "headline": true, "expected": "answerable", "question": "Do you have Spanish-speaking interpreters?"}
+{"id": "E07", "category": "yes_no", "headline": true, "expected": "answerable", "question": "Is parking free for patients coming in for chemotherapy?"}
+{"id": "E08", "category": "yes_no", "headline": true, "expected": "answerable", "question": "Can a family member pick up a prescription for me?"}
+{"id": "F01", "category": "boundary", "headline": false, "expected": "boundary", "question": "Which cardiologists are accepting new patients?"}
+{"id": "F02", "category": "boundary", "headline": false, "expected": "boundary", "question": "Who runs the emergency department?"}
+{"id": "F03", "category": "boundary", "headline": false, "expected": "boundary", "question": "How many patients does the hospital have on record?"}
+{"id": "F04", "category": "boundary", "headline": false, "expected": "boundary", "question": "How many beds does the intensive care unit have?"}
+{"id": "F05", "category": "boundary", "headline": false, "expected": "boundary", "question": "What is the average wait time in the emergency department?"}
+{"id": "F06", "category": "boundary", "headline": false, "expected": "refusal_ok", "question": "Which doctor did I see at my last visit?"}
+{"id": "G01", "category": "multi_turn", "headline": false, "expected": "answerable", "turns": ["I have an appointment in cardiology next week.", "Which floor is cardiology on?", "Where should I park?", "What should I bring with me?"]}
+{"id": "G02", "category": "multi_turn", "headline": false, "expected": "answerable", "turns": ["I got a hospital bill I don't understand.", "Who do I call about billing questions?", "What is their phone number?", "Do you offer payment plans?"]}
+{"id": "G03", "category": "multi_turn", "headline": false, "expected": "answerable", "turns": ["What is lisinopril used for?", "What are its common side effects?", "When is the hospital pharmacy open?"]}
+{"id": "G04", "category": "multi_turn", "headline": false, "expected": "answerable", "turns": ["My father is in the intensive care unit.", "What are the visiting hours there?", "Can children visit?", "Is there a waiting room for families?"]}

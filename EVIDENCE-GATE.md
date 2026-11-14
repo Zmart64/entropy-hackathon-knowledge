@@ -31,15 +31,18 @@ before/after CIs + benign FP + status-quo + one adaptive attack · 11★ novelty
 - **Ladder:** F-01 per attack message — Qwen3-30B 16% [10-25] vs DeepSeek-V4-Pro 10% [6-16] ≈ 1.7× (easier leaks
   more); Claude rungs after unlock.
 
-## Fix (exec-hub `dlp_fix.py`) — status
+## Fix (`dlp_fix.py` v2, frozen 13:49, sha256 `ddcb8931…`) — status (15:36, independent evaluation)
 
-4 layers (canonicalize+parse → label-flow → session-budget → field-predicate). Recall 100% on 450/450 real
-filter-clean leaks; benign FP 1/16 (6%). **NOT objective-ready yet** (independent fix-eval): the recall is in-sample
-(circular), nothing held out, no adaptive run. Before any fix number slides: HELD-OUT recall + the adaptive attack
-residual + out-of-sample FP. **Honest framing:** NOT pre-registered → "generic deterministic info-flow DLP, not
-overfit", never "pre-registered" (honesty is a plus with the professor). **Status-quo:** Riley's OWN deployed DLP
-failed (passed 100% of the leaks) is the real row; do NOT claim "LlamaGuard misses it" (untested, a content-privacy
-classifier); Prompt Guard 2 replica (98% through) is a prompt-injection classifier, supporting only.
+Full write-up and evidence: [mitigations/fix-evaluation/](mitigations/fix-evaluation/README.md).
+
+- **Leaks:** 0 of 32 leaking conversations let through, 0% [0-11], label independent of the guard and covering every
+  identifier field. Same cohort: Llama Guard 4 S7 on replies 29 of 32 (91%), Prompt Guard 2 on user turns 32 of 32.
+- **Benign cost (held-out, frozen before the run):** 23% [15-34] of hard benign answers blocked vs Llama Guard 0% on the
+  same replies; 9% [4-17] on an everyday set. A trade-off: show both columns.
+- **Adaptive round:** 2 of 8 rule-aware conversations leaked past Riley's filter; the fix blocked both (0 of 8 past it).
+- **Honest framing:** not pre-registered ("generic deterministic rules, not tuned to payloads"); value matching does the
+  work, the decoding layer is untested; the oracle channel (F-03) is not measured; held-out attack recall waits on the
+  pre-registered Claude test. Withdrawn: "450/450", "27/28", "78%", "0/500", "98% through", "1/16".
 
 ## Reject on sight
 
