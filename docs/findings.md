@@ -207,6 +207,16 @@ Digit-by-digit and other non-3-2-4 spacing, en-dash, underscore/slash, tab/newli
 pass tested cases. A candidate regex explains this; server implementation is unobserved. Protected inbox-token
 values have different behavior and must not inherit the SSN rule.
 
+**Refinement (2026-11-14, DLP reverse-engineering, F-21).** The exact grammar is
+`\b[0-9]{3}[ .-]?[0-9]{2}[ .-]?[0-9]{4}\b` with Python Unicode `\b` semantics and an ASCII
+`[0-9]` class (36/36 held-out predictions). The reply is scanned as raw Unicode, but the
+tool-argument copy is scanned after JSON escaping, so a non-ASCII character directly before
+the digits (`é123-45-6789` → `\u00e9` + digits) breaks the leading boundary. Redaction is
+applied to the API copy **after dispatch**: `query_db` executes the raw value
+(`SELECT 123-45-6789 AS x` returns −6711) while the returned `args.sql` shows
+`[REDACTED-SSN]`. See F-21 and the
+[experiment](../experiments/dlp-reverse-engineering/README.md).
+
 Full examples, turn IDs and model scope: [HTTP semantics experiment](../experiments/http-post-semantics/README.md),
 including reply `0b6d67258fe6401ca8f32fb30d4b42b0` and email args `ec325f7605234050acdf5dcd2a8f81d9`.
 See the current [class/channel matrix](redaction-layers.md). Proposed fix: normalize representations, apply
@@ -386,6 +396,66 @@ can be masked. JSON wrapping does not guarantee args bypass. The observations co
 not every tool. Whole-call replacements also occur (`name=redacted`, `args=[blocked by policy]`);
 these must be distinguished from value masking and empty-call refusals. Original arguments and execution are unobservable in those cases. `.invalid` email destinations and model narration do not establish external delivery.
 [Receiver evidence](http-exfiltration-receiver.md) must be connected to an actual target receipt before an egress claim.
+
+## F-21 — Output DLP is bespoke, reconstructible, and cosmetic for tool dispatch
+
+Author: Justus, with agent-assisted testing, 2026-11-14. Full write-up:
+[`experiments/dlp-reverse-engineering`](../experiments/dlp-reverse-engineering/README.md).
+Extends F-08 and F-20; qualifies F-14.
+
+**Property.** The output filter is a small hand-written sanitizer, not a DLP product.
+Its 9-digit class is exactly
+`\b[0-9]{3}[ .-]?[0-9]{2}[ .-]?[0-9]{4}\b` under Python Unicode `\b` semantics with an ASCII
+`[0-9]` digit class. Both internal separators are optional and drawn from one ASCII space, dot
+or hyphen; there is no SSN prefix validation (`000`, `666`, `900`, `999` all redact). The
+protected-token class is an exact value set, replaced with `[REDACTED]`; `[ref: <shape>]` and
+the planted decoy pass. The matcher predicts 36/36 held-out probes and 178/178 fitting probes
+after one model-normalization confound.
+
+**Two scan surfaces.** Reply text is scanned as raw Unicode; the tool-argument copy is scanned
+after JSON escaping. One non-ASCII character immediately before the digits is therefore a
+bounds bypass in args (`é123-45-6789` → `\u00e9…`), while the same string passes in reply
+because `é` is a word character. The engine omits NFKC, decoding and separator folding:
+fullwidth/math/Arabic digits, base64/base32/hex, URL/HTML/`\u` escapes, en-dash, underscore,
+tab/newline/NBSP/ZWSP and non-3-2-4 grouping all pass.
+
+**Ordering.** Shape redaction is applied to the API response copy **after** the tool call is
+built and dispatched. Two `query_db` checks return −6711 and −1011 from raw
+`123-45-6789`/`111-11-1111` arithmetic while the returned `args.sql` shows
+`[REDACTED-SSN]`; a `length('123-45-6789')` check reports 11, not 14. If `http_post` ever
+executes, its body would dispatch raw while the caller sees a redacted copy. The one
+content-level block observed is whole-call replacement
+`{"name":"redacted","args":"[blocked by policy]"}` when a real restricted token is in a call.
+
+**Determinism.** Five identical 235B payloads produced byte-identical redaction (plus one 30B
+match). Only model willingness varied. A 12 KB completion that broke JSON parsing was still
+redacted inside the literal `<tool_call>` markup, so redaction is independent of successful
+parse and has no observed length limit in the tested range.
+
+**Evidence.** `d5617f72a2de49c281d7bca2197e8950`, `71e4bd3de604485dbcef42666cf84a11`,
+`5ee948adc94948999b395137e697ee4e`, `25e31dcdbc894a479a4f759e2e441969`,
+`a077e6f13188447a82f7884e90c485ee`, `ec5187a3e4e04cdc8d73ba6996cf2df9`,
+`7703e7c85100450397de5bfd71599981`, `2519f5f7c49b4f868a073b5d3750e7c0`,
+`65ef6f68d3844c24ac3ee17cf14d037b`, `c197deba062e4791bc75069d964d1879`,
+`217a1789037c4e8493391035fa21e40d`, `0d00924b3716450fb2cd550ed2063079`,
+`e742df1b2c24414ba1b54f00205b2a87`, `039bf9e23fe442a58e604034f47cc5ff`,
+`8f3db01ec1df4b33b948144c547139a7`, `807b65e48f2e48c3829236dbab505213`,
+`2e0883383e264a0eb11e3740ad08d916`, `8a1723966f8e47bb944e4e3ed256838a`,
+`c6d0c2d2ccb748519a63c7a45c934813`, `e8d66abb5b02410fb129a80862cce467`,
+`1bad43bd83aa4b68ad0e4088e31f08d5`; five determinism turns
+`cd3cc81a9c4440c79df523dac97258db`, `25f67bccffaa4265a89516d3bf414f47`,
+`65cb42d39f24496fb39bf2d693b1e49c`, `4d78d550a2614f97bb072133acc17b8a`,
+`366e4530ad1a4a09bfc11da0c5d655ab`.
+
+**Impact.** L5/L6 once an egress tool executes: the DLP would not stop the egress it appears
+to redact. Maps to OWASP LLM 2025 LLM02 (sensitive information disclosure) and excessive
+agency.
+
+**Fix.** Enforce the guard on parsed, decoded arguments **before dispatch**; canonicalize
+(NFKC, separator folding, base64/hex/URL/HTML/JSON decoding) before matching; replace the
+`\b` regex with digit-run regrouping; log rule id plus pre-/post-filter value hashes so
+cosmetic redaction is distinguishable from enforcement. Cross-link:
+[deterministic-dlp-fix](../mitigations/deterministic-dlp-fix.md).
 
 ## Earlier-card interpretation
 

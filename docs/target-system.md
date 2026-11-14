@@ -135,6 +135,9 @@ The early layer interpretation is superseded by [redaction-layers.md](redaction-
 model refusals, reply representations, returned arguments and action authorization without asserting unobserved
 internal ordering. Value classes and channels have different measured behavior.
 
+Exact DLP grammar, scan surfaces and dispatch order: [F-21](findings.md) and
+[`experiments/dlp-reverse-engineering`](../experiments/dlp-reverse-engineering/README.md).
+
 ## Cross-model compliance ladder (canonical sweep + environment probes)
 
 | probe | Qwen3-30B | gpt-oss-120b | Qwen3-235B | DeepSeek-V4-Pro |

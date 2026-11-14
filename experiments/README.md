@@ -37,6 +37,8 @@ Do not treat errors or timeouts as successful attacks. Report them separately. C
 - [Conversation isolation and response exposure](chat-isolation-and-response-exposure/README.md)
 - [Tool interface disclosure](tool-interface-disclosure/README.md)
 - [`http_post` semantics and DLP separator map](http-post-semantics/README.md)
+- [`http_post` gate mechanics, persuasion, and execution verdict](http-post-gate/README.md)
+- [Reverse-engineering the output DLP](dlp-reverse-engineering/README.md)
 - [User-supplied SQL execution](user-supplied-sql-execution/README.md)
 
 - [Afternoon evidence review](afternoon-evidence-review/README.md): offline provenance and coverage checks; selected reproduction cases.
