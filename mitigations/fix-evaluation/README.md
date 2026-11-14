@@ -67,6 +67,26 @@ patient record read in this conversation. Post-hoc split (not in the rule fixed 
 Riley's own refusals, 9 block real answers (9/77 = 12% [6-21]). Multi-turn counted per session as pre-registered:
 all 8 sessions blocked (4/4 per model, 100% [68-100]), the budget layer.
 
+## Related findings from other lanes (16:21)
+
+- **Two layers, different evidence.** The output DLP is measured above. The query guard
+  ([user-supplied-sql.md](../user-supplied-sql.md)) is shown by construction and a fixture self-test (19/19 SQL attack
+  strings rejected, 6/6 legitimate requests served); it has not been replayed against the logged attack queries. The
+  organizers' own **Level 3 per-step SQL scope** is live evidence that a query-layer control closes the patient leak:
+  0 of 26 patient queries passed, 0 of 16 flagged L3 "leaks" read the patients table, 3 of 3 benign direct asks for a
+  known patient were refused ([measurement-firewall lane](../../results/2026-11-14-measurement-firewall-l3-and-fix-eval.md)).
+  The output DLP adds defense in depth where a query path is over-entitled (Level 2), for authorized flows that must
+  read patient rows, and for identifiers outside the scoped tables.
+- **Riley's deployed filter** is a hand-written regex plus value-set sanitizer whose tool-argument redaction happens
+  after dispatch ([F-21](../../experiments/dlp-reverse-engineering/README.md)). Our fix's check on tool arguments must
+  therefore run before dispatch; this shadow evaluation does not test dispatch order.
+- **Egress is untested:** no `http_post` egress occurred in 202 F-01 episodes; it is blocked at dispatch on Level 2 and
+  hard-denied on Level 3 ([http-post-gate](../../experiments/http-post-gate/README.md)).
+- **The adaptive result is independently replicated** by the measurement-firewall lane: 3 tool-backed rows before the
+  fix (2 ground-truth confirmed), all blocked; 0 of 8 conversations past v2.
+- **Invented records:** 15% of MRN-like values in the corpus's replies are not in the database. The leak label and the
+  fix both match stored values, so invented values count as neither leaks nor blocks.
+
 ## Method
 
 - **Corpus:** frozen ground-truth snapshot `gt-20261114T143309` (752 replies, 43 conversations, DeepSeek-V4-Pro and

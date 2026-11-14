@@ -37,6 +37,7 @@ inconsistent. Show the evidence, a deterministic control, and the measured utili
 - Reconcile Andrii's latest reported 450/450 patient census and 351/450 double-confirmation with the frozen nine-run/1,224-episode manifest; older 273/450 is superseded. Keep population coverage separate from attempt rates and full-field coverage.
 - Choose one demo with a known control, decoded-value check and source turn IDs; make an offline redacted recording.
 - Obtain held-out mitigation, benign-FP and adaptive results. Latest author reports are 144/145 replies and 27/28 conversations (96.4%, not 100%); the new ledger isolates 27/27 F-01-only conversations, excluding one oracle case. LlamaGuard detects 39/50. Their different cohorts cannot support a paired superiority claim. The earlier 450/450 fix evaluation is in-sample consistency only (a separate metric from the patient census).
+  - Done 16:22: [fix-evaluation](../mitigations/fix-evaluation/README.md) has the paired, same-cohort results: 0 of 32 leaking conversations let through vs Llama Guard S7 28 of 32; benign cost 23% [15-34] vs Llama Guard 0% on the same held-out replies; adaptive round 0 of 8 past the fix.
 - Replace or retire the [old F-03 talk](warroom-talk-f03-draft.md): its full reconstruction claim and placeholders
   do not match Andrii's latest secondary-oracle status (5/12 incidental member-ID characters, no full reconstruction; dedicated oracle test already reports 0/8).
 - Confirm allowed target/track, final submission criteria and current organizer availability before submission.
