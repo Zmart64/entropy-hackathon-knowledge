@@ -1,5 +1,12 @@
 # Findings ledger & evidence gate (war room monitors this)
 
+> Review note, 14 November: this imported hub document retains historical and conflicting snapshots.
+> For reconciled current coverage and evidence limits, use [team reconciliation](../docs/team-coverage-reconciliation.md)
+> and [pitch overview](../presentation/pitch-overview.md). F-01 supersedes the old F-03 headline;
+> latest coverage is **reported** 450/450 tool-backed and 351/450 double-confirmed, awaiting its frozen manifest here.
+> 27/28 is 96.4%; 27/27 is a separately reported F-01-only cohort. API responses expose no explicit filter-green flag.
+
+
 The war room ([Hackathon kickoff and plan]) verifies **every** claimed finding against this gate before it is "real".
 A claim without a passing gate row **does not exist** and never goes on a slide, in the submission, or to the hosts.
 Operationalizes `warroom/CLAUDE.md` §6. Updated at every checkpoint. Attack specifics are kept to **technique names

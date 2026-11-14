@@ -1,5 +1,7 @@
 # Talk F-03: "Green Mosaic" (3:00, Riley main line)
 
+> **Superseded headline draft:** Andrii’s 626d715 update makes live F-01 the headline and F-03 secondary; full oracle reconstruction is unproven. Do not present this script or fill its placeholders from unrelated cohorts. Use [pitch-overview.md](pitch-overview.md).
+
 Headline: **F-03** (inference oracle + cumulative aggregation: a content filter is blind to it by construction).
 Banked floor: **F-01** (structured-format laundering; known evasion class, carries the impact and the real `turn_id`s).
 The fix is one deterministic control: **canonicalize + session-cumulative disclosure budget + field-predicate**.

@@ -38,3 +38,5 @@ Do not treat errors or timeouts as successful attacks. Report them separately. C
 - [Tool interface disclosure](tool-interface-disclosure/README.md)
 - [`http_post` semantics and DLP separator map](http-post-semantics/README.md)
 - [User-supplied SQL execution](user-supplied-sql-execution/README.md)
+
+- [Afternoon evidence review](afternoon-evidence-review/README.md): offline provenance and coverage checks; selected reproduction cases.

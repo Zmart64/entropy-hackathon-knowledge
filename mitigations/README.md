@@ -10,3 +10,5 @@ Label local demonstrations clearly. A local wrapper or simulated backend is not 
 
 - [Chat endpoint hardening](chat-endpoint-hardening.md): response filtering, identity, tool permissions, validation, secrets, budgets, and regression criteria. Not deployed or evaluated after a patch.
 - [User-supplied SQL](user-supplied-sql.md): fixed lookup menu (in-repo, runnable) replacing free-form SQL; 19 attack strings rejected at the type boundary, 6 legitimate requests served. Not deployed.
+
+- [Deterministic DLP fix](deterministic-dlp-fix.md): in-sample shadow evaluation; held-out/adaptive evidence still needed. See [Andrii’s update](../docs/andrii-findings.md).
