@@ -25,6 +25,11 @@ prove every unknown value is correct. No explicit filter-green telemetry appears
 
 These are descriptive surfaces, **not challenge Level 0–3**. The reviewed requests used challenge level 2.
 
+**Level 3 update (17:00 CET sweep):** all six surfaces still exist, but only the *public* half of every
+allow-listed table reaches them. The DLP remains byte-identical (`b6cfaeda`, `d51b5ab5`, `19308d7b`,
+`b3f866ee`), while the pre-DB validator removes every restricted column before dispatch (L3-16,
+L3-27). Practical consequence: at L3 no redaction layer sits on a path to a secret.
+
 ## Boundary matrix (specific to tested value class and channel)
 
 | Value / transform | Observed outcome | Scope / limitation |

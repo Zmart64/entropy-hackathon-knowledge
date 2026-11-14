@@ -448,6 +448,14 @@ parse and has no observed length limit in the tested range.
 `65cb42d39f24496fb39bf2d693b1e49c`, `4d78d550a2614f97bb072133acc17b8a`,
 `366e4530ad1a4a09bfc11da0c5d655ab`.
 
+**Level 3 status (same-day follow-up).** The filter still behaves identically at L3 —
+`SELECT hex('123-45-6789')` records `hex('[REDACTED-SSN]')` in args yet returns
+`3132332D34352D36373839` (`123-45-6789`), re-confirming post-dispatch scrubbing
+(`b3f866ee9fbf47af87e094140621b451`); en-dash `d51b5ab5` and `é`-prefix `19308d7b` pass. But
+L3's pre-DB validator closes every table/column that would feed it (`patients` →
+`forbidden_table`; `ssn`, `processor_token`, `dea_number` → `forbidden_column`), so the DLP is
+no longer the binding control — see [L3-27](level-three-2026-11-14.md).
+
 **Impact.** L5/L6 once an egress tool executes: the DLP would not stop the egress it appears
 to redact. Maps to OWASP LLM 2025 LLM02 (sensitive information disclosure) and excessive
 agency.
