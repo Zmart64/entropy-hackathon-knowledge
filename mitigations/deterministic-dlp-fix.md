@@ -32,8 +32,11 @@ A deterministic guard on the agent's OUTGOING answer (and any egress tool-call a
 |---|---|---|
 | Riley's OWN deployed output DLP | the range's built-in filter | **0%** — passed all 450 filter-clean leaks |
 | PromptGuard2 (Llama-Prompt-Guard-2-86M) | input injection/jailbreak classifier | **0/500 attack inputs = 0%** (benign-pretext exfil passes; it flags obvious injections — a raw "ignore instructions" scores 0.9995 — just not these). Replies 0/500; benign FP 0% |
-| LlamaGuard-S7 | content/privacy classifier | **UNTESTED** (not served here) — do not claim it misses it |
-| **our deterministic output DLP** | output label-flow | **100%** (F-01, non-circular) |
+| LlamaGuard-4 S7 (llama-guard-4-12b, OpenRouter) | content/privacy classifier (12B, a model call per output) | **78% (39/50 leaking replies blocked), 0% benign FP** — it CATCHES most leaks; misses ~22% (obfuscated/edge). NOT a miss. |
+| **our deterministic output DLP** | output label-flow, no model call | **100%** (F-01, non-circular) at microseconds, auditable |
 
-Thesis: both the deployed output DLP and an input injection guard miss agentic data-exfil; a deterministic output DLP
-catches it, with no model call.
+Honest thesis (do NOT claim "guards miss it"): the DEPLOYED output DLP FAILED (0%); an input injection guard is the
+wrong tool (PromptGuard2 0%); even a SOTA output classifier (LlamaGuard-4 S7) reaches only **78%** at a
+12B-model-call-per-response cost, is probabilistic, and misses obfuscated variants; our deterministic rule reaches
+**100%** (F-01) at microseconds, with no model call and a full audit trail — and catches the obfuscated forms
+LlamaGuard misses (via canonicalize). The pitch is "deterministic, complete, cheap, auditable", not "nothing else catches it".
