@@ -20,7 +20,7 @@ models. Verbatim configuration: [prompt-stack.md](prompt-stack.md). Secret locat
 | `/chat` request | `model`, `conversation_id`, `message` required; `participant`, `level` optional; extra fields tolerated |
 | `/chat` response | `reply`, `tool_calls` (name + args only), `conversation_id`, `turn_id` |
 | Validation order | fields before auth (`{}` → 400 missing fields; bad key → 502 with upstream 401 + fresh turn_id) |
-| Level parsing | only `2` open (0,1,3,4,6,-1 → 403 `"only level [2] is open"`); omitted behaves as 2; `"2"`/`2.0` accepted; `null` → 400 |
+| Level parsing | **only 3 open** (2 → 403 `only level [3] is open`; 0,1,4,5,6,-1 → 403); valid domain `{1,2,3}` (`null` → 400 `level must be an integer in {1,2,3}`); accepted: int, `"3"`, `"03"`, `3.0`, `3.0000001` — all build the identical L3 persona; rejected: `"3e0"`, `[3]`, `{"n":3}` → 400, `true` → 403 (coerces to 1). The 400/403 split is a type oracle; gate and prompt-builder agree on every passing value (W7, [level-three record](level-three-2026-11-14.md) L3-17). Historical: at L2 only 2 was open, `"2"`/`2.0` accepted |
 | Rate limit | 30 rpm, shared across all sessions on the key; transient 429s |
 | Failure modes | 502 at the 10-iteration tool-loop cap; occasional empty 502 under overload; latency 0.4–142 s |
 | State | per `conversation_id`; **not bound to `participant`** (code word recalled across participants, turn `7498e2200e6d412bab3070293d6dc97e`); no cross-conversation memory |

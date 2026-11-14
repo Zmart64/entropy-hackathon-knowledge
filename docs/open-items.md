@@ -65,7 +65,10 @@ Snapshot of the reviewed campaign, not a live backlog feed. [Pitch overview](../
 - Write/tamper behavior: no successful mutation established; Justus's deletion readback retained the record.
 - Stronger-model transfer: plain-prose audit framing, SQL hex and combined adaptive variants need per-model evidence;
   do not reset previously tried rungs to “untried”.
-- Level/model availability: follow organizer scope announcements; record any later level unlock as a new scoped experiment.
+- Level/model availability: **resolved — the range cut over to Level 3 only at 14:47 CET 2026-11-14**
+  ([level3-cutover.md](level3-cutover.md)); L2 techniques were re-tested at L3 and most are dead
+  ([level-three-2026-11-14.md](level-three-2026-11-14.md) — the live open-seams menu for Level 3 now lives
+  in that record's "Still untested / open" section). Follow organizer scope announcements for any further rotation.
 - Reproducibility: Andrii’s AUTO harness/fix source revision and frozen campaign manifest remain unavailable here.
   Julian’s query-guard code **is already shared**, with passing local reference tests; do not request it again as missing.
 - Updated fix/classifier numbers: retain 144/145 replies, 27/28 conversations, 39/50 LlamaGuard and their distinct
