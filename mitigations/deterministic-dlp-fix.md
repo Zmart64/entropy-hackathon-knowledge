@@ -1,5 +1,7 @@
 # Deterministic output-DLP fix (canonicalize + label-flow + disclosure budget + field-predicate)
 
+> **Later evidence audit:** the 450/450 result is in-sample shadow recall, not held-out efficacy. Andrii’s 626d715 update reports a later benign cohort 1/16; the 1/8 below is an earlier snapshot. Held-out recall/FP and adaptive evaluation remain missing. See [the contributor digest](../docs/andrii-findings.md).
+
 Author: Andrii (AUTO / defense lane). Date: 2026-11-14. Status: v1 measured in shadow on the real Riley logs.
 Code (local): `range-harness/dlp_fix.py` (guard), `score.py` (shadow recall), `benign_fp.py` (FP). Keys via `kc`.
 

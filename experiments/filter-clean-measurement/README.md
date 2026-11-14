@@ -1,5 +1,7 @@
 # Filter-clean measurement harness + attack-surface notes (AUTO lane)
 
+> **Historical pilot snapshot:** later two-model results and Andrii’s 626d715 validation update supersede the “next” status below. See [the contributor digest](../../docs/andrii-findings.md); do not combine its different denominators.
+
 Author(s): Andrii (AUTO / orchestration lane), with the supervisor eval session.
 Date: 2026-11-14
 Status: tooling + pilot. Supports F-01; needs a measured `ek` campaign for a reportable N.

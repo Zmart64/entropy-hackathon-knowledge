@@ -14,3 +14,8 @@
 - [Open items](open-items.md) — what is NOT extracted yet and each next attempt; update when an item moves
 
 Add focused notes here as needed. Include the author, date, and source links. Distinguish observations from hypotheses, and link to experiment evidence where available.
+
+- [Knowledge-base review and thread coverage](knowledge-review-2026-11-14.md)
+- [Andrii’s live and replica findings](andrii-findings.md)
+- [Evidence-sharing proposal](evidence-sharing.md)
+- [Pitch overview](../presentation/pitch-overview.md)
