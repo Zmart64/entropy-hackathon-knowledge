@@ -94,6 +94,10 @@ the filesystem serves exactly 3 benign public handouts; all secret material is i
 
 ## Practical notes for agents
 
+- Optional outbound HTTP destination: [team receiver](http-exfiltration-receiver.md) at
+  `http://13.60.107.91/`. Direct POST capture is verified, including requests without
+  Content-Type; delivery from the challenge is unconfirmed and `http_post` is currently gated.
+
 - Easiest extraction model: **Qwen3-30B**. Verification/stress model: **DeepSeek-V4-Pro**.
   groq models are live but unprobed.
 - Only the API's `tool_calls` record and filter side-effects are ground truth — the reply
