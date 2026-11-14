@@ -1,6 +1,6 @@
 # Speaker notes: Green Mosaic
 
-Talk estimate 165 s (budget 180 s, limit 180 s) at 140 words/min; video slides count the video length.
+Talk estimate 164 s (budget 180 s, limit 180 s) at 140 words/min; video slides count the video length.
 Beat boundaries: hook ends 0:12; demo ends 0:55; killchain ends 1:25; evidence ends 1:51; rounds ends 2:36; close ends 3:00.
 
 ## 1. hook (12 s budget, ~14 s estimate, 33 words)
@@ -21,11 +21,11 @@ The filter behaves like a pattern redactor: a social-security shape and a fixed 
 for the rows as a table and they pass. The answer itself is the exfiltration channel: no tool to
 send, the record is just there. Credentials Riley refuses, and a dedicated oracle too.
 
-## 4. evidence (26 s budget, ~20 s estimate, 47 words)
+## 4. evidence (26 s budget, ~19 s estimate, 44 words)
 
-Same harness on two open models. Both leak real records while the filter stays green: sixteen
-percent of attack messages on the small model, ten on the large one. The smaller one trends
-higher, but the intervals overlap. Claude Haiku and Sonnet are pending the Level-3 unlock.
+The sixty-five percent headline breaks into the two models, per conversation: the small model
+leaks a real record in eighty-nine percent of conversations, the large one in fifty-nine. The
+smaller, more helpful model leaks more. Claude Haiku and Sonnet are pending the organizer token.
 
 ## 5. rounds (45 s budget, ~31 s estimate, 72 words)
 
