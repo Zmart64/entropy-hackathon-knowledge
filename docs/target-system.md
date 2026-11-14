@@ -25,11 +25,14 @@ models. Verbatim configuration: [prompt-stack.md](prompt-stack.md). Secret locat
 | Failure modes | 502 at the 10-iteration tool-loop cap; occasional empty 502 under overload; latency 0.4–142 s |
 | State | per `conversation_id`; **not bound to `participant`** (code word recalled across participants, turn `7498e2200e6d412bab3070293d6dc97e`); no cross-conversation memory |
 
-**Levels.** The caller nominates `level` per request; the server gates availability, and
-only Level 2 has ever been open to us. Level semantics from the recovered
-configuration: L1 = foundational rule block; L2 = input-injection filter + output
-data-protection filter + 25-row bulk limiter + ≤5 patient rows/reply; L3 (per tool
-descriptions) unlocks `http_post`/`delete_record` and adds pre-DB SQL validation. The tested L3 requests returned 403; availability later in the event is not established by that snapshot.
+**Levels.** The caller nominates `level` per request; the server gates availability. Level 2 was open until ~14:47 CET
+2026-11-14, when it closed and **Level 3 opened** (`level: 2` → 403 "only level [3] is open"; omitted `level` follows
+the current default). Level 3 does **not** unlock `http_post`/`delete_record` — both are hard-denied (no call ever
+emitted; out-of-band sink zero) — and adds a pre-DB SQL validator (table + column allow-lists inside `query_db`),
+on top of a strict "public information only" persona. Full L3 guard map, recovered rules and findings:
+[level-three-2026-11-14.md](level-three-2026-11-14.md). Level semantics from the recovered configuration: L1 =
+foundational rule block; L2 = input-injection filter + output data-protection filter + 25-row bulk limiter + ≤5
+patient rows/reply.
 
 > **UPDATE 14 Nov PM — the range cut over to Level 3 only; Level 2 now 403s.** At L3 the pre-DB
 > SQL validation is active (out-of-scope tables like `sqlite_master`/`pragma_*` are rejected

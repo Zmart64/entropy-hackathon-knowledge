@@ -5,6 +5,13 @@
 > Wilson CI) to become reportable; they are labeled as pilot.
 
 > **Review update:** start with [coverage by model](extraction-goals.md), [the pitch overview](../presentation/pitch-overview.md) and [Andrii’s latest correction](andrii-findings.md). Historical pilot numbers below are not interchangeable with later validation cohorts. Shared-server explanations remain hypotheses unless directly measured.
+>
+> **Level 3 opened 14:47 CET 2026-11-14 (Level 2 closed).** Everything on this page was measured at **level 2**.
+> Current status, guard map, recovered L3 rules and new findings (L3-01…L3-12):
+> [Level Three findings](level-three-2026-11-14.md). Short version: F-01/F-04/F-05/F-06/F-13/F-15 and the
+> query→email chain are **dead at L3** (code-level table/column allow-listing + persona); multi-turn escalation
+> does not transfer; the surviving seams are config disclosure (fragment completion), guard-envelope oracles,
+> and the still-open lanes (persona seams, protocol/parser, sanctioned workflows).
 
 ## API endpoint investigation
 
