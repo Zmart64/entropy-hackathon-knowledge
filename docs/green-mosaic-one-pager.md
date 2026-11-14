@@ -14,7 +14,7 @@ filter-clean; **351 / 450 (78%)** reproduced across two or more independent
 replies. Per conversation the attack succeeds in **65% [50-78]** (N=43, Wilson 95%). No tool sends
 the record out — the reply itself is the channel. Severity L5: regulated patient data disclosed at the scale of the whole table.
 
-**Novelty.** The reconstruction of a private database from many individually innocuous answers is a known problem (Dinur-Nissim 2003; the salami/aggregation line). We did not find it measured against a deployed healthcare assistant's output DLP as of 14 Nov 2026: our delta is the census-scale measurement plus a deterministic two-layer fix (a fixed query menu, and a provenance output DLP with a per-record disclosure budget) with its measured false-positive cost.
+**Novelty.** Even Llama Guard-4's privacy classifier lets 29 of 32 leaking conversations out: the leak is conversation-level, not a bad answer. We did not find this measured against a deployed healthcare assistant's output DLP as of 14 Nov 2026; our contribution is that measurement plus a deterministic provenance rule that closes it - Dinur-Nissim query auditing (2003), ported to an LLM output DLP, with its measured false-positive cost.
 
 **Honest nulls.** A dedicated, pre-registered inference oracle is refused (0 of 8); no L6 credential landed (the
 credential columns are refused). We report both.
