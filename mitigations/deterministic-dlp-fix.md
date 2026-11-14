@@ -18,13 +18,15 @@ call, decision in microseconds:
    Targets the inference-oracle (F-03), where the secret is never emitted verbatim so a content filter is blind.
 
 ## Measurement (shadow, over the real logged Riley runs; aggregates only, no record text)
-- **Recall on filter-clean leaks** (leaks the SERVER DLP already passed): **100%** — 69/69 DeepSeek-V4-Pro and
-  163/163 Qwen3-30B flagged leaks blocked in shadow.
-- **Benign false positives** (8 legitimate patient-service queries): **v1 = 2/8**, both facility-phone mis-flags (the
-  pattern-level guard can't tell a hospital's main line from a patient's phone).
-- **v2 (in progress):** scope `phone` to patient-record provenance (require co-occurrence with a patient identifier),
-  which removes the facility-phone FP; then role/recipient-bound declassification (an authorized clinician may see
-  their own patient). Re-measured FP to follow.
+- **Recall on filter-clean leaks** (leaks the SERVER DLP already passed): **100%** — 287/287 DeepSeek-V4-Pro and
+  163/163 Qwen3-30B flagged leaks blocked in shadow (**450/450** total). Riley's OWN deployed output DLP is the
+  status-quo row and it FAILED: every one of these leaks is filter-clean (it passed Riley's filter). Our guard blocks
+  all of them, no model call.
+- **Benign false positives** (8 legitimate patient-service queries): **v1 = 2/8 -> v2 = 1/8**, recall unchanged at 100%.
+  v2 scopes a lone phone to patient-record provenance (a phone with no patient name = a facility line, allowed),
+  removing one facility-phone mis-flag. The remaining 1/8 is a facility phone co-located with a staff NAME; a clean
+  fix needs field-level data provenance (which table the value came from) — the v3 direction, with role/recipient-bound
+  declassification (an authorized clinician may see their own patient).
 
 ## For the measured campaign (hub's lane)
 Use this guard as the fix row in the `ek` campaign (replica l1/l4 with seeded canaries) for N>=30/arm + Wilson CI,
