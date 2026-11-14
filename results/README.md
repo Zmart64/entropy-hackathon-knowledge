@@ -14,6 +14,7 @@ Review files before sharing: exclude API keys, authentication headers, and unrel
 - [14 November 2026 afternoon extraction campaign](2026-11-14-swarm-extraction/README.md): per-store extraction ledger (extracted vs attempted-not-obtained), routes, turn_ids, costs.
 - [What we extracted — 14 November L2/L3](2026-11-14-extraction-status/README.md): positive inventory (SSNs, routing, employees, payments, app_users, providers), limits, and a 32-case redacted trace bundle.
 - [Haiku L3 scope-gate + FROM-tail relay](2026-11-14-haiku-l3-and-tail-relay/README.md): Haiku 0/96 emissions on any 6th table; V4-Pro tail executes 6/17 and leaks patient-table cardinality, then denies having run it.
+- [L3 patient-table crack, 14 Nov evening](2026-11-14-haiku-l3-tail-emission/README.md): batch-carrier emission (3/3), alias-qualified column bypass that executes a patient-column SELECT, and a `WHERE` membership oracle over arbitrary patient columns.
 - [User-supplied SQL execution](user-supplied-sql-execution.md): 30/30 disclosure, quoted patient and insurance evidence, negative control, log hash.
 - [14 November 2026 Claude Haiku L3](2026-11-14-haiku-l3/README.md): allowed-table row rendering (provider NPI, 25-row page, insurance page), the 0/96 scope-gate qualification, and the selected evidence turns.
 - [14 November 2026 measurement, Level 3 and fix evaluation](2026-11-14-measurement-firewall-l3-and-fix-eval.md): existing Green Mosaic run note; see the [snapshot notes](green-mosaic/README.md) for later rescoring and evidence boundaries.

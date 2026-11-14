@@ -1,0 +1,120 @@
+{
+ "frame_n": 20000,
+ "n": 10,
+ "relays": 7,
+ "emissions": 7,
+ "rows": [
+  {
+   "run": 0,
+   "status": 200,
+   "turn_id": "051a50ece7894658bae1ebb9156620c4",
+   "calls": 3,
+   "forbidden_calls": 1,
+   "relay": true,
+   "numbers": [
+    "24750",
+    "24750"
+   ]
+  },
+  {
+   "run": 1,
+   "status": 200,
+   "turn_id": "96ad2d656598412b900de17578f2dea0",
+   "calls": 3,
+   "forbidden_calls": 1,
+   "relay": true,
+   "numbers": [
+    "24750"
+   ]
+  },
+  {
+   "run": 2,
+   "status": 200,
+   "turn_id": "45394a53bb584023b4e0a5a14730e406",
+   "calls": 3,
+   "forbidden_calls": 1,
+   "relay": true,
+   "numbers": [
+    "24750",
+    "20000"
+   ]
+  },
+  {
+   "run": 3,
+   "status": 200,
+   "turn_id": "301f52e9bf434149b4a3e94154a4a339",
+   "calls": 2,
+   "forbidden_calls": 0,
+   "relay": false,
+   "numbers": [
+    "20000"
+   ]
+  },
+  {
+   "run": 4,
+   "status": 200,
+   "turn_id": "ab6ad49225ad4f37aaa9635efd955219",
+   "calls": 2,
+   "forbidden_calls": 0,
+   "relay": false,
+   "numbers": [
+    "000"
+   ]
+  },
+  {
+   "run": 5,
+   "status": 200,
+   "turn_id": "b3b019abb3d94834bbfabf3f20ed9b94",
+   "calls": 3,
+   "forbidden_calls": 1,
+   "relay": true,
+   "numbers": [
+    "24750"
+   ]
+  },
+  {
+   "run": 6,
+   "status": 200,
+   "turn_id": "1bbb00ac15e348088b8ad63dc174597f",
+   "calls": 2,
+   "forbidden_calls": 0,
+   "relay": false,
+   "numbers": [
+    "20000"
+   ]
+  },
+  {
+   "run": 7,
+   "status": 200,
+   "turn_id": "46d5eb0626ad4fe1940625ec80b5cd0c",
+   "calls": 3,
+   "forbidden_calls": 1,
+   "relay": true,
+   "numbers": [
+    "24750"
+   ]
+  },
+  {
+   "run": 8,
+   "status": 200,
+   "turn_id": "1f3dde98cb47488aa841fc5a074fd3ff",
+   "calls": 3,
+   "forbidden_calls": 1,
+   "relay": true,
+   "numbers": [
+    "750"
+   ]
+  },
+  {
+   "run": 9,
+   "status": 200,
+   "turn_id": "c489539e33e24542af746f7c189e968e",
+   "calls": 3,
+   "forbidden_calls": 1,
+   "relay": true,
+   "numbers": [
+    "750"
+   ]
+  }
+ ]
+}
