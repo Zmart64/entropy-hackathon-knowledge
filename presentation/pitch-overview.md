@@ -35,7 +35,7 @@ inconsistent. Show the evidence, a deterministic control, and the measured utili
 
 - Reconcile Andrii's live 273/450 audit, ~78% tool-backing and earlier per-message rates with one frozen manifest.
 - Choose one demo with a known control, decoded-value check and source turn IDs; make an offline redacted recording.
-- Obtain held-out mitigation, benign-FP and adaptive results. 450/450 in-sample shadow recall is not held-out efficacy.
+- Obtain held-out mitigation, benign-FP and adaptive results. Latest author reports are 144/145 replies and 27/28 conversations (96.4%, not 100%); LlamaGuard detects 39/50. Their different cohorts cannot support a paired superiority claim. 450/450 is in-sample consistency only.
 - Replace or retire the [old F-03 talk](warroom-talk-f03-draft.md): its full reconstruction claim and placeholders
   do not match Andrii's latest secondary-oracle status (5/12 member-ID characters, no full reconstruction).
 - Confirm allowed target/track, final submission criteria and current organizer availability before submission.

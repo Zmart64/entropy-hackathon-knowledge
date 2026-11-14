@@ -26,3 +26,5 @@ The observed protection is a combination of model refusals and visible replaceme
 or database image, so do not claim that all stored values are plaintext, encrypted, hashed, or governed by one
 universal filter. `hex()` is an encoding, not decryption. Known-literal bypasses and unknown-data recovery are
 separate findings. See [the class/channel matrix](redaction-layers.md).
+
+Later SSN separator tests include dot/space and partial separators; see [HTTP semantics](../experiments/http-post-semantics/README.md). These synthetic-literal tests do not establish unknown-secret recovery.

@@ -3,7 +3,7 @@
 Review scope: nine other project threads with activity in **12:08:55–13:08:55 UTC** (13:08:55–14:08:55 CET),
 PR [#6](https://github.com/Zmart64/entropy-hackathon-knowledge/pull/6) at `56703f8`, local worker reports and source
 records. Follow-up expanded the review to Andrii's additional findings, including live-KB commit `626d715`
-and his separate repo at `181df0d`. The sidechat branches contain inherited material; they are not independent trials.
+and his separate repo at `181df0d`; later merged main through `8e9b08f` adds Justus’s HTTP tests and Andrii’s classifier update. The sidechat branches contain inherited material; they are not independent trials.
 
 ## Outcome
 
@@ -17,7 +17,7 @@ and [model/coverage map](extraction-goals.md) are the entry points. No new range
 | --- | --- | --- |
 | `71ceea6d-3db5-45d4-b77d-3ac572de5555` | Five-worker coordination, user requirement for model scope and no impossibility claims, PR integration | Coverage, model matrix, reviewed PR |
 | `056455de-3c3f-42e5-99fd-582e68d285fe` | Mainline authority frame, patient/VIP/employee/payment/RBAC outputs; attacker wiring | Results; discarded overclaims logged below |
-| `agent-f916a082675ec881cd52264d2fa672c1` | W1 credential absence replies, patient predicates and SQL hex | F-09/F-14/F-18; open credentials |
+| `agent-f916a082675ec881cd52264d2fa672c1` | W1 credential absence replies, patient predicates and SQL hex | F-09/F-15/F-19; open credentials |
 | `agent-cee4b03724f5c986fa750ffff9649ef5` | W2 payment schema/sample, provider pages, RBAC negatives | Ledger, model map |
 | `agent-e1d12d0b2806fe5497b604eb3acf1289` | W3 refs, anchor/decoy errors, recovery bodies, apparent-filename correction | Per-ref ledger and remaining census |
 | `agent-bf92f50324c1e268ab85c0d43be0089f` | W4 research, eight literal-calibration probes, later clarification that it recovered no redacted secret | Methods, calibration/unknown-data distinction |
@@ -79,3 +79,11 @@ agreement were computed offline. Six replica metric files were aggregated with p
 No server source/raw DB result channel, fresh range retest, independent organizer ground truth, held-out mitigation
 experiment or complete data census. Full source logs remain local; the [sharing proposal](evidence-sharing.md)
 explains how to package synthetic snapshots without credentials. The audit is not a completed hackathon submission.
+
+## Concurrent updates incorporated before publishing
+
+PR follow-up `59ec43e` added judging/mitigation lanes; its useful open items are retained with corrected evidence
+status. Main through `8e9b08f` adds Justus’s two-sink HTTP negative result and extended SSN separator map, plus
+Andrii’s independent-label fix/PromptGuard2/LlamaGuard reports. The incoming 27/28 “100%” arithmetic is corrected
+and the unshared manifests remain an explicit limitation. Main's F-14 is reserved for HTTP; the PR's six cards
+are now F-15–F-20, with cross-references updated. Original PR review findings refer to its earlier numbering.

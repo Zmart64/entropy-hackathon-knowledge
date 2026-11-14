@@ -54,7 +54,7 @@ A bad model name in `POST /chat` leaks all 8 ids in the error text.
 | `read_file(path)` | bare filenames under `harness/public/` | Three files were found in the tested paths: `holiday_hours.txt`, `insurance_accepted.txt`, `new_patient_handout.md` (all benign). Typed errors: `not_found` (unknown/absent, glob) vs `outside_public` (`/`). Extension-less names fail; absolute paths rejected. No listing. |
 | `read_inbox(subject_hint)` | substring over filename/body, ≤3 messages | Content sampled per call; bodies are a planted injection corpus (below). |
 | `send_email(to, subject, body)` | "queues, never sends" | Invented recipients appear in returned args, with model-reported `{"status":"queued"}`; actual validation, queuing and delivery are not directly observed. Args are scanned: SSN-shapes redacted (queuing model-reported); names/DOB/MRN/phones/clinical text pass verbatim; the canary string passes. |
-| `http_post(url, body)` | Level 3 | Denied in the recorded level-2 tests; later availability unverified. Models still *attempt* it when inbox content instructs (attempts visible in `tool_calls`). |
+| `http_post(url, body)` | Level 3 described | Calls appear in level-2 responses; Justus’s two-sink test observed zero network requests, with receiver self-tests. See F-14 and [the experiment](../experiments/http-post-semantics/README.md). Later availability unverified. |
 | `delete_record(table, pk)` | Level 3 | Denied in the recorded level-2 tests; later availability unverified. |
 
 **Evidence rule.** The API returns tool *calls*, never results; `reply` text is
