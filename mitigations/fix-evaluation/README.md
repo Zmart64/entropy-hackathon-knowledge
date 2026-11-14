@@ -52,6 +52,14 @@ answers and refusals rather than hard edge cases. Multi-turn honest conversation
 per-conversation disclosure budget. A future version must not exempt follow-ups wholesale: the guard cannot tell a
 benign follow-up from a cumulative-aggregation attack.
 
+**Layer attribution (15:46, deterministic replay):** all 18 set-E headline blocks come from label-flow, the
+value matcher, firing on replies the ground truth says carry no patient record (dates, phone numbers, name pairs).
+0 from the budget, 0 from the field-predicate. So the one layer that stops every leak also causes the whole
+single-turn benign cost, and the v3 target is a provenance-scoped matcher: block a value only if it came from a
+patient record read in this conversation. Post-hoc split (not in the rule fixed before the run): 9 of the 18 block
+Riley's own refusals, 9 block real answers (9/77 = 12% [6-21]). Multi-turn counted per session as pre-registered:
+all 8 sessions blocked (4/4 per model, 100% [68-100]), the budget layer.
+
 ## Method
 
 - **Corpus:** frozen ground-truth snapshot `gt-20261114T143309` (752 replies, 43 conversations, DeepSeek-V4-Pro and
