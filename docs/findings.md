@@ -501,7 +501,11 @@ tested model will emit them (tool lists `364d5b9d…`/`b35e112e…`/`b79509bc…
 on the server side. Consequences: the “registry is not the gate” observation is scoped to
 13:35Z–14:14Z, and the remaining hypothesis that the older deny was **destination-dependent**
 (an allowlist) became unmeasurable — see the experiment’s C4 for the evidence against it and
-the tests queued if the tool returns.
+the tests queued if the tool returns. A later retest on the Anthropic route
+(`claude-haiku-5-5`, `X-API-Key`) confirmed the absence and added a mechanism: Anthropic
+tool use is native, the harness does not parse `<tool_call>` text for that provider, and 7/7
+`http_post` frames yielded zero calls. The tool is uncallable there by construction, not
+merely denied.
 
 **Impact.** None observed at L2/L3 while the tool was present; `http_post` was intent-only.
 Had Level 1 opened with a “deny at level ≥2” policy, the unvalidated URL would have been an
