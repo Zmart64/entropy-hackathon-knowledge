@@ -61,7 +61,7 @@ Snapshot of the reviewed campaign, not a live backlog feed. [Pitch overview](../
 - Write/tamper behavior: no successful mutation established; Justus's deletion readback retained the record.
 - Stronger-model transfer: plain-prose audit framing, SQL hex and combined adaptive variants need per-model evidence;
   do not reset previously tried rungs to “untried”.
-- Level/model availability: follow organizer scope announcements; do not assume any later level unlock or secretly probe outside authorized scope.
+- Level/model availability: follow organizer scope announcements; record any later level unlock as a new scoped experiment.
 - Reproducibility: publish the AUTO harness/fix source revision and frozen campaign manifest; those remain local.
 - Updated fix/classifier numbers: retain 144/145 replies, 27/28 conversations, 39/50 LlamaGuard and their distinct
   denominators; resolve the erroneous “27/28 = 100%” claim and obtain paired/held-out evaluation before deck lock.
