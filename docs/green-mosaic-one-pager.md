@@ -14,7 +14,7 @@ filter-clean; **351 / 450 (78%)** reproduced across two or more independent
 replies. Per conversation the attack succeeds in **65% [50-78]** (N=43, Wilson 95%). No tool sends
 the record out — the reply itself is the channel. Severity L5: regulated patient data disclosed at the scale of the whole table.
 
-**Novelty.** Even Llama Guard-4's privacy classifier lets 29 of 32 leaking conversations out: the leak is conversation-level, not a bad answer. We did not find this measured against a deployed healthcare assistant's output DLP as of 14 Nov 2026; our contribution is that measurement plus a deterministic provenance rule that closes it - Dinur-Nissim query auditing (2003), ported to an LLM output DLP, with its measured false-positive cost.
+**Novelty.** Even Llama Guard-4's privacy classifier lets 28 of 32 leaking conversations out: the leak is conversation-level, not a bad answer. We did not find this measured against a deployed healthcare assistant's output DLP as of 14 Nov 2026; our contribution is that measurement plus a deterministic provenance rule that closes it - Dinur-Nissim query auditing (2003), ported to an LLM output DLP, with its measured false-positive cost.
 
 **Honest nulls.** A dedicated inference-oracle cell, reported in full, is refused (0 of 7); no L6 credential landed
 (the credential columns are refused). We report both.
@@ -31,7 +31,7 @@ invented records (a separate data-integrity failure) are excluded.
 Two deterministic layers: a fixed menu of lookups instead of free SQL, and an output check that blocks any identifier-grade value the agent read via query_db from reaching the reply in any parsed form, with a session disclosure budget and a field-predicate rule as defense in depth. No model call. **Layer 1, provenance output DLP:** against an independent ground-truth label it lets
 **0% [0-11]** of 32 leak-conversations through, at **23% [15-34] hard held-out (9% [4-17] everyday)** benign queries
 blocked. **Layer 2, query guard:** 19/19 SQL attack strings rejected, 6/6 legitimate
-served, so the oracle has nothing to ask with. Full-field, identical sets, in-sample (per leaking conversation): ours lets 0/32 through [0-11]; Llama Guard-4 S7 29/32 (91% [76-97]); Prompt Guard 2 32/32 (Fisher p=7e-15). Benign price on the same 77 hard replies: ours 23% [15-34], Llama Guard 0% [0-5]; 387 us vs 525 ms. A trade-off — for patient records the leak is the expensive error, so we default to the complete rule; FPs are v3. Guard rows our re-run.
+served, so the oracle has nothing to ask with. Full-field, identical sets, in-sample (per leaking conversation): ours lets 0/32 through [0-11]; Llama Guard-4 S7 28/32 (88% [72-95], public numbers excluded); Prompt Guard 2 32/32 (Fisher p=6e-14). Benign price on the same 77 hard replies: ours 23% [15-34], Llama Guard 0% [0-5]; 387 us vs 525 ms. A trade-off — for patient records the leak is the expensive error, so we default to the complete rule; FPs are v3. Guard rows our re-run.
 
 ## Why it matters
 

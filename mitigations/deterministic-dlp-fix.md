@@ -4,7 +4,7 @@ Author: Andrii (AUTO / defense lane). Date: 2026-11-14. Status: author-reported 
 `benign_fp.py`.
 
 > **Numbers superseded (15:36 CET).** The independent evaluation in [fix-evaluation/](fix-evaluation/README.md)
-> replaces the measurement and status-quo figures in this file: 0 of 32 leaking conversations let through on any record field (Llama Guard S7: 29 of 32; Prompt Guard 2: 32 of 32); hard benign answers blocked 23% [15-34] vs Llama Guard 0% on the same 77 held-out replies; adaptive round 0 of 8 past the fix. The design description stands; describe the
+> replaces the measurement and status-quo figures in this file: 0 of 32 leaking conversations let through on any record field (Llama Guard S7: 28 of 32; Prompt Guard 2: 32 of 32); hard benign answers blocked 23% [15-34] vs Llama Guard 0% on the same 77 held-out replies; adaptive round 0 of 8 past the fix. The design description stands; describe the
 > working mechanism as value matching against tagged record values (the decoding layer added nothing on the data).
 
 

@@ -23,7 +23,7 @@
     .rule { stroke: #D6D5CE; stroke-width: 2; stroke-dasharray: 6 6; }
     .cell:hover .track { stroke: #3D3C39; }
   </style>
-  <text class="cap" x="0" y="36">Leaks: same 32 conversations, any record field (adaptive: own 8 tries). Benign: same 77 held-out replies. Wilson 95%</text>
+  <text class="cap" x="0" y="36">Leaks: same 32 conversations, record fields minus public numbers (adaptive: own 8 tries). Benign: same 77 replies</text>
   <text class="ph" x="600" y="92">Leaking conversations let through</text>
   <text class="ph2" x="600" y="120">of GT-verified leaking conversations</text>
   <text class="ph" x="1140" y="92">Benign hospital questions blocked</text>
@@ -42,7 +42,7 @@
   <text class="axis" x="1610.0" y="768" text-anchor="end">100%</text>
   <text class="lab" x="0" y="170">Riley&#x27;s output DLP</text>
   <text class="sub" x="0" y="198">deployed; scores each reply on its own</text>
-  <g class="cell"><title>Riley&#x27;s output DLP (deployed; scores each reply on its own). Leaking conversations let through: 100% [89-100], N=32 · by construction. Basis: the leak set is defined as the conversations this filter passed. Source: range-harness/guard_compare/full_field_relabel.json (copy in evidence/)</title>
+  <g class="cell"><title>Riley&#x27;s output DLP (deployed; scores each reply on its own). Leaking conversations let through: 100% [89-100], N=32 · by construction. Basis: the leak set is defined as the conversations this filter passed. Source: range-harness/guard_compare/public_exclusion_relabel.json (copy in evidence/)</title>
   <rect class="track" x="600" y="150" width="470" height="24" rx="4"/>
   <rect class="bar" x="600" y="150" width="470.0" height="24" rx="4"/>
   <rect class="bar" x="600" y="150" width="6.0" height="24"/>
@@ -86,14 +86,14 @@
   </g>
   <text class="lab" x="0" y="422">Llama Guard, Privacy (S7)</text>
   <text class="sub" x="0" y="450">on Riley&#x27;s replies (its strongest config)</text>
-  <g class="cell"><title>Llama Guard, Privacy (S7) (on Riley&#x27;s replies (its strongest config)). Leaking conversations let through: 91% [76-97], N=32 · per conversation. Basis: full-field label; per reply 104/331 = 31% through (38% on identifier-only replies with no MRN); MRN-only label (secondary): 13/28 = 46%. Source: range-harness/guard_compare/full_field_relabel.json (copy in evidence/)</title>
+  <g class="cell"><title>Llama Guard, Privacy (S7) (on Riley&#x27;s replies (its strongest config)). Leaking conversations let through: 88% [72-95], N=32 · per conversation. Basis: public values excluded; per reply 102/329 = 31% through; original full-field label 29/32; phones fully excluded 28/32; MRN-only 13/28. Source: range-harness/guard_compare/public_exclusion_relabel.json (copy in evidence/)</title>
   <rect class="track" x="600" y="402" width="470" height="24" rx="4"/>
-  <rect class="bar" x="600" y="402" width="425.9" height="24" rx="4"/>
+  <rect class="bar" x="600" y="402" width="411.2" height="24" rx="4"/>
   <rect class="bar" x="600" y="402" width="6.0" height="24"/>
-  <line class="ci" x1="956.2" y1="414.0" x2="1054.8" y2="414.0"/>
-  <line class="ci" x1="956.2" y1="406.0" x2="956.2" y2="422.0"/>
-  <line class="ci" x1="1054.8" y1="406.0" x2="1054.8" y2="422.0"/>
-  <text class="val" x="600" y="456">91% [76-97], N=32 · per conversation</text>
+  <line class="ci" x1="938.1" y1="414.0" x2="1046.6" y2="414.0"/>
+  <line class="ci" x1="938.1" y1="406.0" x2="938.1" y2="422.0"/>
+  <line class="ci" x1="1046.6" y1="406.0" x2="1046.6" y2="422.0"/>
+  <text class="val" x="600" y="456">88% [72-95], N=32 · per conversation</text>
   </g>
   <g class="cell"><title>Llama Guard, Privacy (S7) (on Riley&#x27;s replies (its strongest config)). Benign hospital questions blocked: 0% [0-5], N=77 · held-out set E. Basis: same 77 logged replies as our row (log sha256 758a8dfb...); 0 also under &#x27;unsafe, any category&#x27;; set H 0/80; boundary 0/12; multi-turn 0/30; 526 ms per call. Source: range-harness/guard_compare/lg_benign.json (same-unit session)</title>
   <rect class="track" x="1140" y="402" width="470" height="24" rx="4"/>
@@ -106,7 +106,7 @@
   <line class="rule" x1="0" y1="484" x2="1700" y2="484"/>
   <text class="lab ours" x="0" y="530">Our DLP v2 · all record leaks</text>
   <text class="sub" x="0" y="558">canonicalize + label-flow + budget + predicate</text>
-  <g class="cell"><title>Our DLP v2 · all record leaks (canonicalize + label-flow + budget + predicate). Leaking conversations let through: 0% [0-11], N=32 · per conversation. Basis: frozen v2 (ddcb8931), full-field label; F-01 only 0/31; MRN-only label (secondary) 0/28; the 4 conversations only the full-field label finds: 0/4. Source: range-harness/guard_compare/full_field_relabel.json (copy in evidence/)</title>
+  <g class="cell"><title>Our DLP v2 · all record leaks (canonicalize + label-flow + budget + predicate). Leaking conversations let through: 0% [0-11], N=32 · per conversation. Basis: frozen v2 (ddcb8931); 0/32 under all three labels (public values excluded, phones excluded, original full-field); F-01 only 0/31; MRN-only 0/28. Source: range-harness/guard_compare/public_exclusion_relabel.json (copy in evidence/)</title>
   <rect class="track" x="600" y="510" width="470" height="24" rx="4"/>
   <rect class="bar" x="600" y="510" width="3" height="24"/>
   <line class="ci" x1="600.0" y1="522.0" x2="650.4" y2="522.0"/>
@@ -148,6 +148,6 @@
   <rect class="track" x="1140" y="678" width="470" height="24" rx="4"/>
   <text class="pend" x="1140" y="732">n/a (same guard as v2)</text>
   </g>
-  <text class="foot" x="0" y="808">Hatched = not measured yet (never a placeholder number). Leak label: ground truth, independent of every guard. The unit of each measured cell follows its value.</text>
-  <text class="foot" x="0" y="834">Sources per cell: warroom/sim/fix-eval.md · data: warroom/sim/fix_eval/fix_vs_guards.json · updated 2026-11-14 15:28 CET</text>
+  <text class="foot" x="0" y="808">Hatched = not measured yet (never a placeholder number). Leak label: ground truth, independent of every guard. The unit of each measured cell follows its value. Intervals: Wilson 95%.</text>
+  <text class="foot" x="0" y="834">Sources per cell: warroom/sim/fix-eval.md · data: warroom/sim/fix_eval/fix_vs_guards.json · updated 2026-11-14 16:07 CET</text>
 </svg>

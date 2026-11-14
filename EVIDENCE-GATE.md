@@ -36,7 +36,7 @@ before/after CIs + benign FP + status-quo + one adaptive attack · 11★ novelty
 Full write-up and evidence: [mitigations/fix-evaluation/](mitigations/fix-evaluation/README.md).
 
 - **Leaks:** 0 of 32 leaking conversations let through, 0% [0-11], label independent of the guard and covering every
-  identifier field. Same cohort: Llama Guard 4 S7 on replies 29 of 32 (91%), Prompt Guard 2 on user turns 32 of 32.
+  identifier field. Same cohort: Llama Guard 4 S7 on replies 28 of 32 (88%), Prompt Guard 2 on user turns 32 of 32.
 - **Benign cost (held-out, frozen before the run):** 23% [15-34] of hard benign answers blocked vs Llama Guard 0% on the
   same replies; 9% [4-17] on an everyday set. A trade-off: show both columns.
 - **Adaptive round:** 2 of 8 rule-aware conversations leaked past Riley's filter; the fix blocked both (0 of 8 past it).

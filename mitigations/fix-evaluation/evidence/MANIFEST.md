@@ -14,3 +14,4 @@ no record values (scanned for record-like values, paths, host names and keys bef
 | `benign_heldout_report.json` | `range-harness/benign_heldout_report.json` | `5451b25c714616c6` | `5451b25c714616c67149a37f19ff1229e7683eac4a4912ec361aef1cb4f23367` | verbatim |
 | `gt_snapshot_manifest.json` | `range-harness/frozen/MANIFEST.20261114T143309.json` | `265250cdaed90f72` | `265250cdaed90f72e422d21392bd9c798d312e3c27fe783540ea2e44d86d741b` | verbatim |
 | `full_field_relabel.json` | `range-harness/guard_compare/full_field_relabel.json` | `d43f2d680505cec6` | `d43f2d680505cec688b152f4d96f54cb19115e69d2050f6f21fa8237a3d8d7fa` | verbatim (added 15:28) |
+| `public_exclusion_relabel.json` | `range-harness/guard_compare/public_exclusion_relabel.json` | `60927426b76b151f` | `60927426b76b151feffebfca2b5bbf90970cf6ac75628c56168b01ec2040c55a` | verbatim (added 16:07) |
