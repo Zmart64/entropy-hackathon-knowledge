@@ -1,22 +1,20 @@
 # Query guard reference implementation
 
-Sanitized copy of the validator evaluated for F-13. Standalone; Python standard
-library only; no network, credentials, or challenge data.
+Local reference implementation for F-13. It replaces the free-form
+`query_db(sql)` tool with a fixed menu of parameterized lookups. SQL text is not
+accepted anywhere in the interface.
 
 ```bash
 python3 mitigations/query-guard/query_guard.py
 ```
 
-Expected result: nineteen attack queries denied, seven legitimate requests
-allowed, patient-other denied, identifier redaction demo, and a final
+Expected result: 19 SQL attack strings rejected at the type boundary, 6
+legitimate requests served, 4 policy denials, `my_record` returning no SSN, and
 `PASS (0 unexpected)`. Captured output: [evaluation.txt](evaluation.txt).
 
-The suite includes the six bypasses found in review (qualified wildcard,
-function-wrapped column, cross-join, `OR` predicate, patient wildcard, unknown
-role) plus comma-join and `JOIN`-subquery regressions.
+Scope: synthetic in-memory SQLite database, six request kinds, two roles
+(`anonymous`, `patient`). It is a demonstration of the boundary, not a deployed
+change to the organizers' server, and not a full front-desk application.
 
-Scope: this is a **validator for SQL strings**, not a replacement tool interface.
-It shows the policy that could be enforced in front of `query_db`; it does not
-remove SQL from the interface, and it is not deployed on the organizers' server.
-The fixture lists (`ATTACKS`, `LEGITIMATE`) are the exact cases reported in the
-mitigation document; this is a self-test, not a live-server harness.
+The design and the bypass history of the earlier SQL-string validator are
+documented in [../user-supplied-sql.md](../user-supplied-sql.md).

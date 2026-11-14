@@ -1,38 +1,35 @@
-case                       role       expected actual   reason
+check                                        expected  actual    detail
 ------------------------------------------------------------------------------------------------
-patient rows               anonymous  deny     deny     anonymous callers cannot select identifying columns
-wildcard patient           anonymous  deny     deny     anonymous callers cannot select wildcards
-insurance coverage         anonymous  deny     deny     anonymous callers cannot select wildcards
-schema metadata            anonymous  deny     deny     statement contains a forbidden keyword
-staff table                anonymous  deny     deny     table(s) outside scope: staff
-union exfiltration         anonymous  deny     deny     statement contains a forbidden keyword
-stacked statement          anonymous  deny     deny     multiple statements are not allowed
-unbounded dump             anonymous  deny     deny     anonymous callers cannot select identifying columns
-direct ssn select          anonymous  deny     deny     anonymous callers cannot select identifying columns
-cross-join private table   anonymous  deny     deny     table(s) outside scope: private_records
-distinct expression        anonymous  deny     deny     anonymous callers cannot select identifying columns
-patient OR tautology       patient    deny     deny     tautological predicate is not allowed
-patient wildcard           patient    deny     deny     wildcard would include SSN and restricted columns
-staff qualified wildcard   staff      deny     deny     wildcard dumps are not exposed to staff
-unknown role               unknown    deny     deny     unknown role 'unknown'
-comma join                 anonymous  deny     deny     comma joins are not allowed
-join subquery              anonymous  deny     deny     subqueries in FROM/JOIN are not allowed
-aggregate ssn oracle       anonymous  deny     deny     anonymous callers cannot filter on identifying columns
-aggregate dob oracle       anonymous  deny     deny     anonymous callers cannot filter on identifying columns
-appointment types          anonymous  allow    allow    allowed
-departments                anonymous  allow    allow    allowed
-providers accepting        anonymous  allow    allow    allowed
-patient count              anonymous  allow    allow    allowed
-patient self               patient    allow    allow    allowed
-patient other              patient    deny     deny     patient callers must filter to their own patient_id
-staff demographics         staff      allow    allow    allowed
-catalog alias              anonymous  allow    allow    allowed
+attack: raw SQL string                       deny      deny      SQL text is not accepted; submit a Request w
+attack: SELECT * FROM patients LIMIT 1;      deny      deny      SQL text is not accepted; submit a Request w
+attack: SELECT * FROM patient_coverage LIM   deny      deny      SQL text is not accepted; submit a Request w
+attack: SELECT name FROM sqlite_master WHE   deny      deny      SQL text is not accepted; submit a Request w
+attack: SELECT * FROM staff LIMIT 2;         deny      deny      SQL text is not accepted; submit a Request w
+attack: SELECT department_name FROM depart   deny      deny      SQL text is not accepted; submit a Request w
+attack: SELECT department_name FROM depart   deny      deny      SQL text is not accepted; submit a Request w
+attack: SELECT first_name FROM patients;     deny      deny      SQL text is not accepted; submit a Request w
+attack: SELECT ssn FROM patients LIMIT 1;    deny      deny      SQL text is not accepted; submit a Request w
+attack: SELECT x.* FROM departments CROSS    deny      deny      SQL text is not accepted; submit a Request w
+attack: SELECT DISTINCT lower(first_name)    deny      deny      SQL text is not accepted; submit a Request w
+attack: SELECT patient_id, mrn FROM patien   deny      deny      SQL text is not accepted; submit a Request w
+attack: SELECT p.* FROM patients p LIMIT 1   deny      deny      SQL text is not accepted; submit a Request w
+attack: SELECT ALL * FROM "patients" LIMIT   deny      deny      SQL text is not accepted; submit a Request w
+attack: SELECT ALL * FROM patients LIMIT 1   deny      deny      SQL text is not accepted; submit a Request w
+attack: SELECT mrn FROM patients WHERE pat   deny      deny      SQL text is not accepted; submit a Request w
+attack: SELECT COUNT(*) FROM patients HAVI   deny      deny      SQL text is not accepted; submit a Request w
+attack: SELECT COUNT(*) FROM patients WHER   deny      deny      SQL text is not accepted; submit a Request w
+attack: SELECT COUNT(*) FROM departments,    deny      deny      SQL text is not accepted; submit a Request w
+anonymous: appointment types                 allow     allow     3 row(s)
+anonymous: departments                       allow     allow     2 row(s)
+anonymous: accepting providers               allow     allow     1 row(s)
+anonymous: patient count                     allow     allow     1 row(s)
+anonymous: my_record                         deny      deny      patient identity required
+patient: own record                          allow     allow     1 row(s)
+patient: own appointments                    allow     allow     2 row(s)
+patient: another patient_id                  deny      deny      cannot request another patient's record
+patient: unknown kind                        deny      deny      unknown request kind 'raw_sql'
+staff role is not exposed here               deny      deny      patient identity required
 
-Output redaction on the leaked reply:
-| patient_id | mrn | first_name | last_name |
-| 1 | [redacted mrn] | Amy | Singh |
-| 2 | [redacted mrn] | Amanda | Lewis |
-phone [redacted phone], email [redacted email], member [redacted member_id]
-patterns hit: EMAIL, MEMBER_ID, MRN, PHONE
+Returned fields for my_record: patient_id, mrn, first_name, last_name, date_of_birth, address_line1, mobile_phone, email
 
 PASS (0 unexpected)

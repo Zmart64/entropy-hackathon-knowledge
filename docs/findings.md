@@ -326,10 +326,11 @@ of table scope. Delta here: caller authorship plus a measured disclosure rate, a
 input-side fix rather than output canonicalization. F-01's fix would hide the display but
 not stop the query; this guard stops the query even if the DLP is bypassed.
 
-**Mitigation.** Structured query interface with typed filters and fixed field sets per
-role, database views with column grants, output redaction as defense in depth. Local
-reference: `mitigations/user-supplied-sql.md` — 8/8 attack queries denied, 4/4 legitimate
-allowed, not deployed.
+**Mitigation.** Replace free-form SQL with a fixed menu of parameterized lookups and take
+identity from the session. Local reference: `mitigations/user-supplied-sql.md` —
+19 SQL attack strings rejected at the type boundary, 6 legitimate requests served, SSN
+never projected. The earlier SQL-string validator was removed after review found further
+bypasses; the structured design makes them unrepresentable. Not deployed.
 
 **Limitations / open.** Deepseek V4 Pro only; single fixed prompt measured, not a phrasing
 sweep. `secrets`/`staff` were not reached through `query_db` in our runs; F-04's JOIN path

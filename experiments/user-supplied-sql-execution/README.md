@@ -195,11 +195,13 @@ formats it as a table.
 
 ## Mitigation
 
-Replace the free-form SQL tool with a structured, parameterized interface and a
-per-role column/row policy; render results server-side; add identifier-pattern
-redaction as defense in depth. Reference implementation and evaluation:
-[mitigations/user-supplied-sql.md](../../mitigations/user-supplied-sql.md).
-Local code: `break-the-model-starter/mitigation/query_guard.py`.
+Replace `query_db(sql)` with a fixed menu of parameterized lookups; identity comes
+from the session, not the request. Reference implementation and evaluation:
+[mitigations/user-supplied-sql.md](../../mitigations/user-supplied-sql.md) — 19 SQL
+attack strings rejected at the type boundary, 6 legitimate requests served. The
+earlier SQL-string validator was removed after review found bypasses; see the
+"Removed prototype" section. Local code:
+`mitigations/query-guard/query_guard.py` in the knowledge repository.
 
 This is the input-side complement to F-01's output-side fix; either alone leaves
 a gap.

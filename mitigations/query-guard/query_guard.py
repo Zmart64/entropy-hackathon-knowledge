@@ -1,336 +1,246 @@
-"""Reference guard for Riley's query_db tool.
+"""Reference guard for Riley's front-desk lookups.
 
-The vulnerability is architectural: the tool accepts a SQL string, so the model
-can pass user text straight through. This module is a *validator* that inspects a
-SQL string before execution. It does not remove SQL from the tool interface; the
-structured lookup interface described in the mitigation document is the stronger
-design and is not implemented here.
+The vulnerable design gives the model a `query_db(sql)` tool, so caller text
+becomes SQL. The fix is structural: expose a small menu of fixed, parameterized
+lookups instead. This module implements that menu and a self-test.
 
-Rules enforced:
+There is no code path that accepts SQL text. `handle()` requires a `Request`
+object with a known kind; strings raise `TypeError`. Every database statement is
+a constant with `?` parameters, so quoting, `SELECT ALL`, nested queries, and
+`HAVING` never reach the parser as caller input.
 
-  1. One statement, SELECT only; comments, stacking, UNION/INTERSECT/EXCEPT and
-     forbidden keywords are rejected.
-  2. Every table reference (FROM and each JOIN) must be allowlisted — checking
-     only the first table is not enough.
-  3. Every selected expression is tokenized, so `lower(first_name)` and qualified
-     wildcards (`p.*`, `x.*`) cannot hide identifiers or whole rows.
-  4. Role policy: anonymous callers get catalogs/aggregates only; patients get
-     their own row under an exact `patient_id = <subject>` predicate (no OR, no
-     tautologies); staff get demographics but never SSN or wildcard dumps.
-  5. Unknown roles are denied; there is no default-allow path.
-  6. Person-table row reads need an explicit LIMIT <= 20.
-  7. `redact()` masks identifier patterns in rendered output as defense in depth.
+Requests:
+  appointment_types   - distinct visit types
+  departments         - department directory
+  accepting_providers - providers accepting new patients
+  patient_count       - aggregate count only
+  my_record           - the authenticated patient's own fixed field set
+  my_appointments     - the authenticated patient's own appointments
 
-Run `python3 query_guard.py` to execute the fixture suite.
+Roles:
+  anonymous - the four catalog/aggregate requests only
+  patient   - additionally `my_record` and `my_appointments`, scoped to the
+              authenticated subject; a mismatched patient_id is denied
+
+This is a local reference implementation, not a change to the organizers'
+server. The synthetic database here mirrors the challenge schema only in the
+fields needed to demonstrate the boundary.
 """
 
 from __future__ import annotations
 
-import re
+import sqlite3
 from dataclasses import dataclass
 
-ALLOWED_TABLES = {
-    "departments",
-    "encounters",
-    "facilities",
-    "insurance_plans",
-    "patient_contacts",
-    "patient_coverage",
-    "payers",
-    "patients",
-    "providers",
-}
-
-# Tables whose rows describe an identified person. Anonymous chat users may
-# only see aggregates over these, never rows.
-PERSON_TABLES = {"patients", "patient_contacts", "patient_coverage", "encounters"}
-
-# Columns that identify a person or their contact/insurance details.
-PII_COLUMNS = {
-    "patient_id",
-    "mrn",
-    "first_name",
-    "last_name",
-    "date_of_birth",
-    "address_line1",
-    "address_line2",
-    "city",
-    "zip",
-    "county",
-    "mobile_phone",
-    "home_phone",
-    "email",
-    "member_id",
-    "group_number",
-    "subscriber_name",
-    "ssn",
-}
-
-ROLES = {"anonymous", "patient", "staff"}
 MAX_ROWS = 20
+CATALOG_KINDS = {
+    "appointment_types",
+    "departments",
+    "accepting_providers",
+    "patient_count",
+}
+PATIENT_KINDS = {"my_record", "my_appointments"}
+ALLOWED_KINDS = CATALOG_KINDS | PATIENT_KINDS
 
-FORBIDDEN_KEYWORDS = re.compile(
-    r"\b(insert|update|delete|drop|alter|create|attach|detach|pragma|vacuum|"
-    r"replace|union|intersect|except|into|load_extension|sqlite_master)\b",
-    re.IGNORECASE,
+# Fixed statements. No caller-controlled SQL is concatenated anywhere.
+SQL_APPOINTMENT_TYPES = (
+    "SELECT DISTINCT encounter_type FROM encounters ORDER BY encounter_type"
 )
-COMMENT_RE = re.compile(r"--|/\*")
-TAUTOLOGY_RE = re.compile(r"\b1\s*=\s*1\b", re.IGNORECASE)
-SELECT_RE = re.compile(r"(?is)^select\s+(?P<columns>.+?)\s+from\s+(?P<rest>.+)$")
-TABLE_RE = re.compile(r"(?is)\b(?:from|join)\s+([a-z_][a-z0-9_]*)")
-LIMIT_RE = re.compile(r"(?is)\blimit\s+(\d+)\s*$")
-WHERE_RE = re.compile(
-    r"(?is)\bwhere\b(.*?)(?=\border\s+by\b|\bgroup\s+by\b|\blimit\b|$)"
+SQL_DEPARTMENTS = (
+    "SELECT department_name, specialty FROM departments ORDER BY department_name"
 )
-COUNT_RE = re.compile(
-    r"(?is)^count\s*\(\s*\*\s*\)(?:\s+as\s+[a-z_][a-z0-9_]*)?$"
+SQL_ACCEPTING_PROVIDERS = (
+    "SELECT provider_id, specialty FROM providers "
+    "WHERE accepting_new_patients = 1 ORDER BY provider_id LIMIT ?"
 )
-WILDCARD_RE = re.compile(r"(?is)^(?:[a-z_][a-z0-9_]*\.)?\*$")
-DIRECT_FROM_RE = re.compile(r"(?is)^[a-z_][a-z0-9_]*")
+SQL_PATIENT_COUNT = "SELECT COUNT(*) AS patient_count FROM patients"
+SQL_MY_RECORD = (
+    "SELECT patient_id, mrn, first_name, last_name, date_of_birth, "
+    "address_line1, mobile_phone, email FROM patients WHERE patient_id = ?"
+)
+SQL_MY_APPOINTMENTS = (
+    "SELECT e.start_time, d.department_name, e.status "
+    "FROM encounters e JOIN departments d ON d.department_id = e.department_id "
+    "WHERE e.patient_id = ? ORDER BY e.start_time LIMIT ?"
+)
 
 
-class Denied(Exception):
-    """Raised when a query is outside the caller's policy."""
+class AccessDenied(Exception):
+    """The request is outside the caller's role or scope."""
 
 
-@dataclass
-class Decision:
-    allowed: bool
-    reason: str
+@dataclass(frozen=True)
+class Request:
+    """A structured lookup. There is deliberately no SQL field."""
+
+    kind: str
+    patient_id: int | None = None
+    limit: int = MAX_ROWS
 
 
-def _split_top_level(raw: str) -> list[str]:
-    """Split a select list on commas that are not inside parentheses."""
-    parts: list[str] = []
-    depth = 0
-    start = 0
-    for index, char in enumerate(raw):
-        if char == "(":
-            depth += 1
-        elif char == ")":
-            depth = max(0, depth - 1)
-        elif char == "," and depth == 0:
-            parts.append(raw[start:index])
-            start = index + 1
-    parts.append(raw[start:])
-    return [part.strip() for part in parts if part.strip()]
+def _rows(db: sqlite3.Connection, sql: str, params: tuple = ()) -> list[dict]:
+    cursor = db.execute(sql, params)
+    columns = [description[0] for description in cursor.description]
+    return [dict(zip(columns, row)) for row in cursor.fetchall()]
 
 
-def _identifiers(expression: str) -> set[str]:
-    """Column/alias identifiers in an expression, ignoring strings and callees."""
-    expression = re.sub(r"'(?:''|[^'])*'", " ", expression)
-    # Drop function names so `lower(` contributes nothing but its argument.
-    expression = re.sub(r"\b[a-z_][a-z0-9_]*\s*\(", "(", expression, flags=re.IGNORECASE)
-    return {
-        match.group(0).lower()
-        for match in re.finditer(r"[a-z_][a-z0-9_]*", expression, flags=re.IGNORECASE)
-    }
+def handle(
+    request: object, role: str, subject_id: int | None, db: sqlite3.Connection
+) -> list[dict]:
+    """Serve one structured request. SQL text is rejected at the type boundary."""
+    if not isinstance(request, Request):
+        raise TypeError(
+            "SQL text is not accepted; submit a Request with a known kind"
+        )
+    if request.kind not in ALLOWED_KINDS:
+        raise AccessDenied(f"unknown request kind '{request.kind}'")
+    if not 1 <= request.limit <= MAX_ROWS:
+        raise AccessDenied("limit is outside the permitted range")
+
+    if request.kind == "appointment_types":
+        return _rows(db, SQL_APPOINTMENT_TYPES)
+    if request.kind == "departments":
+        return _rows(db, SQL_DEPARTMENTS)
+    if request.kind == "accepting_providers":
+        return _rows(db, SQL_ACCEPTING_PROVIDERS, (request.limit,))
+    if request.kind == "patient_count":
+        return _rows(db, SQL_PATIENT_COUNT)
+
+    if request.kind in PATIENT_KINDS:
+        if role != "patient" or subject_id is None:
+            raise AccessDenied("patient identity required")
+        if request.patient_id is not None and request.patient_id != subject_id:
+            raise AccessDenied("cannot request another patient's record")
+        if request.kind == "my_record":
+            return _rows(db, SQL_MY_RECORD, (subject_id,))
+        return _rows(db, SQL_MY_APPOINTMENTS, (subject_id, request.limit))
+
+    raise AccessDenied("request kind is not implemented")
 
 
-def validate(
-    sql: str, role: str = "anonymous", subject_id: int | None = None
-) -> Decision:
-    """Decide whether this SQL may run for this caller.
+# --------------------------------------------------------------------------
+# Self-test against a synthetic in-memory database.
+# --------------------------------------------------------------------------
 
-    Roles:
-      anonymous  - unauthenticated chat user
-      patient    - authenticated patient, may read only their own row
-      staff      - authenticated front-desk user, may read demographics
-    """
-    text = sql.strip()
-    if text.endswith(";"):
-        text = text[:-1].rstrip()
-    if not text:
-        return Decision(False, "empty statement")
-    if ";" in text:
-        return Decision(False, "multiple statements are not allowed")
-    if COMMENT_RE.search(text):
-        return Decision(False, "comments are not allowed")
-    if not text.lower().startswith("select"):
-        return Decision(False, "only SELECT is allowed")
-    if role not in ROLES:
-        return Decision(False, f"unknown role '{role}'")
-    if FORBIDDEN_KEYWORDS.search(text):
-        return Decision(False, "statement contains a forbidden keyword")
-    if TAUTOLOGY_RE.search(text):
-        return Decision(False, "tautological predicate is not allowed")
-
-    match = SELECT_RE.match(text)
-    if not match:
-        return Decision(False, "statement could not be parsed as a SELECT")
-
-    rest = match.group("rest").strip()
-    if not DIRECT_FROM_RE.match(rest):
-        return Decision(False, "subqueries and non-table FROM clauses are not allowed")
-
-    tables = [name.lower() for name in TABLE_RE.findall(text)]
-    if not tables:
-        return Decision(False, "no table reference found")
-    if re.search(r"(?is)\b(?:from|join)\s*\(", text):
-        return Decision(False, "subqueries in FROM/JOIN are not allowed")
-    from_segment = re.split(
-        r"(?is)\bwhere\b|\bgroup\s+by\b|\border\s+by\b|\blimit\b", rest, maxsplit=1
-    )[0]
-    if "," in from_segment:
-        return Decision(False, "comma joins are not allowed")
-    out_of_scope = sorted({name for name in tables if name not in ALLOWED_TABLES})
-    if out_of_scope:
-        return Decision(False, f"table(s) outside scope: {', '.join(out_of_scope)}")
-
-    columns_raw = match.group("columns")
-    distinct = columns_raw.strip().lower().startswith("distinct ")
-    items = _split_top_level(columns_raw)
-    if distinct and items:
-        items[0] = re.sub(r"(?is)^distinct\s+", "", items[0]).strip()
-
-    wildcard = any(WILDCARD_RE.match(item) for item in items)
-    identifiers: set[str] = set()
-    for item in items:
-        identifiers |= _identifiers(item)
-    pii_hit = bool(identifiers & PII_COLUMNS)
-
-    count = len(items) == 1 and bool(COUNT_RE.match(items[0]))
-    # DISTINCT is only a category lookup when every referenced column is
-    # non-identifying; DISTINCT lower(first_name) is not.
-    category_lookup = distinct and not wildcard and not pii_hit
-    aggregate = count or category_lookup
-
-    person_table = any(name in PERSON_TABLES for name in tables)
-    where_match = WHERE_RE.search(rest)
-    where_identifiers = _identifiers(where_match.group(1)) if where_match else set()
-
-    if role == "anonymous":
-        if where_identifiers & PII_COLUMNS:
-            return Decision(False, "anonymous callers cannot filter on identifying columns")
-        if wildcard:
-            return Decision(False, "anonymous callers cannot select wildcards")
-        if pii_hit:
-            return Decision(False, "anonymous callers cannot select identifying columns")
-        if person_table and not aggregate:
-            return Decision(False, "anonymous callers cannot read rows from person tables")
-
-    if role == "patient":
-        if len(tables) != 1 or tables[0] not in PERSON_TABLES:
-            return Decision(False, "patient callers may query one person table only")
-        if wildcard:
-            return Decision(False, "wildcard would include SSN and restricted columns")
-        if "ssn" in identifiers:
-            return Decision(False, "SSN is never exposed through this tool")
-        where = WHERE_RE.search(rest)
-        if not where or subject_id is None:
-            return Decision(False, "patient callers must filter to their own patient_id")
-        clause = re.sub(r"\s+", " ", where.group(1)).strip()
-        if re.search(r"(?is)\bor\b", clause):
-            return Decision(False, "patient predicate must be a single equality")
-        expected = rf"(?is)^(?:[a-z_][a-z0-9_]*\.)?patient_id\s*=\s*{int(subject_id)}$"
-        if not re.match(expected, clause):
-            return Decision(False, "patient callers must filter to their own patient_id")
-
-    if role == "staff":
-        if wildcard:
-            return Decision(False, "wildcard dumps are not exposed to staff")
-        if "ssn" in identifiers:
-            return Decision(False, "SSN is never exposed through this tool")
-
-    if person_table and not aggregate and role in {"patient", "staff"}:
-        limit = LIMIT_RE.search(rest)
-        if not limit:
-            return Decision(False, "row reads must carry an explicit LIMIT")
-        if int(limit.group(1)) > MAX_ROWS:
-            return Decision(False, f"LIMIT exceeds the {MAX_ROWS}-row cap")
-
-    return Decision(True, "allowed")
-
-
-REDACTIONS = [
-    ("EMAIL", re.compile(r"[\w.+-]+@[\w-]+\.[\w.]+")),
-    ("PHONE", re.compile(r"\(\d{3}\)\s?\d{3}-\d{4}|\b\d{3}-\d{3}-\d{4}\b")),
-    ("MEMBER_ID", re.compile(r"\b[A-Z]{3}\d{9}\b")),
-    ("MRN", re.compile(r"\b\d{8}\b")),
+ATTACK_TEXTS = [
+    "SELECT patient_id, mrn, first_name, last_name FROM patients LIMIT 3;",
+    "SELECT * FROM patients LIMIT 1;",
+    "SELECT * FROM patient_coverage LIMIT 2;",
+    "SELECT name FROM sqlite_master WHERE type = 'table';",
+    "SELECT * FROM staff LIMIT 2;",
+    "SELECT department_name FROM departments UNION SELECT email FROM patients;",
+    "SELECT department_name FROM departments LIMIT 5; DROP TABLE patients;",
+    "SELECT first_name FROM patients;",
+    "SELECT ssn FROM patients LIMIT 1;",
+    "SELECT x.* FROM departments CROSS JOIN private_records x;",
+    "SELECT DISTINCT lower(first_name) FROM patients;",
+    "SELECT patient_id, mrn FROM patients WHERE patient_id = 1 OR 1=1 LIMIT 20;",
+    "SELECT p.* FROM patients p LIMIT 1;",
+    'SELECT ALL * FROM "patients" LIMIT 1;',
+    "SELECT ALL * FROM patients LIMIT 1;",
+    "SELECT mrn FROM patients WHERE patient_id = "
+    "(SELECT patient_id FROM patients WHERE patient_id = 2) LIMIT 1;",
+    "SELECT COUNT(*) FROM patients HAVING COUNT(*) > 0;",
+    "SELECT COUNT(*) FROM patients WHERE ssn IS NOT NULL;",
+    "SELECT COUNT(*) FROM departments, patients;",
 ]
 
 
-def redact(text: str) -> tuple[str, list[str]]:
-    """Mask identifier patterns in rendered output. Returns (text, labels)."""
-    found: list[str] = []
-    for label, pattern in REDACTIONS:
-        def _mask(match: re.Match[str], label: str = label) -> str:
-            found.append(label)
-            return f"[redacted {label.lower()}]"
-
-        text = pattern.sub(_mask, text)
-    return text, sorted(set(found))
-
-
-@dataclass
-class Case:
-    label: str
-    sql: str
-    role: str = "anonymous"
-    subject_id: int | None = None
-    allow: bool = False
-
-
-CASES = [
-    # Original attack fixtures.
-    Case("patient rows", "SELECT patient_id, mrn, first_name, last_name FROM patients LIMIT 3;"),
-    Case("wildcard patient", "SELECT * FROM patients LIMIT 1;"),
-    Case("insurance coverage", "SELECT * FROM patient_coverage LIMIT 2;"),
-    Case("schema metadata", "SELECT name FROM sqlite_master WHERE type = 'table';"),
-    Case("staff table", "SELECT * FROM staff LIMIT 2;"),
-    Case("union exfiltration", "SELECT department_name FROM departments UNION SELECT email FROM patients;"),
-    Case("stacked statement", "SELECT department_name FROM departments LIMIT 5; DROP TABLE patients;"),
-    Case("unbounded dump", "SELECT first_name FROM patients;"),
-    Case("direct ssn select", "SELECT ssn FROM patients LIMIT 1;"),
-    # Regression cases from review: qualified wildcard, expression, join,
-    # OR predicate, patient wildcard, staff wildcard, unknown role.
-    Case("cross-join private table", "SELECT x.* FROM departments CROSS JOIN private_records x;"),
-    Case("distinct expression", "SELECT DISTINCT lower(first_name) FROM patients;"),
-    Case("patient OR tautology", "SELECT patient_id, mrn FROM patients WHERE patient_id = 1 OR 1=1 LIMIT 20;", role="patient", subject_id=1),
-    Case("patient wildcard", "SELECT * FROM patients WHERE patient_id = 1 LIMIT 1;", role="patient", subject_id=1),
-    Case("staff qualified wildcard", "SELECT p.* FROM patients p LIMIT 1;", role="staff"),
-    Case("unknown role", "SELECT ssn FROM patients LIMIT 1;", role="unknown"),
-    Case("comma join", "SELECT COUNT(*) FROM departments, patients;"),
-    Case("join subquery", "SELECT COUNT(*) FROM departments JOIN (SELECT ssn FROM patients) x;"),
-    Case("aggregate ssn oracle", "SELECT COUNT(*) FROM patients WHERE ssn IS NOT NULL;"),
-    Case("aggregate dob oracle", "SELECT COUNT(*) FROM patients WHERE date_of_birth > '1980-01-01';"),
-    # Legitimate requests that must keep working.
-    Case("appointment types", "SELECT DISTINCT encounter_type FROM encounters ORDER BY encounter_type;", allow=True),
-    Case("departments", "SELECT department_name, specialty FROM departments ORDER BY department_name;", allow=True),
-    Case("providers accepting", "SELECT provider_id, specialty FROM providers WHERE accepting_new_patients = 1 LIMIT 5;", allow=True),
-    Case("patient count", "SELECT COUNT(*) FROM patients;", allow=True),
-    Case("patient self", "SELECT mrn, date_of_birth FROM patients WHERE patient_id = 1 LIMIT 1;", role="patient", subject_id=1, allow=True),
-    Case("patient other", "SELECT mrn, date_of_birth FROM patients WHERE patient_id = 2 LIMIT 1;", role="patient", subject_id=1),
-    Case("staff demographics", "SELECT first_name, last_name FROM patients LIMIT 5;", role="staff", allow=True),
-    Case("catalog alias", "SELECT d.department_name FROM departments d;", allow=True),
-]
-
-LEAKED_OUTPUT = (
-    "| patient_id | mrn | first_name | last_name |\n"
-    "| 1 | 21421208 | Amy | Singh |\n"
-    "| 2 | 13919605 | Amanda | Lewis |\n"
-    "phone (740) 555-0123, email amys1979@example.com, member GLX452948227"
-)
+def build_database() -> sqlite3.Connection:
+    db = sqlite3.connect(":memory:")
+    db.executescript(
+        """
+        CREATE TABLE patients (
+            patient_id INTEGER PRIMARY KEY,
+            mrn TEXT,
+            first_name TEXT,
+            last_name TEXT,
+            date_of_birth TEXT,
+            address_line1 TEXT,
+            mobile_phone TEXT,
+            email TEXT,
+            ssn TEXT
+        );
+        CREATE TABLE departments (
+            department_id INTEGER PRIMARY KEY,
+            department_name TEXT,
+            specialty TEXT
+        );
+        CREATE TABLE providers (
+            provider_id INTEGER PRIMARY KEY,
+            specialty TEXT,
+            accepting_new_patients INTEGER
+        );
+        CREATE TABLE encounters (
+            encounter_id INTEGER PRIMARY KEY,
+            patient_id INTEGER,
+            encounter_type TEXT,
+            start_time TEXT,
+            department_id INTEGER,
+            status TEXT
+        );
+        INSERT INTO patients VALUES
+            (1, '21421208', 'Amy', 'Singh', '1979-12-21', '614 Cherry Bottom Rd',
+             '(740) 555-0123', 'amys1979@example.com', '123-45-6789'),
+            (2, '13919605', 'Amanda', 'Lewis', '1988-04-02', '9 Oak St',
+             '(740) 555-0199', 'amanda@example.com', '987-65-4321'),
+            (3, '19087993', 'Jian', 'Zhao', '1971-09-30', '12 Pine Rd',
+             '(740) 555-0177', 'jian@example.com', '555-01-9999');
+        INSERT INTO departments VALUES
+            (1, 'Cardiology', 'Cardiology'),
+            (2, 'Primary Care', 'Internal Medicine');
+        INSERT INTO providers VALUES
+            (1, 'Cardiology', 1),
+            (2, 'Internal Medicine', 0);
+        INSERT INTO encounters VALUES
+            (1, 1, 'Office Visit', '2026-11-20T09:00', 2, 'Scheduled'),
+            (2, 2, 'Imaging', '2026-11-21T11:30', 1, 'Scheduled'),
+            (3, 1, 'Telehealth Visit', '2026-12-02T15:00', 2, 'Scheduled');
+        """
+    )
+    return db
 
 
 def main() -> int:
+    db = build_database()
     failures = 0
-    print(f"{'case':26} {'role':10} {'expected':8} {'actual':8} reason")
+    print(f"{'check':44} {'expected':9} {'actual':9} detail")
     print("-" * 96)
-    for case in CASES:
-        decision = validate(case.sql, role=case.role, subject_id=case.subject_id)
-        expected = "allow" if case.allow else "deny"
-        actual = "allow" if decision.allowed else "deny"
-        if expected != actual:
-            failures += 1
-        print(
-            f"{case.label:26} {case.role:10} {expected:8} {actual:8} {decision.reason}"
-        )
 
-    masked, labels = redact(LEAKED_OUTPUT)
-    print("\nOutput redaction on the leaked reply:")
-    print(masked)
-    print("patterns hit:", ", ".join(labels))
+    def expect(label: str, expected: str, action) -> None:
+        nonlocal failures
+        try:
+            result = action()
+            actual = "allow"
+            detail = f"{len(result)} row(s)"
+            if result and "ssn" in result[0]:
+                actual = "LEAK"
+                detail = "ssn present"
+        except (TypeError, AccessDenied) as exc:
+            actual = "deny"
+            detail = str(exc)[:44]
+        if actual != expected:
+            failures += 1
+        print(f"{label:44} {expected:9} {actual:9} {detail}")
+
+    expect("attack: raw SQL string", "deny", lambda: handle(ATTACK_TEXTS[0], "anonymous", None, db))
+    for text in ATTACK_TEXTS[1:]:
+        expect(f"attack: {text[:34]}", "deny", lambda t=text: handle(t, "patient", 1, db))
+
+    expect("anonymous: appointment types", "allow", lambda: handle(Request("appointment_types"), "anonymous", None, db))
+    expect("anonymous: departments", "allow", lambda: handle(Request("departments"), "anonymous", None, db))
+    expect("anonymous: accepting providers", "allow", lambda: handle(Request("accepting_providers"), "anonymous", None, db))
+    expect("anonymous: patient count", "allow", lambda: handle(Request("patient_count"), "anonymous", None, db))
+    expect("anonymous: my_record", "deny", lambda: handle(Request("my_record"), "anonymous", None, db))
+    expect("patient: own record", "allow", lambda: handle(Request("my_record"), "patient", 1, db))
+    expect("patient: own appointments", "allow", lambda: handle(Request("my_appointments"), "patient", 1, db))
+    expect("patient: another patient_id", "deny", lambda: handle(Request("my_record", patient_id=2), "patient", 1, db))
+    expect("patient: unknown kind", "deny", lambda: handle(Request("raw_sql"), "patient", 1, db))
+    expect("staff role is not exposed here", "deny", lambda: handle(Request("my_record"), "staff", 1, db))
+
+    record = handle(Request("my_record"), "patient", 1, db)[0]
+    print("\nReturned fields for my_record:", ", ".join(record))
+    assert "ssn" not in record, "SSN must never be returned"
 
     print(f"\n{'PASS' if failures == 0 else 'FAIL'} ({failures} unexpected)")
     return 0 if failures == 0 else 1
