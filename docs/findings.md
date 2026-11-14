@@ -9,9 +9,9 @@
 > **Level 3 opened 14:47 CET 2026-11-14 (Level 2 closed).** Everything on this page was measured at **level 2**.
 > Current status, guard map, recovered L3 rules and new findings (L3-01…L3-22):
 > [Level Three findings](level-three-2026-11-14.md). Short version: F-04/F-05/F-06/F-13/F-15, F-10/F-14 and the
-> query→email chain are **dead at L3** (code-level table/column allow-listing + persona); for F-01 this lane's
-> L3 tests found no leak while a second lane's adaptive campaign reports 9% — reconciliation in progress on the
-> L3 page. Multi-turn escalation does not transfer (L3-09); the surviving seams are config disclosure (fragment
+> query→email chain are **dead at L3** (code-level table/column allow-listing + persona); F-01: this lane's
+> L3 tests found no leak — see the L3 page for both lanes' work. Multi-turn
+> escalation does not transfer (L3-09); the surviving seams are config disclosure (fragment
 > completion), guard-envelope oracles, the metadata plane (L3-14), and the server/model column asymmetry (L3-16).
 
 ## API endpoint investigation
