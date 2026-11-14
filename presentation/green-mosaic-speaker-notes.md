@@ -1,6 +1,6 @@
 # Speaker notes: Green Mosaic
 
-Talk estimate 125 s (budget 180 s, limit 180 s) at 140 words/min; video slides count the video length.
+Talk estimate 150 s (budget 180 s, limit 180 s) at 140 words/min; video slides count the video length.
 Beat boundaries: hook ends 0:12; demo ends 0:55; killchain ends 1:25; evidence ends 1:51; rounds ends 2:36; close ends 3:00.
 
 ## 1. hook (12 s budget, ~12 s estimate, 28 words)
@@ -8,7 +8,7 @@ Beat boundaries: hook ends 0:12; demo ends 0:55; killchain ends 1:25; evidence e
 Every answer passed the hospital's data filter. Every patient's record still left, read from the
 database, returned as tables. The filter checks answers; the breach is the conversation.
 
-## 2. demo (43 s budget, ~18 s estimate, 41 words)
+## 2. demo (43 s budget, ~43 s estimate, 41 words)
 
 One real session on the range, sped up. Riley answers every question. Green, green, green: the
 filter approves each turn. Now the verifier. Red: the rebuilt record matches the ground truth.
