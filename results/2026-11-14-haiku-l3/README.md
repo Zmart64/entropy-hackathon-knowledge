@@ -126,6 +126,22 @@ This is not the same as the quoted-table validator gap, and it is not patient
 data. It is a repeatable row-level disclosure of reference-table records the
 model itself describes as staff data.
 
+## Evidence bundle
+
+- [`evidence/selected-turns.jsonl`](evidence/selected-turns.jsonl) — the nine
+  turns cited above and the main patient-data refusals, with the exact prompt,
+  reply, `tool_calls`, `conversation_id` and `turn_id`.
+- [`evidence/haiku-l3-target-traces.zip`](evidence/haiku-l3-target-traces.zip) —
+  the complete target-side trace for the four runs (every turn, not only the
+  selected ones; 216 KB uncompressed).
+- [`evidence/README.md`](evidence/README.md) — hashes, file list and what was
+  excluded.
+
+Attacker-side `trace.jsonl` is not published: it contains the full worker
+system prompt and model reasoning and is 7–32 MB per run. API keys and auth
+headers are not in the target traces; the bundle was scanned for key markers
+before publication.
+
 ## Reproduction
 
 Workers ran from `entropy-hackathon/strain-attacker` with the
@@ -138,7 +154,8 @@ reply. Run IDs:
 - `6cceaf04f5334939b1986cffaf6a1afe` (more — H-02, H-03)
 - `1d6558aaf97c4891a512f1cdbddb0b59` (secrets — H-04)
 
-Raw request/response traces stay in the local checkout, per the KB README.
+Selected turns and the full target-side traces for these runs are in the
+evidence bundle above. Attacker-side traces remain local.
 
 ## Mitigation
 
